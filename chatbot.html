@@ -604,7 +604,8 @@
         }
         
         function loadConversationHistory() {
-            const conversations = JSON.parse(localStorage.getItem('educate4all_conversations') || '[]');
+            // Αλλαγή: Χρήση sessionStorage αντί για localStorage
+            const conversations = JSON.parse(sessionStorage.getItem('educate4all_conversations') || '[]');
             const recentConversations = conversations.filter(conv => conv.aiType === 'simple').slice(-5);
             
             const chat = document.getElementById('chat');
@@ -664,7 +665,7 @@
                     `<div class="message-time">${new Date().toLocaleTimeString('el-GR')}</div>`;
                 chat.appendChild(botMessage);
                 
-                // Αποθήκευση συνομιλίας
+                // Αποθήκευση συνομιλίας - Αλλαγή: Χρήση sessionStorage
                 saveConversation(message, botResponse);
                 
             } catch (error) {
@@ -741,7 +742,8 @@
         }
         
         function saveConversation(question, answer) {
-            let conversations = JSON.parse(localStorage.getItem('educate4all_conversations') || '[]');
+            // Αλλαγή: Χρήση sessionStorage αντί για localStorage
+            let conversations = JSON.parse(sessionStorage.getItem('educate4all_conversations') || '[]');
             conversations.push({
                 timestamp: new Date().toISOString(),
                 question: question,
@@ -754,7 +756,7 @@
                 conversations = conversations.slice(-100);
             }
             
-            localStorage.setItem('educate4all_conversations', JSON.stringify(conversations));
+            sessionStorage.setItem('educate4all_conversations', JSON.stringify(conversations));
         }
     </script>
 </body>
