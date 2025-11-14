@@ -65,6 +65,19 @@
             font-weight: 300;
         }
         
+        .creator-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
         /* Glass Action Cards */
         .main-actions {
             display: grid;
@@ -123,7 +136,7 @@
         }
         
         .feature-badge {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            background: linear-gradient(135deg, #17a2b8, #138496);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
@@ -131,7 +144,7 @@
             font-weight: 600;
             display: inline-block;
             margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
         }
         
         /* Glass Features Section */
@@ -212,6 +225,46 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-top: 20px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            background: linear-gradient(135deg, #20c997, #1e9c7a);
         }
         
         /* Animations */
@@ -336,7 +389,11 @@
         <div class="header">
             <h1>🎓 educate4all</h1>
             <p>Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης με Τεχνητή Νοημοσύνη</p>
-            <div class="tagline">Όλα τα εργαλεία, κανένα όριο - Καλύτερο από euclides.ai</div>
+            <div class="tagline">Όλα τα εργαλεία, κανένα όριο - Πλήρης πρόσβαση για όλους</div>
+            
+            <div class="creator-badge">
+                Create and developed by: Vasdekis Christos
+            </div>
             
             <div class="demo-notice">
                 <strong>🚀 ΠΛΗΡΗΣ ΛΕΙΤΟΥΡΓΙΑ!</strong> Όλα τα features είναι ενεργά και δωρεάν!
@@ -392,8 +449,16 @@
             </a>
         </div>
 
+        <div class="contact-section">
+            <h3>📧 Επικοινωνία</h3>
+            <p>Έχετε ερωτήσεις ή προτάσεις; Μη διστάσετε να επικοινωνήσετε μαζί μας!</p>
+            <a href="mailto:vasdekis.christos@example.com" class="contact-button">
+                ✉️ Στείλτε μήνυμα
+            </a>
+        </div>
+
         <div class="features">
-            <h2>🎯 Γιατί το educate4all είναι Καλύτερο</h2>
+            <h2>🎯 Γιατί να επιλέξετε το educate4all</h2>
             <div class="features-grid">
                 <div class="feature-item">
                     <div class="feature-icon">🤖</div>
@@ -436,7 +501,7 @@
         <div class="footer">
             <p><strong>🎓 educate4all - Καθιστώντας την εκπαίδευση δωρεάν και προσβάσιμη για όλους</strong></p>
             <p>Η πιο ολοκληρωμένη δωρεάν πλατφόρμα εκπαίδευσης με Τεχνητή Νοημοσύνη</p>
-            <p class="creator">Δημιουργήθηκε με ❤️ από ΒΑΣΔΕΚΗ ΧΡΗΣΤΟ</p>
+            <p class="creator">Create and developed by: Vasdekis Christos</p>
             <p style="margin-top: 20px; opacity: 0.7;">&copy; 2025 educate4all. All rights reserved.</p>
         </div>
     </div>
