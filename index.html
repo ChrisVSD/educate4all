@@ -90,7 +90,7 @@
             border-radius: 15px;
             text-align: center;
             transition: transform 0.3s;
-            cursor: default;
+            cursor: pointer;
         }
         
         .feature-card:hover {
@@ -190,7 +190,7 @@
         
         .ai-highlight {
             background: rgba(255,255,255,0.2);
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: 15px;
             margin: 30px 0;
             text-align: center;
@@ -223,23 +223,27 @@
             <div class="logo">🎓</div>
             <h1>educate4all</h1>
             <p class="tagline">Δωρεάν Εκπαίδευση για Όλους με Τεχνητή Νοημοσύνη</p>
-            <a href="#ai-chatbot" class="cta-button">🚀 Ξεκίνα με τον AI Τώρα!</a>
+            <a href="#ai-chatbot" class="cta-button">🚀 Ξεκίνα με τον Δάσκαλο Τώρα!</a>
         </header>
 
         <!-- AI Chatbot Highlight Section -->
         <section class="ai-highlight" id="ai-chatbot">
-            <h2 style="color: white; margin-bottom: 20px; font-size: 2.2rem;">🤖 ΠΡΑΓΜΑΤΙΚΟΣ AI ΒΟΗΘΟΣ</h2>
-            <p style="color: white; font-size: 1.3rem; margin-bottom: 20px;">
-                <strong>ΤΩΡΑ ΛΕΙΤΟΥΡΓΕΙ 100%!</strong> Ρώτα ΟΤΙΔΗΠΟΤΕ για όλα τα μαθήματα
+            <div style="text-align: center;">
+                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" 
+                     alt="AI Δάσκαλος" 
+                     style="width: 120px; height: 120px; margin-bottom: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                <h2 style="color: white; margin-bottom: 20px; font-size: 2.2rem;">🤖 Ρώτα τον Δάσκαλο</h2>
+            </div>
+            <p style="color: white; margin-bottom: 25px; font-size: 1.3rem; text-align: center; line-height: 1.6;">
+                💡 <strong>Μαθηματικά • Φυσική • Χημεία • Ιστορία • Γλώσσες • και πολλά άλλα!</strong>
             </p>
-            <p style="color: white; margin-bottom: 25px; font-size: 1.1rem;">
-                💡 Μαθηματικά • Φυσική • Χημεία • Ιστορία • Γλώσσες • και πολλά άλλα!
-            </p>
-            <a href="real-ai-chatbot.html" class="ai-button">
-                🎯 ΡΩΤΑ ΤΟΝ AI ΤΩΡΑ!
-            </a>
-            <p style="color: #ffd700; margin-top: 15px; font-size: 1rem;">
-                ✅ 100% ΔΩΡΕΑΝ • ✅ ΛΕΙΤΟΥΡΓΕΙ • ✅ ΣΕ ΠΡΑΓΜΑΤΙΚΟ ΧΡΟΝΟ
+            <div style="text-align: center;">
+                <a href="real-ai-chatbot.html" class="ai-button">
+                    🎯 Ρώτα τον Δάσκαλο Τώρα!
+                </a>
+            </div>
+            <p style="color: #ffd700; margin-top: 15px; font-size: 1rem; text-align: center;">
+                ✅ 100% ΔΩΡΕΑΝ • ✅ ΑΜΕΣΗ ΒΟΗΘΕΙΑ • ✅ ΣΕ ΠΡΑΓΜΑΤΙΚΟ ΧΡΟΝΟ
             </p>
         </section>
 
@@ -256,7 +260,16 @@
             <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">🎯 Τι Προσφέρουμε</h2>
             
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card" onclick="showAccessInfo()">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Πρόσβαση για Όλους</h3>
+                    <p>100% Δωρεάν - Χωρίς συνδρομές, χωρίς κρυφά κόστη</p>
+                    <div class="status-badge status-ready">
+                        ✅ Βασική Αρχή Μας
+                    </div>
+                </div>
+                
+                <div class="feature-card" onclick="openAIHelp('general')">
                     <div class="feature-icon">🤖</div>
                     <h3>Πραγματικός AI Βοηθός</h3>
                     <p>Ρώτα ΟΤΙΔΗΠΟΤΕ για όλα τα μαθήματα με πραγματική Τεχνητή Νοημοσύνη</p>
@@ -267,7 +280,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" onclick="openAIHelp('general')">
                     <div class="feature-icon">💡</div>
                     <h3>Έξυπνος AI Βοηθός</h3>
                     <p>Εναλλακτικός AI βοηθός με διαφορετική προσέγγιση</p>
@@ -278,7 +291,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" onclick="openAIHelp('general')">
                     <div class="feature-icon">📚</div>
                     <h3>Structured Courses</h3>
                     <p>Οργανωμένα μαθήματα με AI υποστήριξη</p>
@@ -289,16 +302,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Πρόσβαση για Όλους</h3>
-                    <p>100% Δωρεάν - Χωρίς συνδρομές, χωρίς κρυφά κόστη</p>
-                    <div class="status-badge status-ready">
-                        ✅ Βασική Αρχή Μας
-                    </div>
-                </div>
-                
-                <div class="feature-card">
+                <div class="feature-card" onclick="showProtectionInfo()">
                     <div class="feature-icon">🔒</div>
                     <h3>Προστατευμένος Κώδικας</h3>
                     <p>Ο κώδικας προστατεύεται για να διασφαλιστεί η ποιότητα και η ασφάλεια</p>
@@ -307,7 +311,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" onclick="showDevelopmentRoadmap()">
                     <div class="feature-icon">🚀</div>
                     <h3>Συνεχής Ανάπτυξη</h3>
                     <p>Νέα features και βελτιώσεις προστίθενται συνεχώς</p>
@@ -353,6 +357,22 @@
                 }
             });
         });
+
+        function showAccessInfo() {
+            alert(`🌍 ΠΡΟΣΒΑΣΗ ΓΙΑ ΟΛΟΥΣ - Βασικές Αρχές μας:\n\n✅ 100% Δωρεάν - Χωρίς κρυφά κόστη\n✅ Ανοιχτή Πρόσβαση - Για όλους τους μαθητές\n✅ Χωρίς Συνδρομές - Ποτέ δεν θα χρεώσουμε\n✅ Ισότιμη Εκπαίδευση - Για κάθε οικονομικό background`);
+        }
+
+        function showDevelopmentRoadmap() {
+            alert(`🚀 ΣΥΝΕΧΗΣ ΑΝΑΠΤΥΞΗ - Τι Έρχεται:\n\n📅 Επόμενα Βήματα:\n• 📚 Πλήρη course content\n• 🎮 Διαδραστικά quizzes\n• 👥 User accounts & progress tracking\n• 📱 Mobile app\n• 🌐 Περισσότερες γλώσσες\n\n💡 Ιδέες; Στείλε μας στο christos.vasdekis.cv@gmail.com`);
+        }
+
+        function showProtectionInfo() {
+            alert(`🛡️ ΠΡΟΣΤΑΤΕΥΜΕΝΟΣ ΚΩΔΙΚΑΣ - Γιατί;\n\n🔒 Προστασία Πνευματικής Ιδιοκτησίας\n🔒 Διασφάλιση Ποιότητας\n🔒 Ασφάλεια Δεδομένων\n🔒 Συνέπεια στην Ανάπτυξη\n\nΟ κώδικας προστατεύεται για το καλό όλων!`);
+        }
+
+        function openAIHelp(subject) {
+            window.location.href = 'real-ai-chatbot.html';
+        }
     </script>
 </body>
 </html>
