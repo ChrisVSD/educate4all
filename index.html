@@ -1,13 +1,3 @@
-
-**Κάνε commit changes**
-
----
-
-## 🌐 **ΒΗΜΑ 2: Δημιουργία index.html**
-
-Τώρα **δημιούργησε νέο αρχείο** ονόματι `index.html` και **αντίγραψε αυτόν τον κώδικα:**
-
-```html
 <!DOCTYPE html>
 <html lang="el">
 <head>
@@ -27,6 +17,7 @@
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            scroll-behavior: smooth;
         }
         
         .container {
@@ -69,6 +60,7 @@
             font-weight: bold;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
         }
         
         .cta-button:hover {
@@ -97,6 +89,7 @@
             border-radius: 15px;
             text-align: center;
             transition: transform 0.3s;
+            cursor: default;
         }
         
         .feature-card:hover {
@@ -129,6 +122,12 @@
             align-items: center;
             gap: 10px;
             font-weight: bold;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .github-button:hover {
+            background: #555;
         }
         
         .contact-section {
@@ -146,6 +145,12 @@
             border-radius: 5px;
             margin: 10px;
             font-weight: bold;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .contact-button:hover {
+            background: #34ce57;
         }
         
         footer {
@@ -153,6 +158,11 @@
             padding: 40px 20px;
             color: white;
             opacity: 0.8;
+        }
+
+        /* Προσθήκη για να δουλεύει το anchor link */
+        #features {
+            scroll-margin-top: 20px;
         }
     </style>
 </head>
@@ -162,6 +172,7 @@
             <div class="logo">🎓</div>
             <h1>educate4all</h1>
             <p class="tagline">Δωρεάν Εκπαίδευση για Όλους με Τεχνητή Νοημοσύνη</p>
+            <!-- Άλλαξα το href για να δουλεύει σωστά -->
             <a href="#features" class="cta-button">🚀 Ξεκίνα Εδώ</a>
         </header>
 
@@ -226,13 +237,35 @@
     </div>
 
     <script>
-        // Απλό JavaScript για ομαλή κύλιση
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // Βελτιωμένο smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
+            });
+        });
+
+        // Προσθήκη hover effects για όλα τα buttons
+        document.querySelectorAll('.cta-button, .github-button, .contact-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
             });
         });
     </script>
