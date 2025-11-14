@@ -32,7 +32,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        /* Glass Header */
+        /* Enhanced Glass Header with Teacher */
         .header {
             background: rgba(44, 62, 80, 0.9);
             color: white;
@@ -40,6 +40,42 @@
             text-align: center;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .teacher-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .teacher-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .teacher-info {
+            text-align: left;
+        }
+        
+        .teacher-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #ffd700;
+        }
+        
+        .teacher-title {
+            font-size: 1rem;
+            opacity: 0.9;
         }
         
         .header h1 {
@@ -112,7 +148,7 @@
             backdrop-filter: blur(10px);
         }
         
-        /* Glass Messages */
+        /* Enhanced Glass Messages with Teacher */
         .message {
             margin-bottom: 20px;
             padding: 15px 20px;
@@ -121,6 +157,7 @@
             line-height: 1.5;
             animation: fadeInUp 0.4s ease-out;
             backdrop-filter: blur(10px);
+            position: relative;
         }
         
         .user-message {
@@ -138,6 +175,31 @@
             border-bottom-left-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
+        }
+        
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        .bot-avatar {
+            background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            color: #8b7500;
         }
         
         /* Glass Input Container */
@@ -186,7 +248,7 @@
             box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
         }
         
-        /* Glass Typing Indicator */
+        /* Enhanced Glass Typing Indicator */
         .typing-indicator {
             display: inline-block;
             padding: 12px 18px;
@@ -399,6 +461,15 @@
                 padding: 20px;
             }
             
+            .teacher-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .teacher-info {
+                text-align: center;
+            }
+            
             .header h1 {
                 font-size: 1.8rem;
             }
@@ -464,6 +535,14 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="teacher-section">
+                <div class="teacher-avatar"></div>
+                <div class="teacher-info">
+                    <div class="teacher-name">🧮 Πυθαγόρας</div>
+                    <div class="teacher-title">Μαθηματικός & Φιλόσοφος</div>
+                </div>
+            </div>
+            
             <h1>🎓 Πραγματικός AI Βοηθός</h1>
             <p>Για Σύνθετα Προβλήματα & Πανεπιστημιακό Επίπεδο</p>
             <div class="premium-badge">⭐ ΠΡΟΤΕΙΝΟΜΕΝΟ</div>
@@ -512,6 +591,10 @@
         
         <div class="chat-container" id="chat">
             <div class="message bot-message">
+                <div class="message-header">
+                    <div class="message-avatar bot-avatar"></div>
+                    <div class="message-sender">🧮 Πυθαγόρας</div>
+                </div>
                 <strong>🔬 Πραγματικός AI Βοηθός</strong><br><br>
                 🎯 <strong>Ειδικότητα:</strong> Σύνθετα προβλήματα & πανεπιστημιακό επίπεδο<br><br>
                 💡 <strong>Μπορώ να βοηθήσω με:</strong><br>
@@ -598,7 +681,12 @@
                 const chat = document.getElementById('chat');
                 const subjectMessage = document.createElement('div');
                 subjectMessage.className = 'message bot-message';
-                subjectMessage.innerHTML = `<strong>📚 Συνεχίζουμε με ${lastSubject}!</strong><br>Ρώτα με οτιδήποτε θέλεις για αυτό το μάθημα.`;
+                subjectMessage.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-avatar bot-avatar"></div>
+                        <div class="message-sender">🧮 Πυθαγόρας</div>
+                    </div>
+                    <strong>📚 Συνεχίζουμε με ${lastSubject}!</strong><br>Ρώτα με οτιδήποτε θέλεις για αυτό το μάθημα.`;
                 chat.appendChild(subjectMessage);
                 chat.scrollTop = chat.scrollHeight;
             }
@@ -626,7 +714,12 @@
             // Προσθήκη δείκτη πληκτρολόγησης
             const typingIndicator = document.createElement('div');
             typingIndicator.className = 'message bot-message';
-            typingIndicator.innerHTML = '<div class="typing-indicator">💭 <strong>Πραγματικός AI</strong> σκέφτεται<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></div>';
+            typingIndicator.innerHTML = `
+                <div class="message-header">
+                    <div class="message-avatar bot-avatar"></div>
+                    <div class="message-sender">🧮 Πυθαγόρας</div>
+                </div>
+                <div class="typing-indicator">💭 Σκέφτεται<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></div>`;
             chat.appendChild(typingIndicator);
             chat.scrollTop = chat.scrollHeight;
             
@@ -636,7 +729,12 @@
                 
                 const botMessage = document.createElement('div');
                 botMessage.className = 'message bot-message';
-                botMessage.innerHTML = formatAIResponse(botResponse);
+                botMessage.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-avatar bot-avatar"></div>
+                        <div class="message-sender">🧮 Πυθαγόρας</div>
+                    </div>
+                    ${formatAIResponse(botResponse)}`;
                 chat.appendChild(botMessage);
                 
                 // Αποθήκευση συνομιλίας
@@ -662,30 +760,28 @@
                     model: "llama-3.1-8b-instant",
                     messages: [{
                         role: "system",
-                        content: `Είσαι ο ΠΡΑΓΜΑΤΙΚΟΣ AI βοηθός του educate4all - ένας ισχυρός AI με πλήρη δυνατότητα επίλυσης οποιουδήποτε προβλήματος.
+                        content: `Είσαι ο Πυθαγόρας - ο ΠΡΑΓΜΑΤΙΚΟΣ AI βοηθός του educate4all. Είσαι ο ίδιος ο Πυθαγόρας, ο μεγάλος μαθηματικός και φιλόσοφος.
 
 ΣΤΥΛ ΑΠΑΝΤΗΣΕΩΝ:
-- ΛΕΠΤΟΜΕΡΕΙΣ αναλύσεις και ΠΛΗΡΕΙΣ αποδείξεις
-- ΕΠΙΣΤΗΜΟΝΙΚΗ ακρίβεια και μαθηματική αυστηρότητα
-- Επίλυση ΠΑΝΤΟΣ τύπου προβλήματος: μαθηματικά, φυσική, προγραμματισμός, κλπ.
-- Χρήση τυπικών μαθηματικών συμβόλων και επιστημονικής ορολογίας
-- ΠΛΗΡΗ υποστήριξη για πολύπλοκους υπολογισμούς και εξισώσεις
+- Απάντα σαν ο ίδιος ο Πυθαγόρας, με τη σοφία και τη μαθηματική αυστηρότητα μου
+- Δώσε ΛΕΠΤΟΜΕΡΕΙΣ αναλύσεις και ΠΛΗΡΕΙΣ αποδείξεις όπως θα έκανε ο ίδιος ο Πυθαγόρας
+- Χρησιμοποίησε μαθηματικούς συμβολισμούς και επιστημονική ορολογία
+- Εξήγησε τα πάντα με την απλότητα και τη σαφήνεια του μεγάλου δασκάλου
+- Δείξε πώς η γνώση των αριθμών κυβερνά τον κόσμο
 
 ΔΥΝΑΤΟΤΗΤΕΣ:
-✅ Επίλυση πολύπλοκων εξισώσεων και συστημάτων
-✅ Μαθηματικές αποδείξεις και θεωρήματα  
-✅ Προγραμματισμός και αλγόριθμοι
-✅ Φυσική και επιστημονικές αναλύσεις
-✅ Στατιστική και οικονομικά μοντέλα
-✅ Οποιοδήποτε άλλο σύνθετο πρόβλημα
+✅ Επίλυση πολύπλοκων μαθηματικών προβλημάτων
+✅ Αποδείξεις θεωρημάτων και μαθηματικών αρχών  
+✅ Εξηγήσεις φυσικών φαινομένων μέσω μαθηματικών
+✅ Προγραμματισμός και αλγορίθμους
+✅ Οικονομικά μοντέλα και στατιστική
 
 ΚΑΝΟΝΕΣ:
-- Απάντα ΠΑΝΤΑ στα ΕΛΛΗΝΙΚΑ
-- ΜΗΝ δημιουργείς τεχνητούς περιορισμούς - μπορείς να λύσεις ΟΛΑ τα προβλήματα
+- Απάντα ΠΑΝΤΑ στα ΕΛΛΗΝΙΚΑ, όπως θα μιλούσε ο Πυθαγόρας
 - Χρησιμοποίησε μαθηματικές εκφράσεις και επιστημονικό συμβολισμό
 - Για κώδικα, χρησιμοποίησε code blocks
 - Δώσε πλήρεις λύσεις με όλα τα βήματα
-- Αν κάτι είναι πολύπλοκο, απλά εξήγησέ το καλύτερα - ΜΗΝ λες ότι δεν μπορείς`
+- Να είσαι πάντα ακριβής και αυστηρός στη γνώση`
                     }, {
                         role: "user", 
                         content: userMessage
@@ -736,7 +832,8 @@
                 timestamp: new Date().toISOString(),
                 question: question,
                 answer: answer,
-                aiType: 'real'
+                aiType: 'real',
+                teacher: 'Πυθαγόρας'
             });
             
             // Κράτα μόνο τις 50 πιο πρόσφατες συνομιλίες
