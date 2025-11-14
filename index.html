@@ -78,7 +78,7 @@
             animation: pulse 2s infinite;
         }
         
-        /* Glass Action Cards */
+        /* Enhanced Glass Action Cards with Teachers */
         .main-actions {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -145,6 +145,25 @@
             display: inline-block;
             margin-top: 15px;
             box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+        }
+        
+        /* Teacher Avatar Styles */
+        .teacher-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .teacher-name {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-style: italic;
+            margin-top: 10px;
         }
         
         /* Glass Features Section */
@@ -433,30 +452,38 @@
 
         <div class="main-actions">
             <a href="courses.html" class="action-card">
+                <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                 <div class="action-icon">📚</div>
                 <h3>Δομημένα Μαθήματα</h3>
                 <p>Ολοκληρωμένα μαθήματα με progress tracking και AI υποστήριξη για κάθε θέμα</p>
+                <div class="teacher-name">Με τους σπουδαιότερους δασκάλους</div>
                 <div class="feature-badge">9+ Θέματα</div>
             </a>
             
             <a href="real-ai-chatbot.html" class="action-card">
+                <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                 <div class="action-icon">🤖</div>
                 <h3>Πραγματικός AI</h3>
                 <p>Για σύνθετα προβλήματα, πανεπιστημιακό επίπεδο και λεπτομερείς αναλύσεις</p>
+                <div class="teacher-name">Με τον Πυθαγόρα</div>
                 <div class="feature-badge">Συνιστάται</div>
             </a>
             
             <a href="smart-chatbot.html" class="action-card">
+                <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                 <div class="action-icon">🧠</div>
                 <h3>Έξυπνος AI</h3>
                 <p>Εξηγήσεις βήμα-βήμα με επίπεδο difficulty selector για βαθιά κατανόηση</p>
+                <div class="teacher-name">Με τον Αριστοτέλη</div>
                 <div class="feature-badge">Βασικός</div>
             </a>
             
             <a href="chatbot.html" class="action-card">
+                <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                 <div class="action-icon">😊</div>
                 <h3>Απλός AI</h3>
                 <p>Γρήγορες απαντήσεις, φιλικό ύφος και απλές εξηγήσεις για βασικές έννοιες</p>
+                <div class="teacher-name">Με τον Σωκράτη</div>
                 <div class="feature-badge">Απλός</div>
             </a>
         </div>
@@ -473,9 +500,9 @@
             <h2>🎯 Γιατί να επιλέξετε το educate4all</h2>
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="feature-icon">🤖</div>
-                    <h4>3 AI Βοηθοί</h4>
-                    <p>Περισσότερες επιλογές από οποιαδήποτε άλλη πλατφόρμα</p>
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h4>Εικονικοί Δάσκαλοι</h4>
+                    <p>Μαθήστε από τους σπουδαιότερους στοχαστές της αρχαιότητας</p>
                 </div>
                 
                 <div class="feature-item">
