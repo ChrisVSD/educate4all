@@ -529,6 +529,23 @@
         // 🔧 GROQ API CONFIG
         let apiKey = localStorage.getItem('educate4all_simple_api_key') || "";
         
+        // Λίστες για φιλτράρισμα ακατάλληλων ή ασχετων ερωτήσεων
+        const inappropriateKeywords = [
+            'μαλάκας', 'αρχίδι', 'σκατά', 'γαμώ', 'πουτάνα', 'πουστ', 'μαλακ', 'αρχιδ', 'γαμω',
+            'fuck', 'shit', 'asshole', 'bitch', 'dick', 'pussy', 'bastard', 'cunt'
+        ];
+        
+        const offTopicKeywords = [
+            'ποδόσφαιρο', 'μπάλα', 'γκολ', 'σκορ', 'αγώνας', 'παιχνίδι', 'ομάδα',
+            'χόκεϊ', 'μπάσκετ', 'βόλεϊ', 'τέννις',
+            'instagram', 'tiktok', 'facebook', 'twitter', 'social media',
+            'βίντεο', 'τραγούδι', 'ταινία', 'σείριαλ', 'netflix',
+            'ψώνια', 'αγορές', 'ρούχα', 'αθλητικά', 'shopping',
+            'πολιτική', 'κόμμα', 'βουλή', 'εκλογές', 'πολιτικός',
+            'football', 'soccer', 'basketball', 'volleyball', 'tennis',
+            'game', 'match', 'score', 'team', 'player'
+        ];
+        
         // Ενημέρωση UI κατά τη φόρτωση
         document.addEventListener('DOMContentLoaded', function() {
             updateAPIStatus();
@@ -629,6 +646,44 @@
             }
         }
         
+        // Συνάρτηση για έλεγχο ακατάλληλης ή ασχετης ερώτησης
+        function checkQuestionValidity(question) {
+            const lowerQuestion = question.toLowerCase();
+            
+            // Έλεγχος για ακατάλληλη γλώσσα
+            for (const keyword of inappropriateKeywords) {
+                if (lowerQuestion.includes(keyword)) {
+                    return {
+                        valid: false,
+                        type: 'inappropriate',
+                        message: '🙏 Σεβαστή συμπεριφορά παρακαλώ!<br><br>✨ Ας επιστρέψουμε στο μάθημα και στις εκπαιδευτικές μας συζητήσεις! 😊'
+                    };
+                }
+            }
+            
+            // Έλεγχος για ασχετα θέματα
+            const lastSubject = localStorage.getItem('last_course_subject');
+            if (lastSubject) {
+                let isOffTopic = false;
+                for (const keyword of offTopicKeywords) {
+                    if (lowerQuestion.includes(keyword)) {
+                        isOffTopic = true;
+                        break;
+                    }
+                }
+                
+                if (isOffTopic) {
+                    return {
+                        valid: false,
+                        type: 'offtopic',
+                        message: `🎯 Ας επικεντρωθούμε στο μάθημα!<br><br>📚 <strong>${lastSubject}</strong> είναι το τρέχον θέμα μας.<br>💡 Θέλεις να ρωτήσεις κάτι σχετικό με αυτό; 😊`
+                    };
+                }
+            }
+            
+            return { valid: true };
+        }
+        
         async function sendMessage() {
             if (!apiKey || !apiKey.startsWith('gsk_')) {
                 showError('❌ Χρειάζεσαι Groq API Key. Βάλε το παραπάνω.');
@@ -640,6 +695,27 @@
             const message = userInput.value.trim();
             
             if (message === '') return;
+            
+            // Έλεγχος ερώτησης πριν την αποστολή
+            const validation = checkQuestionValidity(message);
+            if (!validation.valid) {
+                // Προσθήκη μηνύματος χρήστη
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.innerHTML = `${message}<div class="message-time">${new Date().toLocaleTimeString('el-GR')}</div>`;
+                chat.appendChild(userMessage);
+                userInput.value = '';
+                
+                // Προσθήκη μηνύματος επαναφοράς
+                const redirectMessage = document.createElement('div');
+                redirectMessage.className = 'message bot-message';
+                redirectMessage.innerHTML = validation.message + 
+                    `<div class="message-time">${new Date().toLocaleTimeString('el-GR')}</div>`;
+                chat.appendChild(redirectMessage);
+                
+                chat.scrollTop = chat.scrollHeight;
+                return;
+            }
             
             // Προσθήκη μηνύματος χρήστη
             const userMessage = document.createElement('div');
