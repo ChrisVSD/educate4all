@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>educate4all - Δωρεάν Εκπαίδευση για Όλους</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .features {
+            background: white;
+            padding: 80px 20px;
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .github-section {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .github-button {
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🎓</div>
+            <h1>educate4all</h1>
+            <p class="tagline">Δωρεάν Εκπαίδευση για Όλους με Τεχνητή Νοημοσύνη</p>
+            <a href="#features" class="cta-button">🚀 Ξεκίνα Εδώ</a>
+        </header>
+
+        <section class="features" id="features">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">🎯 Τι Προσφέρουμε</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Βοηθός Εκπαίδευσης</h3>
+                    <p>Δωρεάν βοηθός ΤΝ που απαντά σε όλες τις ερωτήσεις σου και σε βοηθάει να μαθαίνεις</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Πλούσιο Υλικό</h3>
+                    <p>Μαθήματα, ασκήσεις και εκπαιδευτικό υλικό για όλα τα επίπεδα και τις ηλικίες</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Πρόσβαση για Όλους</h3>
+                    <p>Δωρεάν, χωρίς συνδρομές, χωρίς κρυφά κόστη. Πάντα δωρεάν για όλους</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔓</div>
+                    <h3>Ανοιχτού Κώδικα</h3>
+                    <p>Ολόκληρο το project είναι ανοιχτού κώδικα. Μπορείς να συνεισφέρεις και εσύ!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="github-section">
+            <h2 style="margin-bottom: 30px; font-size: 2rem;">👨‍💻 Συμμετέχεις στο Project;</h2>
+            <p style="margin-bottom: 30px; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Αυτό είναι ένα project της κοινότητας. Μπορείς να βοηθήσεις με κώδικα, ιδέες, ή απλά να το μοιραστείς!
+            </p>
+            <a href="https://github.com/[ΒΑΛΕ-ΤΟ-USERNAME-ΣΟΥ-ΕΔΩ]/educate4all" class="github-button" target="_blank">
+                📂 Δες τον Κώδικα στο GitHub
+            </a>
+        </section>
+
+        <footer>
+            <p>📧 Επικοινωνία: [Βάλε email εδώ]</p>
+            <p style="margin-top: 10px;">&copy; 2024 educate4all. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Απλό JavaScript για ομαλή κύλιση
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
