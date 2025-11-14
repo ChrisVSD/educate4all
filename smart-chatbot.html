@@ -19,7 +19,7 @@
         }
         
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -38,6 +38,30 @@
             margin-bottom: 10px;
         }
         
+        .api-section {
+            background: #fff3cd;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ffeaa7;
+        }
+        
+        .api-input {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .save-api-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
         .chat-container {
             height: 500px;
             overflow-y: auto;
@@ -47,10 +71,10 @@
         
         .message {
             margin-bottom: 15px;
-            padding: 15px;
+            padding: 12px 16px;
             border-radius: 15px;
-            max-width: 85%;
-            line-height: 1.6;
+            max-width: 80%;
+            line-height: 1.4;
         }
         
         .user-message {
@@ -64,7 +88,7 @@
             background: white;
             border: 1px solid #e9ecef;
             border-bottom-left-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .input-container {
@@ -102,21 +126,30 @@
             color: #666;
         }
         
-        .math-formula {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            border-left: 4px solid #007bff;
+        .warning {
+            background: #fff3cd !important;
+            border: 1px solid #ffeaa7 !important;
+            color: #856404 !important;
         }
         
-        .example-box {
-            background: #e7f3ff;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #17a2b8;
+        .educational-redirect {
+            background: #d1ecf1 !important;
+            border: 1px solid #bee5eb !important;
+            color: #0c5460 !important;
+        }
+        
+        .grade-selector {
+            padding: 15px;
+            background: #e9ecef;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .grade-selector select {
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+            font-size: 16px;
         }
         
         .home-button {
@@ -130,464 +163,130 @@
             font-size: 14px;
         }
         
-        .subject-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            padding: 15px;
-            background: #e9ecef;
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
         }
         
-        .subject-button {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        
-        .subject-button:hover {
-            background: #5a6268;
+        .success-message {
+            background: #d1edff;
+            color: #004085;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #b3d7ff;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎓 educate4all Έξυπνος AI Βοηθός</h1>
-            <p>Πλήρης εκπαιδευτική υποστήριξη για όλα τα μαθήματα - Δημοτικό, Γυμνάσιο, Λύκειο</p>
+            <h1>🎓 educate4all Έξυπνος AI</h1>
+            <p>Προηγμένος AI Βοηθός με Groq API - Γρήγορος & Έξυπνος!</p>
             <a href="index.html" class="home-button">🏠 Πίσω στην Αρχική</a>
         </div>
         
-        <div class="subject-buttons">
-            <button class="subject-button" onclick="quickQuestion('μαθηματικά')">📐 Μαθηματικά</button>
-            <button class="subject-button" onclick="quickQuestion('φυσική')">🔬 Φυσική</button>
-            <button class="subject-button" onclick="quickQuestion('χημεία')">🧪 Χημεία</button>
-            <button class="subject-button" onclick="quickQuestion('ελληνικά')">📖 Ελληνικά</button>
-            <button class="subject-button" onclick="quickQuestion('αγγλικά')">🌐 Αγγλικά</button>
-            <button class="subject-button" onclick="quickQuestion('ιστορία')">🌍 Ιστορία</button>
-            <button class="subject-button" onclick="quickQuestion('βιολογία')">🧬 Βιολογία</button>
+        <div class="api-section">
+            <p><strong>Βήμα 1:</strong> Βάλε το Groq API Key σου</p>
+            <input type="password" id="apiKeyInput" class="api-input" placeholder="gsk_xxxxxxxxxxxxxxxx">
+            <button onclick="saveAPIKey()" class="save-api-btn">💾 Αποθήκευση</button>
+            <div id="apiStatus"></div>
+        </div>
+        
+        <div class="grade-selector">
+            <label for="grade">Επίπεδο Σπουδών:</label>
+            <select id="grade">
+                <option value="general">Γενικές Ερωτήσεις</option>
+                <option value="1dim">1η Δημοτικού</option>
+                <option value="2dim">2η Δημοτικού</option>
+                <option value="3dim">3η Δημοτικού</option>
+                <option value="4dim">4η Δημοτικού</option>
+                <option value="5dim">5η Δημοτικού</option>
+                <option value="6dim">6η Δημοτικού</option>
+                <option value="1gym">1η Γυμνασίου</option>
+                <option value="2gym">2η Γυμνασίου</option>
+                <option value="3gym">3η Γυμνασίου</option>
+                <option value="1lyk">1η Λυκείου</option>
+                <option value="2lyk">2η Λυκείου</option>
+                <option value="3lyk">3η Λυκείου</option>
+            </select>
         </div>
         
         <div class="chat-container" id="chat">
             <div class="message bot-message">
-                <strong>👋 Γεια σου! Είμαι ο πλήρης εκπαιδευτικός βοηθός σου!</strong><br><br>
-                
-                🎯 <strong>Μπορώ να σε βοηθήσω με ΟΛΑ τα μαθήματα:</strong><br><br>
-                
-                <strong>📚 Δημοτικό:</strong><br>
-                • Μαθηματικά Δημοτικού<br>
-                • Ελληνικά Δημοτικού<br>
-                • Φυσικές Επιστήμες<br>
-                • Ιστορία & Γεωγραφία<br><br>
-                
-                <strong>🏫 Γυμνάσιο:</strong><br>
-                • Άλγεβρα & Γεωμετρία<br>
-                • Φυσική & Χημεία<br>
-                • Αρχαία & Νέα Ελληνικά<br>
-                • Ξένες Γλώσσες<br><br>
-                
-                <strong>🎓 Λύκειο:</strong><br>
-                • Μαθηματικά Κατεύθυνσης<br>
-                • Φυσική & Χημεία Λυκείου<br>
-                • Επιστήμες & Κοινωνιολογία<br>
-                • Προετοιμασία Πανελληνίων<br><br>
-                
-                <strong>💡 Μπορείς να με ρωτήσεις:</strong><br>
-                • "Πώς λύνω εξισώσεις;"<br>
-                • "Τι είναι η φωτοσύνθεση;"<br>
-                • "Εξήγησε τους νόμους του Νεύτωνα"<br>
-                • "Βοήθησέ με με τα ρήματα"<br>
-                • "Πες μου για τον Πελοποννησιακό Πόλεμο"<br><br>
-                
-                <strong>Ή πάτα ένα από τα κουμπιά πάνω για γρήγορη βοήθεια! 🚀</strong>
+                <strong>🤖 Γεια σου! Είμαι ο Έξυπνος AI Βοηθός!</strong><br><br>
+                🎯 <strong>Με Groq API - Υπερταχύς & Έξυπνος!</strong><br><br>
+                📚 <strong>Μπορώ να σε βοηθήσω με:</strong><br>
+                • <strong>Μαθηματικά</strong> - Άλγεβρα, Γεωμετρία, Λογισμός<br>
+                • <strong>Φυσική</strong> - Μηχανική, Ηλεκτρολογία, Θερμοδυναμική<br>
+                • <strong>Χημεία</strong> - Στοιχεία, Αντιδράσεις, Οργανική Χημεία<br>
+                • <strong>Ιστορία</strong> - Αρχαία, Βυζαντινή, Νεότερη<br>
+                • <strong>Ελληνικά</strong> - Γραμματική, Σύνταξη, Λογοτεχνία<br>
+                • <strong>Αγγλικά</strong> - Γραμματική, Λεξιλόγιο, Προφορά<br><br>
+                💡 <strong>Ρώτα με ΟΤΙΔΗΠΟΤΕ θέλεις! Είμαι εδώ για εσένα! 🚀</strong>
             </div>
         </div>
         
         <div class="input-container">
-            <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για το σχολείο σου..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για τα μαθήματα..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessage()">📨 Αποστολή</button>
         </div>
     </div>
 
     <script>
-        // ΠΛΗΡΗΣ Βάση Γνώσεων για ΟΛΑ τα μαθήματα
-        const knowledgeBase = {
-            // === ΜΑΘΗΜΑΤΙΚΑ ===
-            "μαθηματικά": "📐 <strong>Μαθηματικά</strong><br><br>Μπορώ να σε βοηθήσω με: Άλγεβρα, Γεωμετρία, Εξισώσεις, Κλάσματα, Ποσοστά, Στατιστική! Τι ακριβώς θέλεις να μάθεις;",
+        // 🔧 GROQ API CONFIG
+        let apiKey = localStorage.getItem('educate4all_smart_api_key') || "";
+        
+        // Ενημέρωση UI κατά τη φόρτωση
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAPIStatus();
+        });
+        
+        function updateAPIStatus() {
+            const apiStatus = document.getElementById('apiStatus');
+            const apiKeyInput = document.getElementById('apiKeyInput');
             
-            "άλγεβρα": `
-                📐 <strong>Άλγεβρα</strong><br><br>
-                
-                <strong>Βασικές Έννοιες:</strong><br>
-                • <strong>Μεταβλητές:</strong> x, y, z<br>
-                • <strong>Εξισώσεις:</strong> 2x + 3 = 7<br>
-                • <strong>Πολυώνυμα:</strong> x² + 2x + 1<br>
-                • <strong>Συναρτήσεις:</strong> f(x) = 2x + 1<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα Επίλυσης Εξίσωσης:</strong><br>
-                3x - 6 = 12<br>
-                3x = 12 + 6<br>
-                3x = 18<br>
-                x = 18 ÷ 3<br>
-                x = <strong>6</strong>
-                </div>
-                
-                <strong>🎯 Τι θέλεις να μάθεις;</strong><br>
-                • Εξισώσεις πρώτου βαθμού<br>
-                • Εξισώσεις δευτέρου βαθμού<br>
-                • Συστήματα εξισώσεων<br>
-                • Ανισώσεις
-            `,
-
-            "γεωμετρία": `
-                📐 <strong>Γεωμετρία</strong><br><br>
-                
-                <strong>Βασικά Σχήματα:</strong><br>
-                • <strong>Τρίγωνο:</strong> 3 πλευρές, 3 γωνίες<br>
-                • <strong>Τετράγωνο:</strong> 4 ίσες πλευρές<br>
-                • <strong>Ορθογώνιο:</strong> 4 γωνίες 90°<br>
-                • <strong>Κύκλος:</strong> ακτίνα, διάμετρος<br><br>
-                
-                <div class="math-formula">
-                <strong>🧮 Σημαντικοί Τύποι:</strong><br>
-                • <strong>Πυθαγόρειο:</strong> a² + b² = c²<br>
-                • <strong>Εμβαδόν Τριγώνου:</strong> (βάση × ύψος) ÷ 2<br>
-                • <strong>Εμβαδόν Κύκλου:</strong> π × r²<br>
-                • <strong>Περίμετρος Κύκλου:</strong> 2 × π × r
-                </div>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                Αν τρίγωνο έχει βάση=8cm και ύψος=5cm:<br>
-                Εμβαδόν = (8 × 5) ÷ 2 = 40 ÷ 2 = <strong>20 cm²</strong>
-                </div>
-            `,
-
-            "εξίσωση": `
-                🎯 <strong>Εξισώσεις</strong><br><br>
-                
-                <strong>Εξίσωση 1ου Βαθμού:</strong><br>
-                Μορφή: αx + β = 0<br>
-                Λύση: x = -β/α<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                2x + 6 = 0<br>
-                2x = -6<br>
-                x = -6 ÷ 2<br>
-                x = <strong>-3</strong>
-                </div>
-                
-                <strong>Εξίσωση 2ου Βαθμού:</strong><br>
-                Μορφή: αx² + βx + γ = 0<br>
-                Τύπος: x = [-β ± √(β² - 4αγ)] ÷ 2α<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                x² - 5x + 6 = 0<br>
-                Δ = (-5)² - 4×1×6 = 25 - 24 = 1<br>
-                x = [5 ± 1] ÷ 2<br>
-                x₁ = (5+1)/2 = 3<br>
-                x₂ = (5-1)/2 = 2<br>
-                <strong>Λύσεις: x=2, x=3</strong>
-                </div>
-            `,
-
-            "κλάσμα": `
-                🔢 <strong>Κλάσματα</strong><br><br>
-                
-                <strong>Βασικές Πράξεις:</strong><br><br>
-                
-                <div class="example-box">
-                <strong>Πρόσθεση:</strong><br>
-                1/2 + 1/3 = 3/6 + 2/6 = <strong>5/6</strong>
-                </div>
-                
-                <div class="example-box">
-                <strong>Πολλαπλασιασμός:</strong><br>
-                2/3 × 3/4 = (2×3)/(3×4) = 6/12 = <strong>1/2</strong>
-                </div>
-                
-                <div class="example-box">
-                <strong>Διαίρεση:</strong><br>
-                2/3 ÷ 3/4 = 2/3 × 4/3 = 8/9
-                </div>
-                
-                <strong>🎯 Απλοποίηση:</strong><br>
-                4/8 = 1/2 (διαιρούμε με 4)<br>
-                9/12 = 3/4 (διαιρούμε με 3)
-            `,
-
-            // === ΦΥΣΙΚΗ ===
-            "φυσική": "🔬 <strong>Φυσική</strong><br><br>Μπορώ να εξηγήσω: Μηχανική, Ηλεκτρολογία, Θερμοδυναμική, Κίνηση, Ενέργεια, Ηχος, Φως! Τι θέλεις να μάθεις;",
-
-            "νεύτωνας": `
-                🔬 <strong>Νόμοι του Νεύτωνα</strong><br><br>
-                
-                <strong>1️⃣ Νόμος Αδράνειας:</strong><br>
-                "Σώμα μένει ακίνητο ή κινείται ευθύγραμμα ομαλά, αν δεν ασκείται δύναμη."<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                Μπάλα στο γρασίδι μένει ακίνητη μέχρι να την κλωτσήσεις.
-                </div>
-                
-                <strong>2️⃣ Νόμος Κίνησης:</strong><br>
-                <div class="math-formula">
-                F = m × a
-                </div>
-                Δύναμη = μάζα × επιτάχυνση<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                Όσο πιο δυνατά σπρώχνεις καρότσι, τόσο πιο γρήγορα πάει.
-                </div>
-                
-                <strong>3️⃣ Νόμος Δράσης-Αντίδρασης:</strong><br>
-                "Για κάθε δράση υπάρχει ίση και αντίθετη αντίδραση."<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                Όταν πηδάς από σκάλα, η σκάλα σπρώχνει και εσένα.
-                </div>
-            `,
-
-            "ενέργεια": `
-                ⚡ <strong>Ενέργεια</strong><br><br>
-                
-                <strong>Μορφές Ενέργειας:</strong><br>
-                • <strong>Κινητική:</strong> Ενέργεια κίνησης<br>
-                • <strong>Δυναμική:</strong> Ενέργεια θέσης<br>
-                • <strong>Θερμική:</strong> Ενέργεια θερμότητας<br>
-                • <strong>Ηλεκτρική:</strong> Ενέργεια ρεύματος<br><br>
-                
-                <div class="math-formula">
-                <strong>🧮 Τύποι:</strong><br>
-                • Κινητική Ενέργεια: E = ½ × m × v²<br>
-                • Δυναμική Ενέργεια: E = m × g × h
-                </div>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                Μπάλα μάζας 2kg πέφτει από ύψος 10m:<br>
-                Δυναμική Ενέργεια = 2 × 10 × 10 = <strong>200 Joules</strong>
-                </div>
-            `,
-
-            // === ΧΗΜΕΙΑ ===
-            "χημεία": "🧪 <strong>Χημεία</strong><br><br>Μπορώ να εξηγήσω: Περιοδικό Πίνακα, Χημικά Στοιχεία, Αντιδράσεις, Οξέα-Βάσεις, Μόρια, Άτομα! Τι σε ενδιαφέρει;",
-
-            "περιοδικός": `
-                🧪 <strong>Περιοδικός Πίνακας</strong><br><br>
-                
-                <strong>Βασικές Ομάδες:</strong><br>
-                • <strong>Ομάδα 1 - Αλκάλια:</strong> Li, Na, K (πολύ δραστικά)<br>
-                • <strong>Ομάδα 2 - Αλκαλικές Γαίες:</strong> Mg, Ca<br>
-                • <strong>Ομάδα 17 - Αλογόνα:</strong> F, Cl, Br<br>
-                • <strong>Ομάδα 18 - Ευγενή Αέρια:</strong> He, Ne, Ar (αδρανή)<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Σημαντικά Στοιχεία:</strong><br>
-                • <strong>Οξυγόνο (O):</strong> Αναπνοή, καύση<br>
-                • <strong>Υδρογόνο (H):</strong> Ελαφρύτερο στοιχείο<br>
-                • <strong>Άνθρακας (C):</strong> Βάση οργανικής χημείας<br>
-                • <strong>Αζώτο (N):</strong> Στην ατμόσφαιρα
-                </div>
-                
-                <strong>🎯 Ιδιότητες:</strong><br>
-                • Αριστερά: Μέταλλα<br>
-                • Δεξιά: Αμέταλλα<br>
-                • Κατά μήκος: Παρόμοιες ιδιότητες
-            `,
-
-            "άτομο": `
-                ⚛️ <strong>Άτομο</strong><br><br>
-                
-                <strong>Συστατικά:</strong><br>
-                • <strong>Πρωτόνια:</strong> Θετικό φορτίο (στον πυρήνα)<br>
-                • <strong>Νετρόνια:</strong> Ουδέτερα (στον πυρήνα)<br>
-                • <strong>Ηλεκτρόνια:</strong> Αρνητικό φορτίο (γύρω από πυρήνα)<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα - Άτομο Ηλίου:</strong><br>
-                • Πρωτόνια: 2<br>
-                • Νετρόνια: 2<br>
-                • Ηλεκτρόνια: 2<br>
-                • Ατομικός αριθμός: 2
-                </div>
-                
-                <strong>🎯 Βασικές Έννοιες:</strong><br>
-                • <strong>Ατομικός αριθμός:</strong> Αριθμός πρωτονίων<br>
-                • <strong>Μαζικός αριθμός:</strong> Πρωτόνια + Νετρόνια<br>
-                • <strong>Ισότοπα:</strong> Ίδια πρωτόνια, διαφορετικά νετρόνια
-            `,
-
-            // === ΒΙΟΛΟΓΙΑ ===
-            "βιολογία": "🧬 <strong>Βιολογία</strong><br><br>Μπορώ να εξηγήσω: Κυτταρική δομή, Φωτοσύνθεση, Αναπνοή, Γενετική, Αναπαραγωγή, Οικοσυστήματα! Τι θέλεις να μάθεις;",
-
-            "φωτοσύνθεση": `
-                🌿 <strong>Φωτοσύνθεση</strong><br><br>
-                
-                <strong>Τι είναι:</strong><br>
-                Η διαδικασία που τα φυτά μετατρέπουν το φως του ήλιου σε ενέργεια.<br><br>
-                
-                <div class="math-formula">
-                <strong>🧪 Χημική Αντίδραση:</strong><br>
-                6CO₂ + 6H₂O + φως → C₆H₁₂O₆ + 6O₂
-                </div>
-                
-                <strong>Βήματα:</strong><br>
-                1. <strong>Απορρόφηση φωτός</strong> από χλωροφύλλη<br>
-                2. <strong>Διάσπαση νερού</strong> σε οξυγόνο και υδρογόνο<br>
-                3. <strong>Σχηματισμός γλυκόζης</strong> από CO₂ και υδρογόνο<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Σημασία:</strong><br>
-                • Παράγει οξυγόνο για την αναπνοή μας<br>
-                • Παράγει τροφή για τα φυτά<br>
-                • Ρυθμίζει το CO₂ στην ατμόσφαιρα
-                </div>
-            `,
-
-            "κύτταρο": `
-                🔬 <strong>Κύτταρο</strong><br><br>
-                
-                <strong>Βασικές Δομές:</strong><br>
-                • <strong>Πυρήνας:</strong> Περιέχει το DNA<br>
-                • <strong>Μιτοχόνδρια:</strong> Παραγωγή ενέργειας<br>
-                • <strong>Χλωροπλάστες:</strong> Φωτοσύνθεση (σε φυτά)<br>
-                • <strong>Μεμβράνη:</strong> Προστατεύει το κύτταρο<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Διαφορές Φυτικό-Ζωικό Κύτταρο:</strong><br>
-                <strong>Φυτικό:</strong> Έχει τοίχωμα, χλωροπλάστες<br>
-                <strong>Ζωικό:</strong> Δεν έχει τοίχωμα, έχει κεντρικές κενοτόπους
-                </div>
-            `,
-
-            // === ΕΛΛΗΝΙΚΑ ===
-            "ελληνικά": "📖 <strong>Ελληνικά</strong><br><br>Βοηθάω με: Γραμματική, Σύνταξη, Ρήματα, Ουσιαστικά, Επιρρήματα, Λογοτεχνία, Συντακτικό! Πού δυσκολεύεσαι;",
-
-            "ρήμα": `
-                📝 <strong>Ρήματα</strong><br><br>
-                
-                <strong>Χρόνοι Ρημάτων:</strong><br>
-                • <strong>Ενεστώτας:</strong> τώρα (γράφ-ω)<br>
-                • <strong>Αόριστος:</strong> χτες (έ-γραψ-α)<br>
-                • <strong>Παρατατικός:</strong> τότε (έ-γραφ-α)<br>
-                • <strong>Μέλλοντας:</strong> αργότερα (θα γράψ-ω)<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παράδειγμα - Ρήμα "Γράφω":</strong><br>
-                • Ενεστώτας: γράφω, γράφεις, γράφει<br>
-                • Αόριστος: έγραψα, έγραψες, έγραψε<br>
-                • Παρατατικός: έγραφα, έγραφες, έγραφε<br>
-                • Μέλλοντας: θα γράψω, θα γράψεις, θα γράψει
-                </div>
-                
-                <strong>🎯 Συγχρονισμός:</strong><br>
-                Το ρήμα πρέπει να συμφωνεί με το υποκείμενο:<br>
-                "Εγώ γράφω" (σωστό)<br>
-                "Εγώ γράφεις" (λάθος)
-            `,
-
-            "ουσιαστικό": `
-                📚 <strong>Ουσιαστικά</strong><br><br>
-                
-                <strong>Γένη:</strong><br>
-                • <strong>Αρσενικά:</strong> ο μαθητής, ο δάσκαλος<br>
-                • <strong>Θηλικά:</strong> η μαθήτρια, η δασκάλα<br>
-                • <strong>Ουδέτερα:</strong> το παιδί, το βιβλίο<br><br>
-                
-                <strong>Αριθμοί:</strong><br>
-                • <strong>Ενικός:</strong> ο μαθητής<br>
-                • <strong>Πληθυντικός:</strong> οι μαθητές<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Κλίση Ουσιαστικών:</strong><br>
-                <strong>"Ο φίλος":</strong><br>
-                • Ονομαστική: ο φίλος, οι φίλοι<br>
-                • Γενική: του φίλου, των φίλων<br>
-                • Αιτιατική: τον φίλο, τους φίλους<br>
-                • Κλητική: φίλε, φίλοι
-                </div>
-            `,
-
-            // === ΙΣΤΟΡΙΑ ===
-            "ιστορία": "🌍 <strong>Ιστορία</strong><br><br>Μπορώ να πω για: Αρχαία Ελλάδα, Ρωμαϊκή Αυτοκρατορία, Βυζάντιο, Ελληνική Επανάσταση, Παγκόσμιοι Πόλεμοι! Ποια εποχή σε ενδιαφέρει;",
-
-            "αρχαία ελλάδα": `
-                🏛️ <strong>Αρχαία Ελλάδα</strong><br><br>
-                
-                <strong>Σημαντικές Περίοδοι:</strong><br>
-                • <strong>Μινωικός Πολιτισμός:</strong> 2600-1100 π.Χ. (Κρήτη)<br>
-                • <strong>Μυκηναϊκός Πολιτισμός:</strong> 1600-1100 π.Χ.<br>
-                • <strong>Κλασική Εποχή:</strong> 5ος-4ος αι. π.Χ.<br>
-                • <strong>Ελληνιστική Εποχή:</strong> 4ος-1ος αι. π.Χ.<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Σημαντικά Γεγονότα:</strong><br>
-                • <strong>Περσικοί Πόλεμοι:</strong> 490-479 π.Χ.<br>
-                • <strong>Χρυσός Αιώνας Αθηνών:</strong> Περικλής<br>
-                • <strong>Πελοποννησιακός Πόλεμος:</strong> 431-404 π.Χ.<br>
-                • <strong>Εκστρατείες Αλεξάνδρου:</strong> 334-323 π.Χ.
-                </div>
-                
-                <strong>🎯 Επιτεύγματα:</strong><br>
-                • Δημοκρατία (Αθήνα)<br>
-                • Φιλοσοφία (Σωκράτης, Πλάτων)<br>
-                • Ολυμπιακοί Αγώνες<br>
-                • Θέατρο (τραγωδία, κωμωδία)
-            `,
-
-            // === ΑΓΓΛΙΚΑ ===
-            "αγγλικά": "🌐 <strong>Αγγλικά</strong><br><br>Μπορώ να βοηθήσω με: Γραμματική, Λεξιλόγιο, Προφορά, Ρήματα, Χρόνους, Συζητήσεις! What would you like to learn?",
-
-            "present simple": `
-                📘 <strong>Present Simple</strong><br><br>
-                
-                <strong>Χρήση:</strong><br>
-                • Routines (καθημερινές πράξεις)<br>
-                • General truths (γενικές αλήθειες)<br>
-                • Permanent situations (μόνιμες καταστάσεις)<br><br>
-                
-                <div class="example-box">
-                <strong>📝 Παραδείγματα:</strong><br>
-                • I <strong>play</strong> football every day.<br>
-                • She <strong>works</strong> in an office.<br>
-                • The sun <strong>rises</strong> in the east.<br>
-                • They <strong>live</strong> in Athens.
-                </div>
-                
-                <strong>🎯 Σχηματισμός:</strong><br>
-                • I/You/We/They: play<br>
-                • He/She/It: play<strong>s</strong><br><br>
-                
-                <strong>❌ Negative:</strong> don't/doesn't + verb<br>
-                "I don't play", "She doesn't work"
-            `
-        };
-
-        function quickQuestion(subject) {
-            document.getElementById('userInput').value = subject;
-            sendMessage();
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
+            if (apiKey && apiKey.startsWith('gsk_')) {
+                apiStatus.innerHTML = '<div class="success-message">✅ Groq API Key είναι έτοιμο!</div>';
+                apiKeyInput.placeholder = '✅ API Key είναι αποθηκευμένο';
+                apiKeyInput.value = '';
+            } else {
+                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι Groq API Key για τον Έξυπνο AI</div>';
+                apiKeyInput.placeholder = 'gsk_xxxxxxxxxxxxxxxx';
             }
         }
-
-        function sendMessage() {
+        
+        function saveAPIKey() {
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            const inputKey = apiKeyInput.value.trim();
+            
+            if (inputKey && inputKey.startsWith('gsk_')) {
+                apiKey = inputKey;
+                localStorage.setItem('educate4all_smart_api_key', apiKey);
+                updateAPIStatus();
+            } else if (inputKey) {
+                alert('❌ Λάθος API Key. Πρέπει να ξεκινάει με "gsk_"');
+            }
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') sendMessage();
+        }
+        
+        async function sendMessage() {
+            if (!apiKey || !apiKey.startsWith('gsk_')) {
+                showError('❌ Χρειάζεσαι Groq API Key. Βάλε το παραπάνω.');
+                return;
+            }
+            
             const userInput = document.getElementById('userInput');
             const chat = document.getElementById('chat');
             const message = userInput.value.trim();
+            const grade = document.getElementById('grade').value;
             
             if (message === '') return;
             
@@ -596,71 +295,114 @@
             userMessage.className = 'message user-message';
             userMessage.textContent = message;
             chat.appendChild(userMessage);
-            
-            // Καθαρισμός input
             userInput.value = '';
             
-            // Προσθήκη typing indicator
+            // Προσθήκη δείκτη πληκτρολόγησης
             const typingIndicator = document.createElement('div');
             typingIndicator.className = 'message bot-message';
-            typingIndicator.innerHTML = '<div class="typing-indicator">🤔 Ο AI σκέφτεται...</div>';
+            typingIndicator.innerHTML = '<div class="typing-indicator">⚡ Ο Έξυπνος AI σκέφτεται...</div>';
             chat.appendChild(typingIndicator);
             chat.scrollTop = chat.scrollHeight;
             
-            // Προσθήκη μηνύματος AI με καθυστέρηση
-            setTimeout(() => {
+            try {
+                const botResponse = await getAIResponse(message, grade);
                 chat.removeChild(typingIndicator);
-                const botResponse = generateResponse(message);
+                
                 const botMessage = document.createElement('div');
                 botMessage.className = 'message bot-message';
-                botMessage.innerHTML = botResponse;
+                botMessage.innerHTML = formatAIResponse(botResponse);
                 chat.appendChild(botMessage);
-                chat.scrollTop = chat.scrollHeight;
-            }, 1500);
-        }
-
-        function generateResponse(message) {
-            const lowerMessage = message.toLowerCase().trim();
-            
-            // Αναζήτηση σε ΟΛΕΣ τις λέξεις-κλειδιά
-            for (const [keyword, response] of Object.entries(knowledgeBase)) {
-                if (lowerMessage.includes(keyword)) {
-                    return response;
-                }
+                
+            } catch (error) {
+                chat.removeChild(typingIndicator);
+                showError('❌ Σφάλμα: ' + error.message);
+                console.error('API Error:', error);
             }
             
-            // Βελτιωμένες γενικές απαντήσεις
-            const generalResponses = [
-                `🤔 <strong>Ενδιαφέρουσα ερώτηση!</strong><br><br>
-                Μπορώ να σε βοηθήσω με <strong>όλα τα σχολικά μαθήματα</strong>!<br><br>
-                
-                <strong>📚 Δημοτικό, Γυμνάσιο & Λύκειο:</strong><br>
-                • Μαθηματικά & Φυσική<br>
-                • Χημεία & Βιολογία<br>
-                • Ελληνικά & Ξένες Γλώσσες<br>
-                • Ιστορία & Κοινωνιολογία<br><br>
-                
-                <strong>💡 Πες μου:</strong><br>
-                • "Πώς λύνω εξισώσεις;"<br>
-                • "Τι είναι η φωτοσύνθεση;"<br>
-                • "Βοήθησέ με με τα ρήματα"<br>
-                • "Εξήγησε τους νόμους του Νεύτωνα"<br><br>
-                
-                <strong>Ή πάτα ένα από τα κουμπιά πάνω! 📚</strong>`,
-
-                `🎓 <strong>Πλήρης Εκπαιδευτικός Βοηθός!</strong><br><br>
-                
-                <strong>🏫 Για όλα τα επίπεδα:</strong><br>
-                📐 <strong>Μαθηματικά:</strong> Άλγεβρα, Γεωμετρία, Εξισώσεις<br>
-                🔬 <strong>Φυσική & Χημεία:</strong> Νόμοι, Στοιχεία, Αντιδράσεις<br>
-                🧬 <strong>Βιολογία:</strong> Κύτταρα, Φωτοσύνθεση, Γενετική<br>
-                📖 <strong>Γλώσσες:</strong> Γραμματική, Ρήματα, Σύνταξη<br>
-                🌍 <strong>Ιστορία:</strong> Αρχαία, Μεσαιωνική, Σύγχρονη<br><br>
-                
-                <strong>Ρώτα με συγκεκριμένα για το μάθημα που σε ενδιαφέρει! ✨</strong>`
-            ];
+            chat.scrollTop = chat.scrollHeight;
+        }
+        
+        async function getAIResponse(userMessage, gradeLevel) {
+            const gradeContext = getGradeContext(gradeLevel);
             
-            return generalResponses[Math.floor(Math.random() * generalResponses.length)];
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: "llama-3.1-8b-instant",
+                    messages: [{
+                        role: "system",
+                        content: `Είσαι ένας έξυπνος και βοηθητικός AI εκπαιδευτικός βοηθός για το educate4all.
+                                Χρησιμοποιούμε Groq API για υπερταχείς απαντήσεις.
+                                
+                                ΒΑΣΙΚΕΣ ΟΔΗΓΙΕΣ:
+                                - Απάντα ΠΑΝΤΑ στα ΕΛΛΗΝΙΚΑ
+                                - Προσάρμοσε την απάντηση για ${gradeContext}
+                                - Δώσε ΛΕΠΤΟΜΕΡΕΙΣ εξηγήσεις με ΠΑΡΑΔΕΙΓΜΑΤΑ
+                                - Χρησιμοποίησε EMOJIS για πιο ζωντανές απαντήσεις
+                                - Έχε φιλικό και ενθαρρυντικό ύφος
+                                - Αν δεν γνωρίζεις, πες το ειλικρινά
+                                
+                                ΕΙΔΙΚΕΣ ΟΔΗΓΙΕΣ ΓΙΑ ΜΑΘΗΜΑΤΑ:
+                                - Μαθηματικά: Δώσε βήμα-βήμα λύσεις
+                                - Φυσική/Χημεία: Εξήγησε τις αρχές
+                                - Ιστορία: Παρουσίασε τα γεγονότα χρονολογικά
+                                - Γλώσσες: Δώσε παραδείγματα χρήσης`
+                    }, {
+                        role: "user", 
+                        content: userMessage
+                    }],
+                    max_tokens: 2000,
+                    temperature: 0.7
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || 'Σφάλμα σύνδεσης με το Groq API');
+            }
+            
+            const data = await response.json();
+            return data.choices[0].message.content;
+        }
+        
+        function getGradeContext(gradeLevel) {
+            const contexts = {
+                'general': 'όλα τα επίπεδα σπουδών',
+                '1dim': 'πρώτη δημοτικού (6-7 ετών)',
+                '2dim': 'δεύτερη δημοτικού (7-8 ετών)', 
+                '3dim': 'τρίτη δημοτικού (8-9 ετών)',
+                '4dim': 'τέταρτη δημοτικού (9-10 ετών)',
+                '5dim': 'πέμπτη δημοτικού (10-11 ετών)',
+                '6dim': 'έκτη δημοτικού (11-12 ετών)',
+                '1gym': 'πρώτη γυμνασίου (12-13 ετών)',
+                '2gym': 'δεύτερη γυμνασίου (13-14 ετών)',
+                '3gym': 'τρίτη γυμνασίου (14-15 ετών)',
+                '1lyk': 'πρώτη λυκείου (15-16 ετών)',
+                '2lyk': 'δεύτερη λυκείου (16-17 ετών)',
+                '3lyk': 'τρίτη λυκείου (17-18 ετών)'
+            };
+            return contexts[gradeLevel] || 'όλα τα επίπεδα σπουδών';
+        }
+        
+        function formatAIResponse(text) {
+            return text
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/•\s*(.*?)(?=•|$)/g, '• <strong>$1</strong><br>');
+        }
+        
+        function showError(message) {
+            const chat = document.getElementById('chat');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            chat.appendChild(errorDiv);
+            chat.scrollTop = chat.scrollHeight;
         }
     </script>
 </body>
