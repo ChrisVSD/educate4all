@@ -134,6 +134,12 @@
             border: 1px solid #f5c6cb;
         }
         
+        .status-live {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
         .developer-section {
             text-align: center;
             padding: 40px 20px;
@@ -181,6 +187,34 @@
             color: white;
             opacity: 0.8;
         }
+        
+        .ai-highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            border: 2px solid #ffd700;
+        }
+        
+        .ai-button {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            transition: transform 0.3s;
+        }
+        
+        .ai-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.6);
+        }
     </style>
 </head>
 <body>
@@ -189,8 +223,25 @@
             <div class="logo">🎓</div>
             <h1>educate4all</h1>
             <p class="tagline">Δωρεάν Εκπαίδευση για Όλους με Τεχνητή Νοημοσύνη</p>
-            <a href="#features" class="cta-button">🚀 Ξεκίνα Εδώ</a>
+            <a href="#ai-chatbot" class="cta-button">🚀 Ξεκίνα με τον AI Τώρα!</a>
         </header>
+
+        <!-- AI Chatbot Highlight Section -->
+        <section class="ai-highlight" id="ai-chatbot">
+            <h2 style="color: white; margin-bottom: 20px; font-size: 2.2rem;">🤖 ΠΡΑΓΜΑΤΙΚΟΣ AI ΒΟΗΘΟΣ</h2>
+            <p style="color: white; font-size: 1.3rem; margin-bottom: 20px;">
+                <strong>ΤΩΡΑ ΛΕΙΤΟΥΡΓΕΙ 100%!</strong> Ρώτα ΟΤΙΔΗΠΟΤΕ για όλα τα μαθήματα
+            </p>
+            <p style="color: white; margin-bottom: 25px; font-size: 1.1rem;">
+                💡 Μαθηματικά • Φυσική • Χημεία • Ιστορία • Γλώσσες • και πολλά άλλα!
+            </p>
+            <a href="real-ai-chatbot.html" class="ai-button">
+                🎯 ΡΩΤΑ ΤΟΝ AI ΤΩΡΑ!
+            </a>
+            <p style="color: #ffd700; margin-top: 15px; font-size: 1rem;">
+                ✅ 100% ΔΩΡΕΑΝ • ✅ ΛΕΙΤΟΥΡΓΕΙ • ✅ ΣΕ ΠΡΑΓΜΑΤΙΚΟ ΧΡΟΝΟ
+            </p>
+        </section>
 
         <!-- Developer Section -->
         <section class="developer-section">
@@ -203,17 +254,26 @@
 
         <section class="features" id="features">
             <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">🎯 Τι Προσφέρουμε</h2>
-            <p style="text-align: center; margin-bottom: 30px; font-size: 1.2rem; color: #666;">
-                🚧 <strong>Σε Ανάπτυξη</strong> - Αυτά τα features έρχονται σύντομα! 🚧
-            </p>
+            
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
+                    <h3>Πραγματικός AI Βοηθός</h3>
+                    <p>Ρώτα ΟΤΙΔΗΠΟΤΕ για όλα τα μαθήματα με πραγματική Τεχνητή Νοημοσύνη</p>
+                    <div class="status-badge status-live">
+                        <a href="real-ai-chatbot.html" style="color: inherit; text-decoration: none;">
+                            🎯 ΛΕΙΤΟΥΡΓΕΙ ΤΩΡΑ!
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
                     <h3>Έξυπνος AI Βοηθός</h3>
-                    <p>Πραγματική Τεχνητή Νοημοσύνη με λεπτομερείς απαντήσεις και παραδείγματα</p>
+                    <p>Εναλλακτικός AI βοηθός με διαφορετική προσέγγιση</p>
                     <div class="status-badge status-ready">
                         <a href="smart-chatbot.html" style="color: inherit; text-decoration: none;">
-                            🚀 Δοκίμασε τον Έξυπνο AI!
+                            🚀 Δοκίμασέ τον!
                         </a>
                     </div>
                 </div>
@@ -221,10 +281,10 @@
                 <div class="feature-card">
                     <div class="feature-icon">📚</div>
                     <h3>Structured Courses</h3>
-                    <p>Οργανωμένα μαθήματα όπως το euclides.ai - 9 courses με AI υποστήριξη</p>
+                    <p>Οργανωμένα μαθήματα με AI υποστήριξη</p>
                     <div class="status-badge status-ready">
                         <a href="courses.html" style="color: inherit; text-decoration: none;">
-                            🚗 Δες τα Courses!
+                            📖 Δες τα Courses!
                         </a>
                     </div>
                 </div>
@@ -244,6 +304,15 @@
                     <p>Ο κώδικας προστατεύεται για να διασφαλιστεί η ποιότητα και η ασφάλεια</p>
                     <div class="status-badge status-protected">
                         🛡️ Προστασία Ιδεών
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Συνεχής Ανάπτυξη</h3>
+                    <p>Νέα features και βελτιώσεις προστίθενται συνεχώς</p>
+                    <div class="status-badge status-coming">
+                        🔄 Σε Εξέλιξη
                     </div>
                 </div>
             </div>
