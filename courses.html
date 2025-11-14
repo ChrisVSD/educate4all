@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>educate4all - Structured Courses</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <meta name="theme-color" content="#667eea">
     <style>
         * {
             margin: 0;
@@ -44,6 +46,7 @@
             background: linear-gradient(45deg, #fff, #e3f2fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
         
         .header p {
@@ -81,58 +84,96 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         
-        /* Glass AI Selector */
-        .ai-selector {
+        /* Enhanced AI Selector */
+        .ai-comparison {
             background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
+            padding: 30px;
             border-radius: 20px;
             margin: 30px 0;
-            text-align: center;
-            color: white;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
         
-        .ai-selector h3 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+        .ai-comparison h3 {
+            text-align: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
             font-weight: 600;
         }
         
-        .ai-options {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+        .ai-options-detailed {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
         
-        .ai-option {
+        .ai-option-detailed {
             background: rgba(255, 255, 255, 0.15);
-            padding: 18px 25px;
+            padding: 25px;
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
             backdrop-filter: blur(10px);
-            min-width: 160px;
+            color: white;
         }
         
-        .ai-option:hover {
+        .ai-option-detailed:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .ai-option-detailed.active {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-        }
-        
-        .ai-option.active {
-            background: rgba(255, 255, 255, 0.3);
             border-color: #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
         }
         
-        .ai-description {
-            font-size: 0.85rem;
+        .ai-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .ai-header strong {
+            font-size: 1.3rem;
+        }
+        
+        .recommended-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .standard-badge {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .simple-badge {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .ai-option-detailed p {
+            margin: 8px 0;
+            font-size: 0.95rem;
             opacity: 0.9;
-            margin-top: 8px;
+            line-height: 1.4;
         }
         
         /* Glass Course Grid */
@@ -328,14 +369,8 @@
                 text-align: center;
             }
             
-            .ai-options {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .ai-option {
-                width: 100%;
-                max-width: 280px;
+            .ai-options-detailed {
+                grid-template-columns: 1fr;
             }
             
             .header h1 {
@@ -344,6 +379,12 @@
             
             .header p {
                 font-size: 1.1rem;
+            }
+            
+            .ai-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
             }
         }
         
@@ -392,13 +433,45 @@
         .course-card:nth-child(even) {
             animation-delay: 0.2s;
         }
+        
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #fff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🎓 Structured Courses</h1>
-            <p>Ολοκληρωμένα μαθήματα με AI υποστήριξη - Όπως το euclides.ai, αλλά καλύτερα!</p>
+            <p>Ολοκληρωμένα μαθήματα με AI υποστήριξη - Όπως το euclides.ai, αλλά καλύτερο!</p>
         </div>
 
         <div class="demo-notice">
@@ -412,20 +485,56 @@
             <a href="chatbot.html" class="nav-button">😊 Απλός AI</a>
         </div>
 
-        <div class="ai-selector">
-            <h3>🎯 Επιλέξτε τον AI Βοηθό Σας:</h3>
-            <div class="ai-options">
-                <div class="ai-option active" onclick="selectAI('real')">
-                    <strong>🤖 Πραγματικός AI</strong>
-                    <div class="ai-description">Για σύνθετα προβλήματα & λεπτομερείς αναλύσεις</div>
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-number">9+</div>
+                <div class="stat-label">Μαθήματα</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">AI Βοηθοί</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Δωρεάν</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Διαθέσιμο</div>
+            </div>
+        </div>
+
+        <div class="ai-comparison">
+            <h3>🎯 Επιλέξτε τον Ιδανικό AI Βοηθό:</h3>
+            <div class="ai-options-detailed">
+                <div class="ai-option-detailed active" onclick="selectAI('real')">
+                    <div class="ai-header">
+                        <strong>🤖 Πραγματικός AI</strong>
+                        <span class="recommended-badge">Συνιστάται</span>
+                    </div>
+                    <p>✅ Για σύνθετα προβλήματα & πανεπιστημιακό επίπεδο</p>
+                    <p>✅ Λεπτομερείς αναλύσεις & proofs</p>
+                    <p>🎯 <strong>Ιδανικός για:</strong> Λύκειο, Πανεπιστήμιο, Εξετάσεις</p>
                 </div>
-                <div class="ai-option" onclick="selectAI('smart')">
-                    <strong>🧠 Έξυπνος AI</strong>
-                    <div class="ai-description">Για βαθιά κατανόηση & εξηγήσεις βήμα-βήμα</div>
+                
+                <div class="ai-option-detailed" onclick="selectAI('smart')">
+                    <div class="ai-header">
+                        <strong>🧠 Έξυπνος AI</strong>
+                        <span class="standard-badge">Βασικός</span>
+                    </div>
+                    <p>✅ Για βαθιά κατανόηση & εξηγήσεις βήμα-βήμα</p>
+                    <p>✅ Επίπεδο difficulty selector</p>
+                    <p>🎯 <strong>Ιδανικός για:</strong> Γυμνάσιο, Λύκειο, Επανάληψη</p>
                 </div>
-                <div class="ai-option" onclick="selectAI('simple')">
-                    <strong>😊 Απλός AI</strong>
-                    <div class="ai-description">Για γρήγορες ερωτήσεις & απλές εξηγήσεις</div>
+                
+                <div class="ai-option-detailed" onclick="selectAI('simple')">
+                    <div class="ai-header">
+                        <strong>😊 Απλός AI</strong>
+                        <span class="simple-badge">Απλός</span>
+                    </div>
+                    <p>✅ Για γρήγορες ερωτήσεις & βασικές έννοιες</p>
+                    <p>✅ Φιλικό & προσιτό ύφος</p>
+                    <p>🎯 <strong>Ιδανικός για:</strong> Δημοτικό, Γυμνάσιο, Γρήγορες ερωτήσεις</p>
                 </div>
             </div>
         </div>
@@ -661,13 +770,16 @@
             selectedAI = aiType;
             
             // Ενημέρωση οπτικής επιλογής
-            document.querySelectorAll('.ai-option').forEach(option => {
+            document.querySelectorAll('.ai-option-detailed').forEach(option => {
                 option.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
             
             // Αποθήκευση προτίμησης
             localStorage.setItem('preferred_ai', selectedAI);
+            
+            // Προσθήκη animation
+            event.currentTarget.style.animation = 'fadeInUp 0.5s ease-out';
         }
 
         function openAIHelp(subject) {
@@ -694,8 +806,16 @@
             localStorage.setItem('last_course_subject', subjectMapping[subject]);
             localStorage.setItem('preferred_ai', selectedAI);
             
+            // Προσθήκη animation στο button
+            event.target.style.animation = 'pulse 0.6s ease-out';
+            setTimeout(() => {
+                event.target.style.animation = '';
+            }, 600);
+            
             // Ανακατεύθυνση
-            window.location.href = aiPages[selectedAI];
+            setTimeout(() => {
+                window.location.href = aiPages[selectedAI];
+            }, 300);
         }
 
         // Προσομοίωση progress με animations
@@ -724,8 +844,11 @@
                     const progressFill = card.querySelector('.progress-fill');
                     const progressText = card.querySelector('.progress-text');
                     
-                    progressFill.style.width = progress + '%';
-                    progressText.textContent = progress + '% Ολοκληρώθηκε';
+                    // Animate progress bar
+                    setTimeout(() => {
+                        progressFill.style.width = progress + '%';
+                        progressText.textContent = progress + '% Ολοκληρώθηκε';
+                    }, index * 100);
                 });
             }, 500);
 
@@ -733,28 +856,50 @@
             const savedAI = localStorage.getItem('preferred_ai');
             if (savedAI) {
                 selectedAI = savedAI;
-                document.querySelectorAll('.ai-option').forEach(option => {
+                document.querySelectorAll('.ai-option-detailed').forEach(option => {
                     option.classList.remove('active');
-                    if (option.querySelector('strong').textContent.includes(
-                        savedAI === 'real' ? 'Πραγματικός' : 
-                        savedAI === 'smart' ? 'Έξυπνος' : 'Απλός'
-                    )) {
+                    const aiType = option.querySelector('strong').textContent.includes('Πραγματικός') ? 'real' :
+                                  option.querySelector('strong').textContent.includes('Έξυπνος') ? 'smart' : 'simple';
+                    if (aiType === savedAI) {
                         option.classList.add('active');
                     }
                 });
             }
-        });
 
-        // Enhanced hover effects
-        document.querySelectorAll('.course-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
+            // Enhanced hover effects
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
+            // Load saved progress
+            loadUserProgress();
         });
+
+        function loadUserProgress() {
+            const savedProgress = localStorage.getItem('educate4all_progress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                const courseCards = document.querySelectorAll('.course-card');
+                const subjects = ['math', 'physics', 'chemistry', 'biology', 'history', 'geography', 'economics', 'robotics', 'ai'];
+                
+                courseCards.forEach((card, index) => {
+                    const subject = subjects[index];
+                    if (progress[subject]) {
+                        const progressFill = card.querySelector('.progress-fill');
+                        const progressText = card.querySelector('.progress-text');
+                        
+                        progressFill.style.width = progress[subject] + '%';
+                        progressText.textContent = progress[subject] + '% Ολοκληρώθηκε';
+                    }
+                });
+            }
+        }
     </script>
 </body>
 </html>
