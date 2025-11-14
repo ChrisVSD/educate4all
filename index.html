@@ -107,28 +107,49 @@
             color: #333;
         }
         
-        .github-section {
-            text-align: center;
-            padding: 60px 20px;
-            color: white;
-        }
-        
-        .github-button {
-            background: #333;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
+        .status-badge {
+            margin-top: 15px;
+            padding: 8px 12px;
+            background: #e9ecef;
             border-radius: 5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            transition: background 0.3s;
-            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-block;
         }
         
-        .github-button:hover {
-            background: #555;
+        .status-coming {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-ready {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .status-protected {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .developer-section {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .developer-card {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         .contact-section {
@@ -171,72 +192,80 @@
             <a href="#features" class="cta-button">🚀 Ξεκίνα Εδώ</a>
         </header>
 
+        <!-- Developer Section -->
+        <section class="developer-section">
+            <div class="developer-card">
+                <h2 style="margin-bottom: 15px; color: #333;">👨‍💻 Δημιουργός</h2>
+                <h3 style="color: #667eea; margin-bottom: 10px;">ΒΑΣΔΕΚΗΣ ΧΡΗΣΤΟΣ</h3>
+                <p style="color: #666; font-style: italic;">"Η γνώση πρέπει να είναι δωρεάν για όλους"</p>
+            </div>
+        </section>
+
         <section class="features" id="features">
             <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">🎯 Τι Προσφέρουμε</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.2rem; color: #666;">
+                🚧 <strong>Σε Ανάπτυξη</strong> - Αυτά τα features έρχονται σύντομα! 🚧
+            </p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
                     <h3>AI Βοηθός Εκπαίδευσης</h3>
                     <p>Δωρεάν βοηθός ΤΝ που απαντά σε όλες τις ερωτήσεις σου και σε βοηθάει να μαθαίνεις</p>
+                    <div class="status-badge status-coming">
+                        🔜 Αναμένεται Ιανουάριος 2024
+                    </div>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">📚</div>
                     <h3>Πλούσιο Υλικό</h3>
-                    <p>Μαθήματα, ασκήσεις και εκπαιδευτικό υλικό για όλα τα επίπεδα και τις ηλικίες</p>
+                    <p>Μαθήματα και ασκήσεις για όλα τα ακαδημαϊκά επίπεδα</p>
+                    <div class="status-badge status-coming">
+                        🔜 Αναμένεται Φεβρουάριος 2024
+                    </div>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">🌍</div>
                     <h3>Πρόσβαση για Όλους</h3>
-                    <p>Δωρεάν, χωρίς συνδρομές, χωρίς κρυφά κόστη. Πάντα δωρεάν για όλους</p>
+                    <p>100% Δωρεάν - Χωρίς συνδρομές, χωρίς κρυφά κόστη</p>
+                    <div class="status-badge status-ready">
+                        ✅ Βασική Αρχή Μας
+                    </div>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">🔓</div>
-                    <h3>Ανοιχτού Κώδικα</h3>
-                    <p>Ολόκληρο το project είναι ανοιχτού κώδικα. Μπορείς να συνεισφέρεις και εσύ!</p>
+                    <div class="feature-icon">🔒</div>
+                    <h3>Προστατευμένος Κώδικας</h3>
+                    <p>Ο κώδικας προστατεύεται για να διασφαλιστεί η ποιότητα και η ασφάλεια</p>
+                    <div class="status-badge status-protected">
+                        🛡️ Προστασία Ιδεών
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="github-section">
-            <h2 style="margin-bottom: 30px; font-size: 2rem;">👨‍💻 Συμμετέχεις στο Project;</h2>
-            <p style="margin-bottom: 30px; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Αυτό είναι ένα project της κοινότητας. Μπορείς να βοηθήσεις με κώδικα, ιδέες, ή απλά να το μοιραστείς!
-            </p>
-            <a href="https://github.com/ChrisVSD/educate4all" class="github-button" target="_blank">
-                📂 Δες τον Κώδικα στο GitHub
-            </a>
-        </section>
-
         <section class="contact-section">
-            <h2 style="margin-bottom: 30px; font-size: 2rem;">📞 Επικοινωνία</h2>
-            <p style="margin-bottom: 20px; font-size: 1.2rem;">
-                Έχεις ιδέες; Θέλεις να βοηθήσεις; Επικοινώνησε μαζί μας!
+            <h2 style="margin-bottom: 30px; font-size: 2rem;">📞 Επικοινωνία & Συνεργασία</h2>
+            <p style="margin-bottom: 20px; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Ενδιαφέρεσαι να συνεργαστείς; Έχεις ιδέες ή θέλεις να μάθεις περισσότερα;
             </p>
             <a href="mailto:christos.vasdekis.cv@gmail.com" class="contact-button">
-                📧 Στείλε Email
-            </a>
-            <br>
-            <a href="https://github.com/ChrisVSD/educate4all/issues" class="contact-button" target="_blank">
-                🐛 Αναφέρετε Θέμα
+                📧 Επικοινώνησε Μαζί Μας
             </a>
         </section>
 
         <footer>
-            <p>📧 Επικοινωνία: christos.vasdekis.cv@gmail.com</p>
+            <p><strong>Δημιουργήθηκε με ❤️ από ΒΑΣΔΕΚΗ ΧΡΗΣΤΟ</strong></p>
+            <p style="margin-top: 10px;">📧 Επικοινωνία: christos.vasdekis.cv@gmail.com</p>
             <p style="margin-top: 10px;">&copy; 2024 educate4all. All rights reserved.</p>
-            <p style="margin-top: 5px;">Δημιουργήθηκε με ❤️ από την κοινότητα</p>
         </footer>
     </div>
 
     <script>
-        // ΔΙΟΡΘΩΜΕΝΟ JavaScript - Μόνο για internal anchor links
+        // Smooth scrolling για anchor links
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling ΜΟΝΟ για links που έχουν href="#something"
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                // Ελέγχουμε αν το link είναι ΜΟΝΟ για internal navigation (όχι external links)
                 if (anchor.getAttribute('href').startsWith('#') && anchor.getAttribute('href').length > 1) {
                     anchor.addEventListener('click', function (e) {
                         e.preventDefault();
