@@ -32,7 +32,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        /* Glass Header */
+        /* Enhanced Glass Header with Teacher */
         .header {
             background: rgba(44, 62, 80, 0.9);
             color: white;
@@ -40,6 +40,42 @@
             text-align: center;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .teacher-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .teacher-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(108, 117, 125, 0.5);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .teacher-info {
+            text-align: left;
+        }
+        
+        .teacher-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #e9ecef;
+        }
+        
+        .teacher-title {
+            font-size: 1rem;
+            opacity: 0.9;
         }
         
         .header h1 {
@@ -112,7 +148,7 @@
             backdrop-filter: blur(10px);
         }
         
-        /* Glass Messages */
+        /* Enhanced Glass Messages with Teacher */
         .message {
             margin-bottom: 20px;
             padding: 15px 20px;
@@ -121,6 +157,7 @@
             line-height: 1.5;
             animation: fadeInUp 0.4s ease-out;
             backdrop-filter: blur(10px);
+            position: relative;
         }
         
         .user-message {
@@ -138,6 +175,31 @@
             border-bottom-left-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
+        }
+        
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(108, 117, 125, 0.5);
+        }
+        
+        .bot-avatar {
+            background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            color: #495057;
         }
         
         /* Glass Input Container */
@@ -186,7 +248,7 @@
             box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
         }
         
-        /* Glass Typing Indicator */
+        /* Enhanced Glass Typing Indicator */
         .typing-indicator {
             display: inline-block;
             padding: 12px 18px;
@@ -346,6 +408,15 @@
                 padding: 20px;
             }
             
+            .teacher-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .teacher-info {
+                text-align: center;
+            }
+            
             .header h1 {
                 font-size: 1.8rem;
             }
@@ -407,6 +478,14 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="teacher-section">
+                <div class="teacher-avatar"></div>
+                <div class="teacher-info">
+                    <div class="teacher-name">💭 Σωκράτης</div>
+                    <div class="teacher-title">Φιλόσοφος & Δάσκαλος</div>
+                </div>
+            </div>
+            
             <h1>🎓 Απλός AI Βοηθός</h1>
             <p>Φιλικός & Απλός Βοηθός για Γρήγορες Ερωτήσεις</p>
             <div class="simple-badge">😊 ΑΠΛΟΣ</div>
@@ -433,14 +512,18 @@
         
         <div class="chat-container" id="chat">
             <div class="message bot-message">
-                <strong>👋 Γεια σου! Είμαι ο Απλός AI Βοηθός! 😊</strong><br><br>
-                🎯 <strong>Είμαι εδώ για γρήγορες και απλές απαντήσεις!</strong><br><br>
+                <div class="message-header">
+                    <div class="message-avatar bot-avatar"></div>
+                    <div class="message-sender">💭 Σωκράτης</div>
+                </div>
+                <strong>👋 Γεια σου! Είμαι ο Σωκράτης! 😊</strong><br><br>
+                🎯 <strong>Είμαι εδώ για απλές και φιλικές συζητήσεις!</strong><br><br>
                 💡 <strong>Μπορώ να βοηθήσω με:</strong><br>
                 • 📝 <strong>Σύντομες εξηγήσεις</strong><br>
                 • 🎯 <strong>Γρήγορες απαντήσεις</strong><br>
                 • 📚 <strong>Βασικές έννοιες</strong><br>
                 • 🏃 <strong>Απλές λύσεις</strong><br><br>
-                ✨ <strong>Χρησιμοποίησε τις γρήγορες ερωτήσεις ή ρώτα με οτιδήποτε θέλεις!</strong>
+                ✨ <strong>Ρώτα με οτιδήποτε θέλεις να μάθεις!</strong>
             </div>
         </div>
         
@@ -457,6 +540,7 @@
         // Ενημέρωση UI κατά τη φόρτωση
         document.addEventListener('DOMContentLoaded', function() {
             updateAPIStatus();
+            loadLastSubject();
             
             // Προσθήκη animation για το welcome message
             const welcomeMessage = document.querySelector('.bot-message');
@@ -507,6 +591,27 @@
             sendMessage();
         }
         
+        function loadLastSubject() {
+            const lastSubject = localStorage.getItem('last_course_subject');
+            if (lastSubject) {
+                const userInput = document.getElementById('userInput');
+                userInput.placeholder = `Ρώτα για ${lastSubject}...`;
+                
+                // Προσθήκη welcome message για το συγκεκριμένο μάθημα
+                const chat = document.getElementById('chat');
+                const subjectMessage = document.createElement('div');
+                subjectMessage.className = 'message bot-message';
+                subjectMessage.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-avatar bot-avatar"></div>
+                        <div class="message-sender">💭 Σωκράτης</div>
+                    </div>
+                    <strong>📚 Συνεχίζουμε με ${lastSubject}!</strong><br>Ρώτα με οτιδήποτε θέλεις για αυτό το μάθημα.`;
+                chat.appendChild(subjectMessage);
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+        
         async function sendMessage() {
             if (!apiKey || !apiKey.startsWith('gsk_')) {
                 showError('❌ Χρειάζεσαι Groq API Key. Βάλε το παραπάνω.');
@@ -529,7 +634,12 @@
             // Προσθήκη δείκτη πληκτρολόγησης
             const typingIndicator = document.createElement('div');
             typingIndicator.className = 'message bot-message';
-            typingIndicator.innerHTML = '<div class="typing-indicator">💭 Σκέφτομαι...</div>';
+            typingIndicator.innerHTML = `
+                <div class="message-header">
+                    <div class="message-avatar bot-avatar"></div>
+                    <div class="message-sender">💭 Σωκράτης</div>
+                </div>
+                <div class="typing-indicator">💭 Σκέφτομαι<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></div>`;
             chat.appendChild(typingIndicator);
             chat.scrollTop = chat.scrollHeight;
             
@@ -539,8 +649,16 @@
                 
                 const botMessage = document.createElement('div');
                 botMessage.className = 'message bot-message';
-                botMessage.innerHTML = formatAIResponse(botResponse);
+                botMessage.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-avatar bot-avatar"></div>
+                        <div class="message-sender">💭 Σωκράτης</div>
+                    </div>
+                    ${formatAIResponse(botResponse)}`;
                 chat.appendChild(botMessage);
+                
+                // Αποθήκευση συνομιλίας
+                saveConversation(message, botResponse);
                 
             } catch (error) {
                 chat.removeChild(typingIndicator);
@@ -562,21 +680,24 @@
                     model: "llama-3.1-8b-instant",
                     messages: [{
                         role: "system",
-                        content: `Είσαι ένας απλός και φιλικός AI εκπαιδευτικός βοηθός για το educate4all.
-                                
-                                ΣΤΥΛ ΑΠΑΝΤΗΣΕΩΝ:
-                                - Απλές και σύντομες εξηγήσεις
-                                - Φιλικό και προσιτό ύφος
-                                - Χρήση emojis για ζωντανότητα
-                                - Εστίαση στις βασικές έννοιες
-                                - Σαφείς και κατανοητές απαντήσεις
-                                
-                                ΚΑΝΟΝΕΣ:
-                                - Απάντα ΠΑΝΤΑ στα ΕΛΛΗΝΙΚΑ
-                                - Κράτα τις απαντήσεις σύντομες
-                                - Χρησιμοποίησε παραδείγματα
-                                - Έχε ενθαρρυντικό ύφος
-                                - Αν δεν γνωρίζεις, πες το ειλικρινά`
+                        content: `Είσαι ο Σωκράτης - ο ΑΠΛΟΣ AI βοηθός του educate4all. Είσαι ο ίδιος ο Σωκράτης, ο φιλόσοφος που αγαπά τις απλές συζητήσεις και τις βασικές αλήθειες.
+
+ΣΤΥΛ ΑΠΑΝΤΗΣΕΩΝ:
+- Απλές και σαφείς εξηγήσεις, όπως θα μιλούσε ο Σωκράτης
+- Φιλικό και προσιτό ύφος με ενθαρρυντικές λέξεις
+- Χρήση απλών παραδειγμάτων από την καθημερινή ζωή
+- Εστίαση στις βασικές έννοιες και τις ουσίες
+- Ερωτήσεις που βοηθούν στην κατανόηση
+
+ΚΑΝΟΝΕΣ:
+- Απάντα ΠΑΝΤΑ στα ΕΛΛΗΝΙΚΑ, με την απλότητα του Σωκράτη
+- Κράτα τις απαντήσεις σύντομες και κατανοητές
+- Χρησιμοποίησε παραδείγματα που όλοι μπορούν να καταλάβουν
+- Έχε ενθαρρυντικό ύφος και υπομονή
+- Αν δεν γνωρίζεις κάτι, πες το ειλικρινά και με ταπεινότητα
+- Χρησιμοποίησε ερωτήσεις για να βοηθήσεις τον άλλο να σκεφτεί
+
+Θυμήσου: Η γνώση ξεκινά από την αναγνώριση της άγνοιας!`
                     }, {
                         role: "user", 
                         content: userMessage
@@ -609,6 +730,24 @@
             errorDiv.textContent = message;
             chat.appendChild(errorDiv);
             chat.scrollTop = chat.scrollHeight;
+        }
+        
+        function saveConversation(question, answer) {
+            let conversations = JSON.parse(localStorage.getItem('educate4all_conversations') || '[]');
+            conversations.push({
+                timestamp: new Date().toISOString(),
+                question: question,
+                answer: answer,
+                aiType: 'simple',
+                teacher: 'Σωκράτης'
+            });
+            
+            // Κράτα μόνο τις 50 πιο πρόσφατες συνομιλίες
+            if (conversations.length > 50) {
+                conversations = conversations.slice(-50);
+            }
+            
+            localStorage.setItem('educate4all_conversations', JSON.stringify(conversations));
         }
     </script>
 </body>
