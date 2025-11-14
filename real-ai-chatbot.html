@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>educate4all - Πραγματικός AI Βοηθός</title>
     <style>
+        /* ΟΛΑ ΤΑ ΙΔΙΑ STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
@@ -29,20 +30,20 @@
     <div class="container">
         <div class="header">
             <h1>🎓 educate4all Πραγματικός AI</h1>
-            <p>Με Google Gemini - Ξέρει ΟΛΑ τα μαθήματα!</p>
+            <p>Με Groq API - Πανέξυπνος & Γρήγορος!</p>
             <a href="index.html" class="home-button">🏠 Πίσω στην Αρχική</a>
         </div>
         
         <div class="api-section">
-            <p><strong>Βήμα 1:</strong> Βάλε το Google Gemini API Key σου</p>
-            <input type="password" id="apiKeyInput" class="api-input" placeholder="AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+            <p><strong>Βήμα 1:</strong> Βάλε το Groq API Key σου</p>
+            <input type="password" id="apiKeyInput" class="api-input" placeholder="gsk_xxxxxxxxxxxxxxxx">
             <button onclick="saveAPIKey()" class="save-api-btn">💾 Αποθήκευση</button>
             <div id="apiStatus"></div>
         </div>
         
         <div class="chat-container" id="chat">
             <div class="message bot-message">
-                <strong>👋 Γεια σου! Είμαι ο AI βοηθός με Google Gemini!</strong><br><br>
+                <strong>👋 Γεια σου! Είμαι ο AI βοηθός με Groq!</strong><br><br>
                 🎯 <strong>Μπορώ να απαντήσω σε ΟΠΟΙΑΔΗΠΟΤΕ ερώτηση για όλα τα μαθήματα!</strong><br><br>
                 💡 <strong>Παραδείγματα:</strong><br>
                 • "Τι είναι ο αριθμός π;"<br>
@@ -59,25 +60,20 @@
     </div>
 
     <script>
-        // 🔧 GOOGLE GEMINI API CONFIG - 100% ΔΩΡΕΑΝ
+        // 🔧 GROQ API CONFIG - 100% ΔΩΡΕΑΝ & ΓΡΗΓΟΡΟ
         let apiKey = localStorage.getItem('educate4all_api_key') || "";
-        
-        // Ενημέρωση UI κατά τη φόρτωση
-        document.addEventListener('DOMContentLoaded', function() {
-            updateAPIStatus();
-        });
         
         function updateAPIStatus() {
             const apiStatus = document.getElementById('apiStatus');
             const apiKeyInput = document.getElementById('apiKeyInput');
             
-            if (apiKey && apiKey.startsWith('AIza')) {
-                apiStatus.innerHTML = '<div class="success-message">✅ Google Gemini API Key είναι έτοιμο!</div>';
+            if (apiKey && apiKey.startsWith('gsk_')) {
+                apiStatus.innerHTML = '<div class="success-message">✅ Groq API Key είναι έτοιμο!</div>';
                 apiKeyInput.placeholder = '✅ API Key είναι αποθηκευμένο';
                 apiKeyInput.value = '';
             } else {
-                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι Google Gemini API Key</div>';
-                apiKeyInput.placeholder = 'AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι Groq API Key</div>';
+                apiKeyInput.placeholder = 'gsk_xxxxxxxxxxxxxxxx';
             }
         }
         
@@ -85,12 +81,12 @@
             const apiKeyInput = document.getElementById('apiKeyInput');
             const inputKey = apiKeyInput.value.trim();
             
-            if (inputKey && inputKey.startsWith('AIza')) {
+            if (inputKey && inputKey.startsWith('gsk_')) {
                 apiKey = inputKey;
                 localStorage.setItem('educate4all_api_key', apiKey);
                 updateAPIStatus();
             } else if (inputKey) {
-                alert('❌ Λάθος API Key. Πρέπει να ξεκινάει με "AIza"');
+                alert('❌ Λάθος API Key. Πρέπει να ξεκινάει με "gsk_"');
             }
         }
         
@@ -99,8 +95,8 @@
         }
         
         async function sendMessage() {
-            if (!apiKey || !apiKey.startsWith('AIza')) {
-                showError('❌ Χρειάζεσαι Google Gemini API Key. Βάλε το παραπάνω.');
+            if (!apiKey || !apiKey.startsWith('gsk_')) {
+                showError('❌ Χρειάζεσαι Groq API Key. Βάλε το παραπάνω.');
                 return;
             }
             
@@ -109,14 +105,12 @@
             const message = userInput.value.trim();
             if (message === '') return;
             
-            // Προσθήκη μηνύματος χρήστη
             const userMessage = document.createElement('div');
             userMessage.className = 'message user-message';
             userMessage.textContent = message;
             chat.appendChild(userMessage);
             userInput.value = '';
             
-            // Προσθήκη δείκτη πληκτρολόγησης
             const typingIndicator = document.createElement('div');
             typingIndicator.className = 'message bot-message';
             typingIndicator.innerHTML = '<div class="typing-indicator">🤔 Ο AI σκέφτεται...</div>';
@@ -142,36 +136,36 @@
         }
         
         async function getAIResponse(userMessage) {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: `Είσαι ένας φιλικός και βοηθητικός AI εκπαιδευτικός βοηθός για το educate4all. 
-                                  Απάντα ΣΤΑ ΕΛΛΗΝΙΚΑ και βοήθησε μαθητές με όλα τα σχολικά μαθήματα.
-                                  Δώσε λεπτομερείς και κατανοητές εξηγήσεις με παραδείγματα.
-                                  Χρησιμοποίησε emojis για να κάνεις τις απαντήσεις πιο ζωντανές.
-                                  
-                                  Ερώτηση μαθητή: ${userMessage}`
-                        }]
+                    model: "llama3-8b-8192",
+                    messages: [{
+                        role: "system",
+                        content: `Είσαι ένας φιλικός και βοηθητικός AI εκπαιδευτικός βοηθός για το educate4all. 
+                                Απάντα ΣΤΑ ΕΛΛΗΝΙΚΑ και βοήθησε μαθητές με όλα τα σχολικά μαθήματα.
+                                Δώσε λεπτομερείς και κατανοητές εξηγήσεις με παραδείγματα.
+                                Χρησιμοποίησε emojis για να κάνεις τις απαντήσεις πιο ζωντανές.`
+                    }, {
+                        role: "user", 
+                        content: userMessage
                     }],
-                    generationConfig: {
-                        maxOutputTokens: 2000,
-                        temperature: 0.7
-                    }
+                    max_tokens: 2000,
+                    temperature: 0.7
                 })
             });
             
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error?.message || 'Σφάλμα σύνδεσης με το Google Gemini API');
+                throw new Error(errorData.error?.message || 'Σφάλμα σύνδεσης με το Groq API');
             }
             
             const data = await response.json();
-            return data.candidates[0].content.parts[0].text;
+            return data.choices[0].message.content;
         }
         
         function formatAIResponse(text) {
@@ -190,6 +184,8 @@
             chat.appendChild(errorDiv);
             chat.scrollTop = chat.scrollHeight;
         }
+        
+        document.addEventListener('DOMContentLoaded', updateAPIStatus);
     </script>
 </body>
 </html>
