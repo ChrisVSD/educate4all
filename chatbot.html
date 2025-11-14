@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>educate4all - AI Βοηθός Εκπαίδευσης</title>
+    <title>educate4all - Έξυπνος AI Βοηθός</title>
     <style>
         * {
             margin: 0;
@@ -36,6 +36,30 @@
         
         .header h1 {
             margin-bottom: 10px;
+        }
+        
+        .api-section {
+            background: #fff3cd;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ffeaa7;
+        }
+        
+        .api-input {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .save-api-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         
         .chat-container {
@@ -93,6 +117,15 @@
             font-weight: bold;
         }
         
+        .typing-indicator {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #e9ecef;
+            border-radius: 15px;
+            font-style: italic;
+            color: #666;
+        }
+        
         .warning {
             background: #fff3cd !important;
             border: 1px solid #ffeaa7 !important;
@@ -129,14 +162,39 @@
             margin-top: 10px;
             font-size: 14px;
         }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success-message {
+            background: #d1edff;
+            color: #004085;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #b3d7ff;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎓 educate4all AI Βοηθός</h1>
-            <p>Δωρεάν βοήθεια για όλα τα μαθήματα - 1η Δημοτικού έως 3η Λυκείου</p>
+            <h1>🎓 educate4all Έξυπνος AI</h1>
+            <p>Προηγμένος AI Βοηθός με Groq API - Γρήγορος & Έξυπνος!</p>
             <a href="index.html" class="home-button">🏠 Πίσω στην Αρχική</a>
+        </div>
+        
+        <div class="api-section">
+            <p><strong>Βήμα 1:</strong> Βάλε το Groq API Key σου</p>
+            <input type="password" id="apiKeyInput" class="api-input" placeholder="gsk_xxxxxxxxxxxxxxxx">
+            <button onclick="saveAPIKey()" class="save-api-btn">💾 Αποθήκευση</button>
+            <div id="apiStatus"></div>
         </div>
         
         <div class="grade-selector">
@@ -160,119 +218,75 @@
         
         <div class="chat-container" id="chat">
             <div class="message bot-message">
-                👋 Γεια σου! Είμαι ο AI βοηθός σου! Μπορώ να σε βοηθήσω με:<br><br>
-                📚 <strong>Μαθηματικά</strong> - Άλγεβρα, Γεωμετρία<br>
-                🔬 <strong>Φυσική</strong> - Μηχανική, Ηλεκτρολογία<br>
-                🧪 <strong>Χημεία</strong> - Στοιχεία, Αντιδράσεις<br>
-                🌍 <strong>Ιστορία</strong> - Αρχαία, Νεότερη<br>
-                📖 <strong>Νέα Ελληνικά</strong> - Γραμματική, Λογοτεχνία<br>
-                🌐 <strong>Αγγλικά</strong> - Γραμματική, Λεξιλόγιο (Γερμανικής καταγωγής)<br><br>
-                Διάλεξε το επίπεδο σπουδών σου και ρώτα με οτιδήποτε θέλεις!
+                <strong>🤖 Γεια σου! Είμαι ο Έξυπνος AI Βοηθός!</strong><br><br>
+                🎯 <strong>Με Groq API - Υπερταχύς & Έξυπνος!</strong><br><br>
+                📚 <strong>Μπορώ να σε βοηθήσω με:</strong><br>
+                • <strong>Μαθηματικά</strong> - Άλγεβρα, Γεωμετρία, Λογισμός<br>
+                • <strong>Φυσική</strong> - Μηχανική, Ηλεκτρολογία, Θερμοδυναμική<br>
+                • <strong>Χημεία</strong> - Στοιχεία, Αντιδράσεις, Οργανική Χημεία<br>
+                • <strong>Ιστορία</strong> - Αρχαία, Βυζαντινή, Νεότερη<br>
+                • <strong>Ελληνικά</strong> - Γραμματική, Σύνταξη, Λογοτεχνία<br>
+                • <strong>Αγγλικά</strong> - Γραμματική, Λεξιλόγιο, Προφορά<br><br>
+                💡 <strong>Ρώτα με ΟΤΙΔΗΠΟΤΕ θέλεις! Είμαι εδώ για εσένα! 🚀</strong>
             </div>
         </div>
         
         <div class="input-container">
-            <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για το μάθημα..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για τα μαθήματα..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessage()">📨 Αποστολή</button>
         </div>
     </div>
 
     <script>
-        // ΕΚΤΕΤΑΜΕΝΗ Βάση γνώσεων με εκπαιδευτικό υλικό
-        const knowledgeBase = {
-            // Μαθηματικά - πολλές λέξεις κλειδιά
-            "μαθηματικά": "Τα μαθηματικά είναι η επιστήμη που μελετά αριθμούς, ποσότητες, σχήματα και δομές. Θέλεις βοήθεια με συγκεκριμένο θέμα;",
-            "μαθηματικα": "Τα μαθηματικά είναι η επιστήμη που μελετά αριθμούς, ποσότητες, σχήματα και δομές. Θέλεις βοήθεια με συγκεκριμένο θέμα;",
-            "άλγεβρα": "Η άλγεβρα μελετά μαθηματικές σχέσεις χρησιμοποιώντας σύμβολα και μεταβλητές. Μπορώ να βοηθήσω με εξισώσεις, ανισώσεις ή άλλα θέματα άλγεβρας!",
-            "αλγεβρα": "Η άλγεβρα μελετά μαθηματικές σχέσεις χρησιμοποιώντας σύμβολα και μεταβλητές. Μπορώ να βοηθήσω με εξισώσεις, ανισώσεις ή άλλα θέματα άλγεβρας!",
-            "γεωμετρία": "Η γεωμετρία μελετά σχήματα, μεγέθη και ιδιότητες του χώρου. Θέλεις βοήθεια με τρίγωνα, κύκλους ή άλλα γεωμετρικά σχήματα;",
-            "γεωμετρια": "Η γεωμετρία μελετά σχήματα, μεγέθη και ιδιότητες του χώρου. Θέλεις βοήθεια με τρίγωνα, κύκλους ή άλλα γεωμετρικά σχήματα;",
-            "τρίγωνο": "Τα τρίγωνα έχουν τρεις πλευρές και τρεις γωνίες. Υπάρχουν ισόπλευρα, ισοσκελή και σκαληνά τρίγωνα. Θέλεις να μάθεις περισσότερα;",
-            "τριγωνο": "Τα τρίγωνα έχουν τρεις πλευρές και τρεις γωνίες. Υπάρχουν ισόπλευρα, ισοσκελή και σκαληνά τρίγωνα. Θέλεις να μάθεις περισσότερα;",
-            "κύκλος": "Ο κύκλος είναι ένα σχήμα με όλα τα σημεία του σε ίση απόσταση από το κέντρο. Έχει ακτίνα, διάμετρο και περίμετρο. Θέλεις βοήθεια;",
-            "κυκλος": "Ο κύκλος είναι ένα σχήμα με όλα τα σημεία του σε ίση απόσταση από το κέντρο. Έχει ακτίνα, διάμετρο και περίμετρο. Θέλεις βοήθεια;",
-            "εξίσωση": "Μια εξίσωση είναι μια μαθηματική ισότητα. Για παράδειγμα: 2x + 3 = 7. Μπορώ να βοηθήσω με την επίλυση εξισώσεων!",
-            "εξισωση": "Μια εξίσωση είναι μια μαθηματική ισότητα. Για παράδειγμα: 2x + 3 = 7. Μπορώ να βοηθήσω με την επίλυση εξισώσεων!",
-            "πυθαγόρειο": "Το Πυθαγόρειο Θεώρημα λέει: a² + b² = c² σε ένα ορθογώνιο τρίγωνο. Θέλεις να δούμε ένα παράδειγμα;",
-            "πυθαγορειο": "Το Πυθαγόρειο Θεώρημα λέει: a² + b² = c² σε ένα ορθογώνιο τρίγωνο. Θέλεις να δούμε ένα παράδειγμα;",
+        // 🔧 GROQ API CONFIG
+        let apiKey = localStorage.getItem('educate4all_smart_api_key') || "";
+        
+        // Ενημέρωση UI κατά τη φόρτωση
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAPIStatus();
+        });
+        
+        function updateAPIStatus() {
+            const apiStatus = document.getElementById('apiStatus');
+            const apiKeyInput = document.getElementById('apiKeyInput');
             
-            // Φυσική
-            "φυσική": "Η φυσική μελετά την ύλη, την ενέργεια και τις αλληλεπιδράσεις τους. Μπορώ να βοηθήσω με μηχανική, ηλεκτρομαγνητισμό ή άλλα θέματα φυσικής!",
-            "φυσικη": "Η φυσική μελετά την ύλη, την ενέργεια και τις αλληλεπιδράσεις τους. Μπορώ να βοηθήσω με μηχανική, ηλεκτρομαγνητισμό ή άλλα θέματα φυσικής!",
-            "νόμοι του νεύτωνα": "Οι 3 νόμοι του Νεύτωνα: 1) Αδράνεια, 2) F=m·a, 3) Δράση-Αντίδραση. Θέλεις να εξηγήσω κανέναν;",
-            "νευτωνα": "Οι 3 νόμοι του Νεύτωνα: 1) Αδράνεια, 2) F=m·a, 3) Δράση-Αντίδραση. Θέλεις να εξηγήσω κανέναν;",
-            "ηλεκτρισμός": "Ο ηλεκτρισμός αφορά το φορτίο των ηλεκτρονίων. Έχει ρεύμα, τάση και αντίσταση. Θέλεις βοήθεια;",
-            "ηλεκτρισμος": "Ο ηλεκτρισμός αφορά το φορτίο των ηλεκτρονίων. Έχει ρεύμα, τάση και αντίσταση. Θέλεις βοήθεια;",
-            
-            // Χημεία
-            "χημεία": "Η χημεία μελετά τη σύνθεση και τις ιδιότητες της ύλης. Θέλεις βοήθεια με χημικά στοιχεία, αντιδράσεις ή τον περιοδικό πίνακα;",
-            "χημεια": "Η χημεία μελετά τη σύνθεση και τις ιδιότητες της ύλης. Θέλεις βοήθεια με χημικά στοιχεία, αντιδράσεις ή τον περιοδικό πίνακα;",
-            "περιοδικός πίνακας": "Ο περιοδικός πίνακας οργανώνει τα χημικά στοιχεία. Έχει ομάδες και περίοδους. Θέλεις να μάθεις για συγκεκριμένα στοιχεία;",
-            "στοιχείο": "Τα χημικά στοιχεία είναι οξυγόνο, υδρογόνο, άνθρακας κλπ. Κάθε στοιχείο έχει ατομικό αριθμό και σύμβολο. Ποιο σε ενδιαφέρει;",
-            "στοιχειο": "Τα χημικά στοιχεία είναι οξυγόνο, υδρογόνο, άνθρακας κλπ. Κάθε στοιχείο έχει ατομικό αριθμό και σύμβολο. Ποιο σε ενδιαφέρει;",
-            
-            // Ιστορία
-            "ιστορία": "Η ιστορία μελετά το παρελθόν της ανθρωπότητας. Μπορώ να βοηθήσω με αρχαία ελληνική ιστορία, βυζαντινή ιστορία ή νεότερη ιστορία!",
-            "ιστορια": "Η ιστορία μελετά το παρελθόν της ανθρωπότητας. Μπορώ να βοηθήσω με αρχαία ελληνική ιστορία, βυζαντινή ιστορία ή νεότερη ιστορία!",
-            "αρχαία ελλάδα": "Η Αρχαία Ελλάδα είχε σημαντικούς φιλοσόφους όπως ο Σωκράτης και ο Πλάτωνας, και σπουδαίες μάχες όπως οι Περσικοί Πόλεμοι.",
-            "αρχαια ελλαδα": "Η Αρχαία Ελλάδα είχε σημαντικούς φιλοσόφους όπως ο Σωκράτης και ο Πλάτωνας, και σπουδαίες μάχες όπως οι Περσικοί Πόλεμοι.",
-            "αλέξανδρος ο μέγας": "Ο Μέγας Αλέξανδρος ήταν βασιλιάς της Μακεδονίας που δημιούργησε μια τεράστια αυτοκρατορία. Θέλεις να μάθεις περισσότερα;",
-            "βυζαντινή αυτοκρατορία": "Η Βυζαντινή Αυτοκρατορία ήταν η συνέχεια της Ρωμαϊκής Αυτοκρατορίας στην Ανατολή με πρωτεύουσα την Κωνσταντινούπολη.",
-            "βυζαντινη αυτοκρατορια": "Η Βυζαντινή Αυτοκρατορία ήταν η συνέχεια της Ρωμαϊκής Αυτοκρατορίας στην Ανατολή με πρωτεύουσα την Κωνσταντινούπολη.",
-            
-            // Ελληνικά
-            "ελληνικά": "Τα Νέα Ελληνικά περιλαμβάνουν γραμματική, σύνταξη και λογοτεχνία. Θέλεις βοήθεια με ρήματα, ουσιαστικά ή λογοτεχνικά κείμενα;",
-            "ελληνικα": "Τα Νέα Ελληνικά περιλαμβάνουν γραμματική, σύνταξη και λογοτεχνία. Θέλεις βοήθεια με ρήματα, ουσιαστικά ή λογοτεχνικά κείμενα;",
-            "γραμματική": "Η γραμματική μελετά τη δομή της γλώσσας. Έχει ουσιαστικά, ρήματα, επιρρήματα κλπ. Με τι θέλεις βοήθεια;",
-            "γραμματικη": "Η γραμματική μελετά τη δομή της γλώσσας. Έχει ουσιαστικά, ρήματα, επιρρήματα κλπ. Με τι θέλεις βοήθεια;",
-            "ρήμα": "Τα ρήματα δείχνουν δράση ή κατάσταση. Έχουν χρόνους (παρόν, αόριστο, μέλλοντα) και διαθέσεις. Θέλεις βοήθεια;",
-            "ρημα": "Τα ρήματα δείχνουν δράση ή κατάσταση. Έχουν χρόνους (παρόν, αόριστο, μέλλοντα) και διαθέσεις. Θέλεις βοήθεια;",
-            "ουσιαστικό": "Τα ουσιαστικά είναι ονόματα ανθρώπων, ζώων, πραγμάτων. Έχουν γένη (αρσενικό, θηλυκό, ουδέτερο) και αριθμούς.",
-            "ουσιαστικο": "Τα ουσιαστικά είναι ονόματα ανθρώπων, ζώων, πραγμάτων. Έχουν γένη (αρσενικό, θηλυκό, ουδέτερο) και αριθμούς.",
-            
-            // Αγγλικά
-            "αγγλικά": "Τα Αγγλικά είναι μια <strong>γερμανικής καταγωγής</strong> γλώσσα που μιλιέται σε πολλές χώρες. Μπορώ να βοηθήσω με γραμματική, λεξιλόγιο ή προφορά!",
-            "αγγλικα": "Τα Αγγλικά είναι μια <strong>γερμανικής καταγωγής</strong> γλώσσα που μιλιέται σε πολλές χώρες. Μπορώ να βοηθήσω με γραμματική, λεξιλόγιο ή προφορά!",
-            "present simple": "Το Present Simple χρησιμοποιείται για rutines και γενικές αλήθειες. Π.χ.: I play football every day.",
-            "past simple": "Το Past Simple χρησιμοποιείται για completed actions στο παρελθόν. Π.χ.: I played football yesterday.",
-            
-            // Γενικές ερωτήσεις
-            "βοήθεια": "Μπορώ να σε βοηθήσω με μαθηματικά, φυσική, χημεία, ιστορία, ελληνικά ή αγγλικά! Τι μάθημα σε ενδιαφέρει;",
-            "βοηθεια": "Μπορώ να σε βοηθήσω με μαθηματικά, φυσική, χημεία, ιστορία, ελληνικά ή αγγλικά! Τι μάθημα σε ενδιαφέρει;",
-            "τι μπορείς να κάνεις": "Μπορώ να βοηθήσω με όλα τα σχολικά μαθήματα από Δημοτικό έως Λύκειο! Ρώτα με οτιδήποτε θέλεις για μαθηματικά, επιστήμες ή γλώσσες!",
-            "ποιος είσαι": "Είμαι ο AI βοηθός του educate4all! Στόχος μου είναι να βοηθάω μαθητές με την εκπαίδευσή τους. Είμαι εδώ για εσένα!",
-            "χαιρετισμός": "Γεια σου! 😊 Είμαι ο AI βοηθός σου για τα μαθήματα. Με τι μπορώ να σε βοηθήσω σήμερα;",
-            "γεια": "Γεια σου! 😊 Είμαι ο AI βοηθός σου για τα μαθήματα. Με τι μπορώ να σε βοηθήσω σήμερα;",
-            "hello": "Γεια σου! 😊 Είμαι ο AI βοηθός σου για τα μαθήματα. Με τι μπορώ να σε βοηθήσω σήμερα;",
-            "ευχαριστώ": "Παρακαλώ! 😊 Χαίρομαι που μπορώ να βοηθάω! Αν έχεις άλλη ερώτηση, ρώτα με ελεύθερα!",
-            "ευχαριστω": "Παρακαλώ! 😊 Χαίρομαι που μπορώ να βοηθάω! Αν έχεις άλλη ερώτηση, ρώτα με ελεύθερα!"
-        };
-
-        // Λίστα με ακατάλληλες λέξεις (για φιλτράρισμα)
-        const inappropriateWords = [
-            'μαλάκας', 'αρχίδι', 'σκατά', 'γαμώ', 'πουτάνα', 'μαλακία', 
-            'βρωμά', 'χέσιμο', 'σκατό', 'μαλακές', 'πουτανά'
-        ];
-
-        // Λίστα με μη εκπαιδευτικές ερωτήσεις
-        const nonEducationalTopics = [
-            'παιχνίδι', 'σκορ', 'γκολ', 'ποδόσφαιρο', 'μπάσκετ', 'αγώνας',
-            'ταινία', 'σίνema', 'netflix', 'youtube', 'tiktok', 'instagram',
-            'facebook', 'twitter', 'τραγούδι', 'τραγουδιστής', 'ηθοποιός',
-            'celebrity', 'διασκέδαση', 'πάρτι', 'κλαμπ', 'ποτό', 'κυβέρνηση',
-            'πολιτική', 'κόμμα', 'βουλή', 'εκλογές'
-        ];
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
+            if (apiKey && apiKey.startsWith('gsk_')) {
+                apiStatus.innerHTML = '<div class="success-message">✅ Groq API Key είναι έτοιμο!</div>';
+                apiKeyInput.placeholder = '✅ API Key είναι αποθηκευμένο';
+                apiKeyInput.value = '';
+            } else {
+                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι Groq API Key για τον Έξυπνο AI</div>';
+                apiKeyInput.placeholder = 'gsk_xxxxxxxxxxxxxxxx';
             }
         }
-
-        function sendMessage() {
+        
+        function saveAPIKey() {
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            const inputKey = apiKeyInput.value.trim();
+            
+            if (inputKey && inputKey.startsWith('gsk_')) {
+                apiKey = inputKey;
+                localStorage.setItem('educate4all_smart_api_key', apiKey);
+                updateAPIStatus();
+            } else if (inputKey) {
+                alert('❌ Λάθος API Key. Πρέπει να ξεκινάει με "gsk_"');
+            }
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') sendMessage();
+        }
+        
+        async function sendMessage() {
+            if (!apiKey || !apiKey.startsWith('gsk_')) {
+                showError('❌ Χρειάζεσαι Groq API Key. Βάλε το παραπάνω.');
+                return;
+            }
+            
             const userInput = document.getElementById('userInput');
             const chat = document.getElementById('chat');
             const message = userInput.value.trim();
+            const grade = document.getElementById('grade').value;
             
             if (message === '') return;
             
@@ -281,71 +295,114 @@
             userMessage.className = 'message user-message';
             userMessage.textContent = message;
             chat.appendChild(userMessage);
-            
-            // Καθαρισμός input
             userInput.value = '';
             
-            // Προσθήκη μηνύματος AI με καθυστέρηση
-            setTimeout(() => {
-                const botResponse = generateResponse(message);
+            // Προσθήκη δείκτη πληκτρολόγησης
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message bot-message';
+            typingIndicator.innerHTML = '<div class="typing-indicator">⚡ Ο Έξυπνος AI σκέφτεται...</div>';
+            chat.appendChild(typingIndicator);
+            chat.scrollTop = chat.scrollHeight;
+            
+            try {
+                const botResponse = await getAIResponse(message, grade);
+                chat.removeChild(typingIndicator);
+                
                 const botMessage = document.createElement('div');
-                botMessage.className = 'message bot-message ' + botResponse.class;
-                botMessage.innerHTML = botResponse.text;
+                botMessage.className = 'message bot-message';
+                botMessage.innerHTML = formatAIResponse(botResponse);
                 chat.appendChild(botMessage);
-                chat.scrollTop = chat.scrollHeight;
-            }, 1000);
+                
+            } catch (error) {
+                chat.removeChild(typingIndicator);
+                showError('❌ Σφάλμα: ' + error.message);
+                console.error('API Error:', error);
+            }
+            
+            chat.scrollTop = chat.scrollHeight;
         }
-
-        function generateResponse(message) {
-            const lowerMessage = message.toLowerCase();
+        
+        async function getAIResponse(userMessage, gradeLevel) {
+            const gradeContext = getGradeContext(gradeLevel);
             
-            // Έλεγχος για ακατάλληλη γλώσσα
-            if (containsInappropriateWords(lowerMessage)) {
-                return {
-                    text: '⚠️ <strong>Παρατήρηση:</strong> Η χρήση ακατάλληλης γλώσσας δεν επιτρέπεται. Θα χαρώ να σε βοηθήσω με οποιαδήποτε εκπαιδευτική ερώτηση έχεις! 📚',
-                    class: 'warning'
-                };
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: "llama-3.1-8b-instant",
+                    messages: [{
+                        role: "system",
+                        content: `Είσαι ένας έξυπνος και βοηθητικός AI εκπαιδευτικός βοηθός για το educate4all.
+                                Χρησιμοποιούμε Groq API για υπερταχείς απαντήσεις.
+                                
+                                ΒΑΣΙΚΕΣ ΟΔΗΓΙΕΣ:
+                                - Απάντα ΠΑΝΤΑ στα ΕΛΛΗΝΙΚΑ
+                                - Προσάρμοσε την απάντηση για ${gradeContext}
+                                - Δώσε ΛΕΠΤΟΜΕΡΕΙΣ εξηγήσεις με ΠΑΡΑΔΕΙΓΜΑΤΑ
+                                - Χρησιμοποίησε EMOJIS για πιο ζωντανές απαντήσεις
+                                - Έχε φιλικό και ενθαρρυντικό ύφος
+                                - Αν δεν γνωρίζεις, πες το ειλικρινά
+                                
+                                ΕΙΔΙΚΕΣ ΟΔΗΓΙΕΣ ΓΙΑ ΜΑΘΗΜΑΤΑ:
+                                - Μαθηματικά: Δώσε βήμα-βήμα λύσεις
+                                - Φυσική/Χημεία: Εξήγησε τις αρχές
+                                - Ιστορία: Παρουσίασε τα γεγονότα χρονολογικά
+                                - Γλώσσες: Δώσε παραδείγματα χρήσης`
+                    }, {
+                        role: "user", 
+                        content: userMessage
+                    }],
+                    max_tokens: 2000,
+                    temperature: 0.7
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || 'Σφάλμα σύνδεσης με το Groq API');
             }
             
-            // Έλεγχος για μη εκπαιδευτικές ερωτήσεις
-            if (isNonEducational(lowerMessage)) {
-                return {
-                    text: '🎓 <strong>Ας επιστρέψουμε στο μάθημα!</strong> Είμαι εδώ για να σε βοηθήσω με εκπαιδευτικά θέματα. Μήπως έχεις κάποια ερώτηση για μαθηματικά, φυσική, ιστορία ή άλλο μάθημα; 📖',
-                    class: 'educational-redirect'
-                };
-            }
-            
-            // Απάντηση βασισμένη στη βάση γνώσεων - έλεγχος για όλες τις λέξεις κλειδιά
-            for (const [keyword, response] of Object.entries(knowledgeBase)) {
-                if (lowerMessage.includes(keyword)) {
-                    return {
-                        text: response,
-                        class: ''
-                    };
-                }
-            }
-            
-            // Βελτιωμένη γενική απάντηση
-            const generalResponses = [
-                "🤔 <strong>Ενδιαφέρουσα ερώτηση!</strong> Μπορώ να σε βοηθήσω καλύτερα αν μου πεις για ποιο μάθημα ή θέμα ενδιαφέρεσαι. Έχεις ερωτήσεις για μαθηματικά, φυσική, χημεία, ιστορία ή ελληνικά; 📚",
-                "🎓 <strong>Ας δούμε τα μαθήματα!</strong> Είμαι εδώ για να σε βοηθήσω με: Μαθηματικά, Φυσική, Χημεία, Ιστορία, Ελληνικά ή Αγγλικά. Ποιο σου αρέσει περισσότερο; ✨",
-                "📖 <strong>Εκπαιδευτικός βοηθός!</strong> Μπορώ να απαντήσω σε ερωτήσεις για όλα τα σχολικά μαθήματα. Ρώτα με για συγκεκριμένο μάθημα ή θέμα που σου δυσκολεύει! 🌟"
-            ];
-            
-            const randomResponse = generalResponses[Math.floor(Math.random() * generalResponses.length)];
-            
-            return {
-                text: randomResponse,
-                class: ''
+            const data = await response.json();
+            return data.choices[0].message.content;
+        }
+        
+        function getGradeContext(gradeLevel) {
+            const contexts = {
+                'general': 'όλα τα επίπεδα σπουδών',
+                '1dim': 'πρώτη δημοτικού (6-7 ετών)',
+                '2dim': 'δεύτερη δημοτικού (7-8 ετών)', 
+                '3dim': 'τρίτη δημοτικού (8-9 ετών)',
+                '4dim': 'τέταρτη δημοτικού (9-10 ετών)',
+                '5dim': 'πέμπτη δημοτικού (10-11 ετών)',
+                '6dim': 'έκτη δημοτικού (11-12 ετών)',
+                '1gym': 'πρώτη γυμνασίου (12-13 ετών)',
+                '2gym': 'δεύτερη γυμνασίου (13-14 ετών)',
+                '3gym': 'τρίτη γυμνασίου (14-15 ετών)',
+                '1lyk': 'πρώτη λυκείου (15-16 ετών)',
+                '2lyk': 'δεύτερη λυκείου (16-17 ετών)',
+                '3lyk': 'τρίτη λυκείου (17-18 ετών)'
             };
+            return contexts[gradeLevel] || 'όλα τα επίπεδα σπουδών';
         }
-
-        function containsInappropriateWords(message) {
-            return inappropriateWords.some(word => message.includes(word));
+        
+        function formatAIResponse(text) {
+            return text
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/•\s*(.*?)(?=•|$)/g, '• <strong>$1</strong><br>');
         }
-
-        function isNonEducational(message) {
-            return nonEducationalTopics.some(topic => message.includes(topic));
+        
+        function showError(message) {
+            const chat = document.getElementById('chat');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            chat.appendChild(errorDiv);
+            chat.scrollTop = chat.scrollHeight;
         }
     </script>
 </body>
