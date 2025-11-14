@@ -129,206 +129,454 @@
             margin-top: 10px;
             font-size: 14px;
         }
+        
+        .subject-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 15px;
+            background: #e9ecef;
+        }
+        
+        .subject-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .subject-button:hover {
+            background: #5a6268;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🎓 educate4all Έξυπνος AI Βοηθός</h1>
-            <p>Πραγματική Τεχνητή Νοημοσύνη για εκπαίδευση - Σαν τον DeepSeek!</p>
+            <p>Πλήρης εκπαιδευτική υποστήριξη για όλα τα μαθήματα - Δημοτικό, Γυμνάσιο, Λύκειο</p>
             <a href="index.html" class="home-button">🏠 Πίσω στην Αρχική</a>
+        </div>
+        
+        <div class="subject-buttons">
+            <button class="subject-button" onclick="quickQuestion('μαθηματικά')">📐 Μαθηματικά</button>
+            <button class="subject-button" onclick="quickQuestion('φυσική')">🔬 Φυσική</button>
+            <button class="subject-button" onclick="quickQuestion('χημεία')">🧪 Χημεία</button>
+            <button class="subject-button" onclick="quickQuestion('ελληνικά')">📖 Ελληνικά</button>
+            <button class="subject-button" onclick="quickQuestion('αγγλικά')">🌐 Αγγλικά</button>
+            <button class="subject-button" onclick="quickQuestion('ιστορία')">🌍 Ιστορία</button>
+            <button class="subject-button" onclick="quickQuestion('βιολογία')">🧬 Βιολογία</button>
         </div>
         
         <div class="chat-container" id="chat">
             <div class="message bot-message">
-                <strong>👋 Γεια σου! Είμαι ο έξυπνος AI βοηθός του educate4all!</strong><br><br>
+                <strong>👋 Γεια σου! Είμαι ο πλήρης εκπαιδευτικός βοηθός σου!</strong><br><br>
                 
-                🎯 <strong>Μπορώ να σε βοηθήσω με:</strong><br>
-                • 📐 <strong>Μαθηματικά</strong> - Άλγεβρα, Γεωμετρία, Λογισμός<br>
-                • 🔬 <strong>Φυσική</strong> - Μηχανική, Θερμοδυναμική, Ηλεκτρολογία<br>
-                • 🧪 <strong>Χημεία</strong> - Οργανική, Ανόργανη, Βιοχημεία<br>
-                • 🌍 <strong>Ιστορία</strong> - Αρχαία, Μεσαιωνική, Σύγχρονη<br>
-                • 📖 <strong>Ελληνικά</strong> - Γραμματική, Σύνταξη, Λογοτεχνία<br>
-                • 🌐 <strong>Ξένες Γλώσσες</strong> - Αγγλικά, Γαλλικά, Γερμανικά<br><br>
+                🎯 <strong>Μπορώ να σε βοηθήσω με ΟΛΑ τα μαθήματα:</strong><br><br>
                 
-                💡 <strong>Προτεινόμενες ερωτήσεις:</strong><br>
-                • "Πυθαγόρειο θεώρημα"<br>
-                • "Εξίσωση δευτέρου βαθμού"<br>
-                • "Νόμοι του Νεύτωνα"<br>
-                • "Περιοδικός πίνακας"<br><br>
+                <strong>📚 Δημοτικό:</strong><br>
+                • Μαθηματικά Δημοτικού<br>
+                • Ελληνικά Δημοτικού<br>
+                • Φυσικές Επιστήμες<br>
+                • Ιστορία & Γεωγραφία<br><br>
                 
-                <strong>Ρώτα με οτιδήποτε θέλεις! 🚀</strong>
+                <strong>🏫 Γυμνάσιο:</strong><br>
+                • Άλγεβρα & Γεωμετρία<br>
+                • Φυσική & Χημεία<br>
+                • Αρχαία & Νέα Ελληνικά<br>
+                • Ξένες Γλώσσες<br><br>
+                
+                <strong>🎓 Λύκειο:</strong><br>
+                • Μαθηματικά Κατεύθυνσης<br>
+                • Φυσική & Χημεία Λυκείου<br>
+                • Επιστήμες & Κοινωνιολογία<br>
+                • Προετοιμασία Πανελληνίων<br><br>
+                
+                <strong>💡 Μπορείς να με ρωτήσεις:</strong><br>
+                • "Πώς λύνω εξισώσεις;"<br>
+                • "Τι είναι η φωτοσύνθεση;"<br>
+                • "Εξήγησε τους νόμους του Νεύτωνα"<br>
+                • "Βοήθησέ με με τα ρήματα"<br>
+                • "Πες μου για τον Πελοποννησιακό Πόλεμο"<br><br>
+                
+                <strong>Ή πάτα ένα από τα κουμπιά πάνω για γρήγορη βοήθεια! 🚀</strong>
             </div>
         </div>
         
         <div class="input-container">
-            <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για τα μαθήματα σου..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για το σχολείο σου..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessage()">📨 Αποστολή</button>
         </div>
     </div>
 
     <script>
-        // Βελτιωμένη βάση γνώσεων με ΠΟΛΛΕΣ λέξεις-κλειδιά
+        // ΠΛΗΡΗΣ Βάση Γνώσεων για ΟΛΑ τα μαθήματα
         const knowledgeBase = {
             // === ΜΑΘΗΜΑΤΙΚΑ ===
-            "πυθαγόρειο": `
-                📐 <strong>Πυθαγόρειο Θεώρημα - Ολοκληρωμένη Ανάλυση</strong><br><br>
-
-                <strong>📖 Ορισμός:</strong><br>
-                Σε κάθε ορθογώνιο τρίγωνο, το τετράγωνο της υποτείνουσας (c) ισούται με το άθροισμα των τετραγώνων των δύο κάθετων πλευρών (a και b).<br><br>
-
-                <div class="math-formula">
-                <strong>🧮 Μαθηματικός Τύπος:</strong><br>
-                c² = a² + b²
-                </div>
-
+            "μαθηματικά": "📐 <strong>Μαθηματικά</strong><br><br>Μπορώ να σε βοηθήσω με: Άλγεβρα, Γεωμετρία, Εξισώσεις, Κλάσματα, Ποσοστά, Στατιστική! Τι ακριβώς θέλεις να μάθεις;",
+            
+            "άλγεβρα": `
+                📐 <strong>Άλγεβρα</strong><br><br>
+                
+                <strong>Βασικές Έννοιες:</strong><br>
+                • <strong>Μεταβλητές:</strong> x, y, z<br>
+                • <strong>Εξισώσεις:</strong> 2x + 3 = 7<br>
+                • <strong>Πολυώνυμα:</strong> x² + 2x + 1<br>
+                • <strong>Συναρτήσεις:</strong> f(x) = 2x + 1<br><br>
+                
                 <div class="example-box">
-                <strong>🔢 Παράδειγμα 1:</strong><br>
-                Αν a = 3 cm και b = 4 cm:<br>
-                c² = 3² + 4² = 9 + 16 = 25<br>
-                c = √25 = <strong>5 cm</strong>
+                <strong>📝 Παράδειγμα Επίλυσης Εξίσωσης:</strong><br>
+                3x - 6 = 12<br>
+                3x = 12 + 6<br>
+                3x = 18<br>
+                x = 18 ÷ 3<br>
+                x = <strong>6</strong>
                 </div>
-
-                <div class="example-box">
-                <strong>🔢 Παράδειγμα 2:</strong><br>
-                Αν c = 13 cm και a = 5 cm:<br>
-                b² = c² - a² = 169 - 25 = 144<br>
-                b = √144 = <strong>12 cm</strong>
-                </div>
-
-                <strong>🎯 Εφαρμογές:</strong><br>
-                • Υπολογισμός αποστάσεων<br>
-                • Αρχιτεκτονική και κατασκευές<br>
-                • Ηλεκτρονικοί υπολογισμοί<br>
-                • Αστρονομία<br><br>
-
-                <strong>📚 Ιστορική Πληροφορία:</strong><br>
-                Το θεώρημα πιστεύεται ότι ανακαλύφθηκε από τον Πυθαγόρα τον 6ο αιώνα π.Χ.
+                
+                <strong>🎯 Τι θέλεις να μάθεις;</strong><br>
+                • Εξισώσεις πρώτου βαθμού<br>
+                • Εξισώσεις δευτέρου βαθμού<br>
+                • Συστήματα εξισώσεων<br>
+                • Ανισώσεις
             `,
 
-            "πυθαγορειο": `
-                📐 <strong>Πυθαγόρειο Θεώρημα - Ολοκληρωμένη Ανάλυση</strong><br><br>
-
-                <strong>📖 Ορισμός:</strong><br>
-                Σε κάθε ορθογώνιο τρίγωνο, το τετράγωνο της υποτείνουσας (c) ισούται με το άθροισμα των τετραγώνων των δύο κάθετων πλευρών (a και b).<br><br>
-
+            "γεωμετρία": `
+                📐 <strong>Γεωμετρία</strong><br><br>
+                
+                <strong>Βασικά Σχήματα:</strong><br>
+                • <strong>Τρίγωνο:</strong> 3 πλευρές, 3 γωνίες<br>
+                • <strong>Τετράγωνο:</strong> 4 ίσες πλευρές<br>
+                • <strong>Ορθογώνιο:</strong> 4 γωνίες 90°<br>
+                • <strong>Κύκλος:</strong> ακτίνα, διάμετρος<br><br>
+                
                 <div class="math-formula">
-                <strong>🧮 Μαθηματικός Τύπος:</strong><br>
-                c² = a² + b²
+                <strong>🧮 Σημαντικοί Τύποι:</strong><br>
+                • <strong>Πυθαγόρειο:</strong> a² + b² = c²<br>
+                • <strong>Εμβαδόν Τριγώνου:</strong> (βάση × ύψος) ÷ 2<br>
+                • <strong>Εμβαδόν Κύκλου:</strong> π × r²<br>
+                • <strong>Περίμετρος Κύκλου:</strong> 2 × π × r
                 </div>
-
+                
                 <div class="example-box">
-                <strong>🔢 Παράδειγμα 1:</strong><br>
-                Αν a = 3 cm και b = 4 cm:<br>
-                c² = 3² + 4² = 9 + 16 = 25<br>
-                c = √25 = <strong>5 cm</strong>
+                <strong>📝 Παράδειγμα:</strong><br>
+                Αν τρίγωνο έχει βάση=8cm και ύψος=5cm:<br>
+                Εμβαδόν = (8 × 5) ÷ 2 = 40 ÷ 2 = <strong>20 cm²</strong>
                 </div>
-
-                <strong>🎯 Εφαρμογές:</strong><br>
-                • Υπολογισμός αποστάσεων<br>
-                • Αρχιτεκτονική<br>
-                • Ηλεκτρονικοί υπολογισμοί
-            `,
-
-            "θεωρημα": `
-                📐 <strong>Πυθαγόρειο Θεώρημα</strong><br><br>
-                Σε ορθογώνιο τρίγωνο: c² = a² + b²<br><br>
-                <strong>Παράδειγμα:</strong> Αν a=3, b=4, τότε c=5<br>
-                Θέλεις περισσότερες λεπτομέρειες;
             `,
 
             "εξίσωση": `
-                🎯 <strong>Εξισώσεις Β' Βαθμού - Πλήρης Οδηγός</strong><br><br>
-
-                <strong>📖 Ορισμός:</strong><br>
-                Μια εξίσωση της μορφής: αx² + βx + γ = 0, όπου α ≠ 0<br><br>
-
-                <div class="math-formula">
-                <strong>🧮 Τύπος Επίλυσης:</strong><br>
-                x = [-β ± √(β² - 4αγ)] / 2α
-                </div>
-
+                🎯 <strong>Εξισώσεις</strong><br><br>
+                
+                <strong>Εξίσωση 1ου Βαθμού:</strong><br>
+                Μορφή: αx + β = 0<br>
+                Λύση: x = -β/α<br><br>
+                
                 <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong> 2x² - 4x - 6 = 0<br><br>
-                α=2, β=-4, γ=-6<br>
-                Δ = (-4)² - 4·2·(-6) = 16 + 48 = 64<br>
-                x = [4 ± 8] / 4<br>
-                • x₁ = (4 + 8)/4 = 3<br>
-                • x₂ = (4 - 8)/4 = -1
+                <strong>📝 Παράδειγμα:</strong><br>
+                2x + 6 = 0<br>
+                2x = -6<br>
+                x = -6 ÷ 2<br>
+                x = <strong>-3</strong>
+                </div>
+                
+                <strong>Εξίσωση 2ου Βαθμού:</strong><br>
+                Μορφή: αx² + βx + γ = 0<br>
+                Τύπος: x = [-β ± √(β² - 4αγ)] ÷ 2α<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong><br>
+                x² - 5x + 6 = 0<br>
+                Δ = (-5)² - 4×1×6 = 25 - 24 = 1<br>
+                x = [5 ± 1] ÷ 2<br>
+                x₁ = (5+1)/2 = 3<br>
+                x₂ = (5-1)/2 = 2<br>
+                <strong>Λύσεις: x=2, x=3</strong>
                 </div>
             `,
 
-            "βαθμού": `
-                🎯 <strong>Εξισώσεις Β' Βαθμού</strong><br><br>
-                Μορφή: αx² + βx + γ = 0<br>
-                Τύπος: x = [-β ± √(β² - 4αγ)] / 2α<br><br>
-                <strong>Παράδειγμα:</strong> x² - 5x + 6 = 0<br>
-                Λύσεις: x=2, x=3
+            "κλάσμα": `
+                🔢 <strong>Κλάσματα</strong><br><br>
+                
+                <strong>Βασικές Πράξεις:</strong><br><br>
+                
+                <div class="example-box">
+                <strong>Πρόσθεση:</strong><br>
+                1/2 + 1/3 = 3/6 + 2/6 = <strong>5/6</strong>
+                </div>
+                
+                <div class="example-box">
+                <strong>Πολλαπλασιασμός:</strong><br>
+                2/3 × 3/4 = (2×3)/(3×4) = 6/12 = <strong>1/2</strong>
+                </div>
+                
+                <div class="example-box">
+                <strong>Διαίρεση:</strong><br>
+                2/3 ÷ 3/4 = 2/3 × 4/3 = 8/9
+                </div>
+                
+                <strong>🎯 Απλοποίηση:</strong><br>
+                4/8 = 1/2 (διαιρούμε με 4)<br>
+                9/12 = 3/4 (διαιρούμε με 3)
             `,
 
             // === ΦΥΣΙΚΗ ===
-            "νεύτωνα": `
-                🔬 <strong>Οι 3 Νόμοι της Κίνησης του Νεύτωνα</strong><br><br>
+            "φυσική": "🔬 <strong>Φυσική</strong><br><br>Μπορώ να εξηγήσω: Μηχανική, Ηλεκτρολογία, Θερμοδυναμική, Κίνηση, Ενέργεια, Ηχος, Φως! Τι θέλεις να μάθεις;",
 
+            "νεύτωνας": `
+                🔬 <strong>Νόμοι του Νεύτωνα</strong><br><br>
+                
                 <strong>1️⃣ Νόμος Αδράνειας:</strong><br>
-                "Ένα σώμα παραμένει σε ηρεμία ή ευθύγραμμη ομαλή κίνηση, εκτός αν ασκηθεί σε αυτό εξωτερική δύναμη."<br><br>
-
-                <strong>2️⃣ Νόμος Κίνησης:</strong><br>
-                <div class="math-formula">
-                F = m·a
-                </div>
-
-                <strong>3️⃣ Νόμος Δράσης-Αντίδρασης:</strong><br>
-                "Για κάθε δράση υπάρχει ίση και αντίθετη αντίδραση."<br><br>
-
+                "Σώμα μένει ακίνητο ή κινείται ευθύγραμμα ομαλά, αν δεν ασκείται δύναμη."<br><br>
+                
                 <div class="example-box">
                 <strong>📝 Παράδειγμα:</strong><br>
-                Όταν πηδάς από βάρκα, η βάρκα κινείται προς τα πίσω.
+                Μπάλα στο γρασίδι μένει ακίνητη μέχρι να την κλωτσήσεις.
+                </div>
+                
+                <strong>2️⃣ Νόμος Κίνησης:</strong><br>
+                <div class="math-formula">
+                F = m × a
+                </div>
+                Δύναμη = μάζα × επιτάχυνση<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong><br>
+                Όσο πιο δυνατά σπρώχνεις καρότσι, τόσο πιο γρήγορα πάει.
+                </div>
+                
+                <strong>3️⃣ Νόμος Δράσης-Αντίδρασης:</strong><br>
+                "Για κάθε δράση υπάρχει ίση και αντίθετη αντίδραση."<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong><br>
+                Όταν πηδάς από σκάλα, η σκάλα σπρώχνει και εσένα.
                 </div>
             `,
 
-            "νόμοι": `
-                🔬 <strong>Νόμοι του Νεύτωνα</strong><br><br>
-                1. <strong>Αδράνεια:</strong> Σώμα μένει ακίνητο ή κινείται ομαλά<br>
-                2. <strong>F = m·a:</strong> Δύναμη = μάζα × επιτάχυνση<br>
-                3. <strong>Δράση-Αντίδραση:</strong> Ίσες και αντίθετες δυνάμεις
+            "ενέργεια": `
+                ⚡ <strong>Ενέργεια</strong><br><br>
+                
+                <strong>Μορφές Ενέργειας:</strong><br>
+                • <strong>Κινητική:</strong> Ενέργεια κίνησης<br>
+                • <strong>Δυναμική:</strong> Ενέργεια θέσης<br>
+                • <strong>Θερμική:</strong> Ενέργεια θερμότητας<br>
+                • <strong>Ηλεκτρική:</strong> Ενέργεια ρεύματος<br><br>
+                
+                <div class="math-formula">
+                <strong>🧮 Τύποι:</strong><br>
+                • Κινητική Ενέργεια: E = ½ × m × v²<br>
+                • Δυναμική Ενέργεια: E = m × g × h
+                </div>
+                
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong><br>
+                Μπάλα μάζας 2kg πέφτει από ύψος 10m:<br>
+                Δυναμική Ενέργεια = 2 × 10 × 10 = <strong>200 Joules</strong>
+                </div>
             `,
 
             // === ΧΗΜΕΙΑ ===
+            "χημεία": "🧪 <strong>Χημεία</strong><br><br>Μπορώ να εξηγήσω: Περιοδικό Πίνακα, Χημικά Στοιχεία, Αντιδράσεις, Οξέα-Βάσεις, Μόρια, Άτομα! Τι σε ενδιαφέρει;",
+
             "περιοδικός": `
-                🧪 <strong>Ο Περιοδικός Πίνακας των Στοιχείων</strong><br><br>
-
-                <strong>📖 Τι είναι:</strong><br>
-                Διάταξη χημικών στοιχείων με βάση ατομικό αριθμό και ιδιότητες.<br><br>
-
-                <strong>🎯 Κύριες Ομάδες:</strong><br>
-                • <strong>Αλκάλια (1):</strong> Li, Na, K<br>
-                • <strong>Αλκαλικές γαίες (2):</strong> Mg, Ca<br>
-                • <strong>Αλογόνα (17):</strong> F, Cl, Br<br>
-                • <strong>Ευγενή αέρια (18):</strong> He, Ne, Ar<br><br>
-
+                🧪 <strong>Περιοδικός Πίνακας</strong><br><br>
+                
+                <strong>Βασικές Ομάδες:</strong><br>
+                • <strong>Ομάδα 1 - Αλκάλια:</strong> Li, Na, K (πολύ δραστικά)<br>
+                • <strong>Ομάδα 2 - Αλκαλικές Γαίες:</strong> Mg, Ca<br>
+                • <strong>Ομάδα 17 - Αλογόνα:</strong> F, Cl, Br<br>
+                • <strong>Ομάδα 18 - Ευγενή Αέρια:</strong> He, Ne, Ar (αδρανή)<br><br>
+                
                 <div class="example-box">
-                <strong>📝 Παράδειγμα:</strong><br>
-                <strong>Νάτριο (Na):</strong> Βασικό συστατικό αλατιού<br>
-                <strong>Οξυγόνο (O):</strong> Απαραίτητο για την αναπνοή
+                <strong>📝 Σημαντικά Στοιχεία:</strong><br>
+                • <strong>Οξυγόνο (O):</strong> Αναπνοή, καύση<br>
+                • <strong>Υδρογόνο (H):</strong> Ελαφρύτερο στοιχείο<br>
+                • <strong>Άνθρακας (C):</strong> Βάση οργανικής χημείας<br>
+                • <strong>Αζώτο (N):</strong> Στην ατμόσφαιρα
+                </div>
+                
+                <strong>🎯 Ιδιότητες:</strong><br>
+                • Αριστερά: Μέταλλα<br>
+                • Δεξιά: Αμέταλλα<br>
+                • Κατά μήκος: Παρόμοιες ιδιότητες
+            `,
+
+            "άτομο": `
+                ⚛️ <strong>Άτομο</strong><br><br>
+                
+                <strong>Συστατικά:</strong><br>
+                • <strong>Πρωτόνια:</strong> Θετικό φορτίο (στον πυρήνα)<br>
+                • <strong>Νετρόνια:</strong> Ουδέτερα (στον πυρήνα)<br>
+                • <strong>Ηλεκτρόνια:</strong> Αρνητικό φορτίο (γύρω από πυρήνα)<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Παράδειγμα - Άτομο Ηλίου:</strong><br>
+                • Πρωτόνια: 2<br>
+                • Νετρόνια: 2<br>
+                • Ηλεκτρόνια: 2<br>
+                • Ατομικός αριθμός: 2
+                </div>
+                
+                <strong>🎯 Βασικές Έννοιες:</strong><br>
+                • <strong>Ατομικός αριθμός:</strong> Αριθμός πρωτονίων<br>
+                • <strong>Μαζικός αριθμός:</strong> Πρωτόνια + Νετρόνια<br>
+                • <strong>Ισότοπα:</strong> Ίδια πρωτόνια, διαφορετικά νετρόνια
+            `,
+
+            // === ΒΙΟΛΟΓΙΑ ===
+            "βιολογία": "🧬 <strong>Βιολογία</strong><br><br>Μπορώ να εξηγήσω: Κυτταρική δομή, Φωτοσύνθεση, Αναπνοή, Γενετική, Αναπαραγωγή, Οικοσυστήματα! Τι θέλεις να μάθεις;",
+
+            "φωτοσύνθεση": `
+                🌿 <strong>Φωτοσύνθεση</strong><br><br>
+                
+                <strong>Τι είναι:</strong><br>
+                Η διαδικασία που τα φυτά μετατρέπουν το φως του ήλιου σε ενέργεια.<br><br>
+                
+                <div class="math-formula">
+                <strong>🧪 Χημική Αντίδραση:</strong><br>
+                6CO₂ + 6H₂O + φως → C₆H₁₂O₆ + 6O₂
+                </div>
+                
+                <strong>Βήματα:</strong><br>
+                1. <strong>Απορρόφηση φωτός</strong> από χλωροφύλλη<br>
+                2. <strong>Διάσπαση νερού</strong> σε οξυγόνο και υδρογόνο<br>
+                3. <strong>Σχηματισμός γλυκόζης</strong> από CO₂ και υδρογόνο<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Σημασία:</strong><br>
+                • Παράγει οξυγόνο για την αναπνοή μας<br>
+                • Παράγει τροφή για τα φυτά<br>
+                • Ρυθμίζει το CO₂ στην ατμόσφαιρα
                 </div>
             `,
 
-            "πίνακας": `
-                🧪 <strong>Περιοδικός Πίνακας</strong><br><br>
-                Οργανώνει τα χημικά στοιχεία σε:<br>
-                • <strong>Ομάδες (κάθετα):</strong> Παρόμοιες ιδιότητες<br>
-                • <strong>Περίοδοι (οριζόντια):</strong> Ίδιος αριθμός ηλεκτρονίων<br><br>
-                <strong>Παράδειγμα:</strong> Ομάδα 1: Li, Na, K (πολύ δραστικά)
+            "κύτταρο": `
+                🔬 <strong>Κύτταρο</strong><br><br>
+                
+                <strong>Βασικές Δομές:</strong><br>
+                • <strong>Πυρήνας:</strong> Περιέχει το DNA<br>
+                • <strong>Μιτοχόνδρια:</strong> Παραγωγή ενέργειας<br>
+                • <strong>Χλωροπλάστες:</strong> Φωτοσύνθεση (σε φυτά)<br>
+                • <strong>Μεμβράνη:</strong> Προστατεύει το κύτταρο<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Διαφορές Φυτικό-Ζωικό Κύτταρο:</strong><br>
+                <strong>Φυτικό:</strong> Έχει τοίχωμα, χλωροπλάστες<br>
+                <strong>Ζωικό:</strong> Δεν έχει τοίχωμα, έχει κεντρικές κενοτόπους
+                </div>
             `,
 
-            // === ΓΕΝΙΚΕΣ ΕΡΩΤΗΣΕΙΣ ===
-            "μαθηματικά": "📚 <strong>Μαθηματικά</strong><br><br>Μπορώ να σε βοηθήσω με: Άλγεβρα, Γεωμετρία, Εξισώσεις, Πυθαγόρειο Θεώρημα! Τι ακριβώς θέλεις να μάθεις;",
-            "φυσική": "🔬 <strong>Φυσική</strong><br><br>Μπορώ να εξηγήσω: Νόμους του Νεύτωνα, Ενέργεια, Κίνηση, Ηλεκτρολογία! Με τι θέλεις βοήθεια;",
-            "χημεία": "🧪 <strong>Χημεία</strong><br><br>Ξέρω για: Περιοδικό Πίνακα, Χημικά Στοιχεία, Αντιδράσεις, Οξέα-Βάσεις! Τι σε ενδιαφέρει;",
-            "ιστορία": "🌍 <strong>Ιστορία</strong><br><br>Μπορώ να πω για: Αρχαία Ελλάδα, Ρωμαϊκή Αυτοκρατορία, Βυζαντινή Περίοδο, Νεότερη Ιστορία! Ποια εποχή;",
-            "ελληνικά": "📖 <strong>Ελληνικά</strong><br><br>Βοηθάω με: Γραμματική, Σύνταξη, Ρήματα, Ουσιαστικά, Λογοτεχνία! Πού δυσκολεύεσαι;"
+            // === ΕΛΛΗΝΙΚΑ ===
+            "ελληνικά": "📖 <strong>Ελληνικά</strong><br><br>Βοηθάω με: Γραμματική, Σύνταξη, Ρήματα, Ουσιαστικά, Επιρρήματα, Λογοτεχνία, Συντακτικό! Πού δυσκολεύεσαι;",
+
+            "ρήμα": `
+                📝 <strong>Ρήματα</strong><br><br>
+                
+                <strong>Χρόνοι Ρημάτων:</strong><br>
+                • <strong>Ενεστώτας:</strong> τώρα (γράφ-ω)<br>
+                • <strong>Αόριστος:</strong> χτες (έ-γραψ-α)<br>
+                • <strong>Παρατατικός:</strong> τότε (έ-γραφ-α)<br>
+                • <strong>Μέλλοντας:</strong> αργότερα (θα γράψ-ω)<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Παράδειγμα - Ρήμα "Γράφω":</strong><br>
+                • Ενεστώτας: γράφω, γράφεις, γράφει<br>
+                • Αόριστος: έγραψα, έγραψες, έγραψε<br>
+                • Παρατατικός: έγραφα, έγραφες, έγραφε<br>
+                • Μέλλοντας: θα γράψω, θα γράψεις, θα γράψει
+                </div>
+                
+                <strong>🎯 Συγχρονισμός:</strong><br>
+                Το ρήμα πρέπει να συμφωνεί με το υποκείμενο:<br>
+                "Εγώ γράφω" (σωστό)<br>
+                "Εγώ γράφεις" (λάθος)
+            `,
+
+            "ουσιαστικό": `
+                📚 <strong>Ουσιαστικά</strong><br><br>
+                
+                <strong>Γένη:</strong><br>
+                • <strong>Αρσενικά:</strong> ο μαθητής, ο δάσκαλος<br>
+                • <strong>Θηλικά:</strong> η μαθήτρια, η δασκάλα<br>
+                • <strong>Ουδέτερα:</strong> το παιδί, το βιβλίο<br><br>
+                
+                <strong>Αριθμοί:</strong><br>
+                • <strong>Ενικός:</strong> ο μαθητής<br>
+                • <strong>Πληθυντικός:</strong> οι μαθητές<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Κλίση Ουσιαστικών:</strong><br>
+                <strong>"Ο φίλος":</strong><br>
+                • Ονομαστική: ο φίλος, οι φίλοι<br>
+                • Γενική: του φίλου, των φίλων<br>
+                • Αιτιατική: τον φίλο, τους φίλους<br>
+                • Κλητική: φίλε, φίλοι
+                </div>
+            `,
+
+            // === ΙΣΤΟΡΙΑ ===
+            "ιστορία": "🌍 <strong>Ιστορία</strong><br><br>Μπορώ να πω για: Αρχαία Ελλάδα, Ρωμαϊκή Αυτοκρατορία, Βυζάντιο, Ελληνική Επανάσταση, Παγκόσμιοι Πόλεμοι! Ποια εποχή σε ενδιαφέρει;",
+
+            "αρχαία ελλάδα": `
+                🏛️ <strong>Αρχαία Ελλάδα</strong><br><br>
+                
+                <strong>Σημαντικές Περίοδοι:</strong><br>
+                • <strong>Μινωικός Πολιτισμός:</strong> 2600-1100 π.Χ. (Κρήτη)<br>
+                • <strong>Μυκηναϊκός Πολιτισμός:</strong> 1600-1100 π.Χ.<br>
+                • <strong>Κλασική Εποχή:</strong> 5ος-4ος αι. π.Χ.<br>
+                • <strong>Ελληνιστική Εποχή:</strong> 4ος-1ος αι. π.Χ.<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Σημαντικά Γεγονότα:</strong><br>
+                • <strong>Περσικοί Πόλεμοι:</strong> 490-479 π.Χ.<br>
+                • <strong>Χρυσός Αιώνας Αθηνών:</strong> Περικλής<br>
+                • <strong>Πελοποννησιακός Πόλεμος:</strong> 431-404 π.Χ.<br>
+                • <strong>Εκστρατείες Αλεξάνδρου:</strong> 334-323 π.Χ.
+                </div>
+                
+                <strong>🎯 Επιτεύγματα:</strong><br>
+                • Δημοκρατία (Αθήνα)<br>
+                • Φιλοσοφία (Σωκράτης, Πλάτων)<br>
+                • Ολυμπιακοί Αγώνες<br>
+                • Θέατρο (τραγωδία, κωμωδία)
+            `,
+
+            // === ΑΓΓΛΙΚΑ ===
+            "αγγλικά": "🌐 <strong>Αγγλικά</strong><br><br>Μπορώ να βοηθήσω με: Γραμματική, Λεξιλόγιο, Προφορά, Ρήματα, Χρόνους, Συζητήσεις! What would you like to learn?",
+
+            "present simple": `
+                📘 <strong>Present Simple</strong><br><br>
+                
+                <strong>Χρήση:</strong><br>
+                • Routines (καθημερινές πράξεις)<br>
+                • General truths (γενικές αλήθειες)<br>
+                • Permanent situations (μόνιμες καταστάσεις)<br><br>
+                
+                <div class="example-box">
+                <strong>📝 Παραδείγματα:</strong><br>
+                • I <strong>play</strong> football every day.<br>
+                • She <strong>works</strong> in an office.<br>
+                • The sun <strong>rises</strong> in the east.<br>
+                • They <strong>live</strong> in Athens.
+                </div>
+                
+                <strong>🎯 Σχηματισμός:</strong><br>
+                • I/You/We/They: play<br>
+                • He/She/It: play<strong>s</strong><br><br>
+                
+                <strong>❌ Negative:</strong> don't/doesn't + verb<br>
+                "I don't play", "She doesn't work"
+            `
         };
+
+        function quickQuestion(subject) {
+            document.getElementById('userInput').value = subject;
+            sendMessage();
+        }
 
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
@@ -374,47 +622,42 @@
         function generateResponse(message) {
             const lowerMessage = message.toLowerCase().trim();
             
-            console.log("Ο χρήστης ρώτησε:", lowerMessage); // Για debugging
-            
             // Αναζήτηση σε ΟΛΕΣ τις λέξεις-κλειδιά
             for (const [keyword, response] of Object.entries(knowledgeBase)) {
                 if (lowerMessage.includes(keyword)) {
-                    console.log("Βρέθηκε keyword:", keyword); // Για debugging
                     return response;
                 }
-            }
-            
-            // Ειδικές περιπτώσεις για συγκεκριμένες φράσεις
-            if (lowerMessage.includes("πυθαγόρειο") && lowerMessage.includes("θεώρημα")) {
-                return knowledgeBase["πυθαγόρειο"];
-            }
-            if (lowerMessage.includes("εξίσωση") && lowerMessage.includes("βαθμού")) {
-                return knowledgeBase["εξίσωση"];
-            }
-            if (lowerMessage.includes("νόμοι") && lowerMessage.includes("νεύτωνα")) {
-                return knowledgeBase["νεύτωνα"];
-            }
-            if (lowerMessage.includes("περιοδικός") && lowerMessage.includes("πίνακας")) {
-                return knowledgeBase["περιοδικός"];
             }
             
             // Βελτιωμένες γενικές απαντήσεις
             const generalResponses = [
                 `🤔 <strong>Ενδιαφέρουσα ερώτηση!</strong><br><br>
-                Δοκίμασε να ρωτήσεις για:<br><br>
-                • "<strong>Πυθαγόρειο θεώρημα</strong>"<br>
-                • "<strong>Εξίσωση β βαθμού</strong>"<br>
-                • "<strong>Νόμοι του Νεύτωνα</strong>"<br>
-                • "<strong>Περιοδικός πίνακας</strong>"<br><br>
-                <strong>Ή πες μου απλά τι μάθημα σε ενδιαφέρει! 📚</strong>`,
+                Μπορώ να σε βοηθήσω με <strong>όλα τα σχολικά μαθήματα</strong>!<br><br>
+                
+                <strong>📚 Δημοτικό, Γυμνάσιο & Λύκειο:</strong><br>
+                • Μαθηματικά & Φυσική<br>
+                • Χημεία & Βιολογία<br>
+                • Ελληνικά & Ξένες Γλώσσες<br>
+                • Ιστορία & Κοινωνιολογία<br><br>
+                
+                <strong>💡 Πες μου:</strong><br>
+                • "Πώς λύνω εξισώσεις;"<br>
+                • "Τι είναι η φωτοσύνθεση;"<br>
+                • "Βοήθησέ με με τα ρήματα"<br>
+                • "Εξήγησε τους νόμους του Νεύτωνα"<br><br>
+                
+                <strong>Ή πάτα ένα από τα κουμπιά πάνω! 📚</strong>`,
 
-                `🎓 <strong>Εκπαιδευτικός Βοηθός!</strong><br><br>
-                Ρώτα με για:<br><br>
-                📐 <strong>Μαθηματικά</strong> (Πυθαγόρειο, εξισώσεις)<br>
-                🔬 <strong>Φυσική</strong> (Νεύτωνας, ενέργεια)<br>
-                🧪 <strong>Χημεία</strong> (Περιοδικός πίνακας)<br>
-                🌍 <strong>Ιστορία & Γλώσσες</strong><br><br>
-                <strong>Προτίμησε συγκεκριμένες ερωτήσεις! ✨</strong>`
+                `🎓 <strong>Πλήρης Εκπαιδευτικός Βοηθός!</strong><br><br>
+                
+                <strong>🏫 Για όλα τα επίπεδα:</strong><br>
+                📐 <strong>Μαθηματικά:</strong> Άλγεβρα, Γεωμετρία, Εξισώσεις<br>
+                🔬 <strong>Φυσική & Χημεία:</strong> Νόμοι, Στοιχεία, Αντιδράσεις<br>
+                🧬 <strong>Βιολογία:</strong> Κύτταρα, Φωτοσύνθεση, Γενετική<br>
+                📖 <strong>Γλώσσες:</strong> Γραμματική, Ρήματα, Σύνταξη<br>
+                🌍 <strong>Ιστορία:</strong> Αρχαία, Μεσαιωνική, Σύγχρονη<br><br>
+                
+                <strong>Ρώτα με συγκεκριμένα για το μάθημα που σε ενδιαφέρει! ✨</strong>`
             ];
             
             return generalResponses[Math.floor(Math.random() * generalResponses.length)];
