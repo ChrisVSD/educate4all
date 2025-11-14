@@ -34,8 +34,8 @@
         </div>
         
         <div class="api-section">
-            <p><strong>Βήμα 1:</strong> Βάλε το OpenAI API Key σου</p>
-            <input type="password" id="apiKeyInput" class="api-input" placeholder="sk-proj-xxxxxxxxxxxxxxxx">
+            <p><strong>Βήμα 1:</strong> Βάλε το DeepSeek API Key σου</p>
+            <input type="password" id="apiKeyInput" class="api-input" placeholder="sk-xxxxxxxxxxxxxxxx">
             <button onclick="saveAPIKey()" class="save-api-btn">💾 Αποθήκευση</button>
             <div id="apiStatus"></div>
         </div>
@@ -59,7 +59,7 @@
     </div>
 
     <script>
-        // 🔧 ΑΣΦΑΛΕΣ CONFIG - ΚΑΝΕΝΑ API KEY ΣΤΟΝ ΚΩΔΙΚΑ
+        // 🔧 DEEPSEEK API CONFIG - 100% ΔΩΡΕΑΝ
         let apiKey = localStorage.getItem('educate4all_api_key') || "";
         
         // Ενημέρωση UI κατά τη φόρτωση
@@ -72,12 +72,12 @@
             const apiKeyInput = document.getElementById('apiKeyInput');
             
             if (apiKey && apiKey.startsWith('sk-')) {
-                apiStatus.innerHTML = '<div class="success-message">✅ API Key είναι έτοιμο! Μπορείς να ρωτήσεις τον AI.</div>';
+                apiStatus.innerHTML = '<div class="success-message">✅ DeepSeek API Key είναι έτοιμο! Μπορείς να ρωτήσεις τον AI.</div>';
                 apiKeyInput.placeholder = '✅ API Key είναι αποθηκευμένο';
                 apiKeyInput.value = '';
             } else {
-                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι OpenAI API Key για να λειτουργήσει ο AI.</div>';
-                apiKeyInput.placeholder = 'sk-proj-xxxxxxxxxxxxxxxx';
+                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι DeepSeek API Key για να λειτουργήσει ο AI.</div>';
+                apiKeyInput.placeholder = 'sk-xxxxxxxxxxxxxxxx';
             }
         }
         
@@ -100,7 +100,7 @@
         
         async function sendMessage() {
             if (!apiKey || !apiKey.startsWith('sk-')) {
-                showError('❌ Χρειάζεσαι OpenAI API Key. Βάλε το παραπάνω.');
+                showError('❌ Χρειάζεσαι DeepSeek API Key. Βάλε το παραπάνω.');
                 return;
             }
             
@@ -142,14 +142,14 @@
         }
         
         async function getAIResponse(userMessage) {
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            const response = await fetch('https://api.deepseek.com/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: "gpt-4o",
+                    model: "deepseek-chat",
                     messages: [{
                         role: "system",
                         content: `Είσαι ένας φιλικός και βοηθητικός AI εκπαιδευτικός βοηθός για το educate4all. 
@@ -160,14 +160,15 @@
                         role: "user", 
                         content: userMessage
                     }],
-                    max_tokens: 1500,
-                    temperature: 0.7
+                    max_tokens: 2000,
+                    temperature: 0.7,
+                    stream: false
                 })
             });
             
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error?.message || 'Σφάλμα σύνδεσης με το API');
+                throw new Error(errorData.error?.message || 'Σφάλμα σύνδεσης με το DeepSeek API');
             }
             
             const data = await response.json();
