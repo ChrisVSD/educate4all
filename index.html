@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>educate4all - Δωρεάν Εκπαίδευση για Όλους</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>educate4all - AI-Powered Education Platform</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <meta name="theme-color" content="#667eea">
     <style>
         * {
             margin: 0;
@@ -12,688 +13,469 @@
             box-sizing: border-box;
         }
         
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #ff6b6b;
-            --success: #28a745;
-            --text: #2d3748;
-            --text-light: #718096;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-dark: rgba(255, 255, 255, 0.05);
-        }
-        
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: var(--text);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        /* Particle Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg); 
-                opacity: 0.7;
-            }
-            50% { 
-                transform: translateY(-20px) rotate(180deg); 
-                opacity: 1;
-            }
+            color: #333;
+            padding: 20px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
         }
         
         /* Glass Morphism Header */
-        header {
+        .header {
             text-align: center;
-            padding: 80px 20px 60px;
-            color: var(--white);
-            background: var(--glass);
+            padding: 60px 30px;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
-            border-radius: 30px;
-            margin: 20px 0 40px;
+            border-radius: 25px;
+            margin-bottom: 30px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            animation: fadeInUp 0.8s ease-out;
         }
         
-        .logo {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
-            display: inline-block;
-            background: linear-gradient(135deg, #ffd700, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
-        }
-        
-        h1 {
-            font-size: 3.5rem;
+        .header h1 {
+            font-size: 4rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--white), #e2e8f0);
+            background: linear-gradient(45deg, #fff, #e3f2fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
         }
         
         .tagline {
-            font-size: 1.4rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
             font-weight: 300;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent), #ee5a24);
-            color: var(--white);
-            padding: 18px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-            cursor: pointer;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
-        }
-        
-        /* Enhanced AI Highlight Section */
-        .ai-highlight {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            padding: 50px 30px;
-            border-radius: 25px;
+        /* Glass Action Cards */
+        .main-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
             margin: 40px 0;
+        }
+        
+        .action-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 20px;
             text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
-
-        .ai-highlight::before {
+        
+        .action-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #ff6b6b, #ffd700, #28a745);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { background-position: -200% 0; }
-            50% { background-position: 200% 0; }
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
         
-        .ai-teacher-img {
-            width: 140px;
-            height: 140px;
-            margin-bottom: 25px;
-            border-radius: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            animation: float 3s ease-in-out infinite;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .ai-teacher-img:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.4);
+        .action-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
         
-        .ai-button {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: var(--white);
-            padding: 18px 35px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
+        .action-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        
+        .action-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .ai-button:hover::after {
-            width: 300px;
-            height: 300px;
         }
         
-        .ai-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        .action-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+            font-size: 1rem;
         }
         
+        .feature-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        /* Glass Features Section */
         .features {
-            background: var(--white);
-            padding: 80px 20px;
-            border-radius: 30px;
-            margin-top: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            scroll-margin-top: 80px;
-            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px 30px;
+            border-radius: 25px;
+            margin: 50px 0;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
-
-        .features::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--success));
-            border-radius: 30px 30px 0 0;
+        
+        .features h2 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 600;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
         
-        .feature-card {
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            padding: 35px 25px;
-            border-radius: 20px;
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .feature-card:hover::before {
-            left: 100%;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            background: linear-gradient(135deg, #ffffff, #f1f5f9);
-        }
-        
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            animation: pulse 2s ease-in-out infinite;
-            display: inline-block;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 15px;
-            color: var(--text);
-            font-weight: 600;
-            font-size: 1.4rem;
-        }
-        
-        .feature-card p {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .status-badge {
-            margin-top: 15px;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-block;
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .status-badge:hover {
-            transform: scale(1.05);
         }
         
-        .status-coming {
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-            color: #856404;
-            border-color: #ffeaa7;
-        }
-        
-        .status-ready {
-            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
-            color: #0c5460;
-            border-color: #bee5eb;
-        }
-        
-        .status-protected {
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-            color: #721c24;
-            border-color: #f5c6cb;
-        }
-        
-        .status-live {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            color: #155724;
-            border-color: #c3e6cb;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 10px rgba(21, 87, 36, 0.3); }
-            to { box-shadow: 0 0 20px rgba(21, 87, 36, 0.6); }
-        }
-        
-        .developer-section {
-            text-align: center;
-            padding: 50px 20px;
-            color: var(--white);
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            margin: 40px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        .developer-card {
-            background: rgba(255,255,255,0.95);
-            padding: 40px;
-            border-radius: 20px;
-            display: inline-block;
-            color: var(--text);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .developer-card:hover {
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-5px);
         }
         
-        .contact-section {
-            text-align: center;
-            padding: 50px 20px;
-            color: var(--white);
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            margin: 40px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
         }
         
-        .contact-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--success), #20c997);
-            color: var(--white);
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 25px;
-            margin: 10px;
+        .feature-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
-            border: none;
         }
         
-        .contact-button:hover {
-            background: linear-gradient(135deg, #34ce57, #20c997);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(40, 167, 69, 0.6);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            color: var(--white);
+        .feature-item p {
             opacity: 0.9;
-            background: var(--glass-dark);
-            backdrop-filter: blur(10px);
+            line-height: 1.5;
+        }
+        
+        /* Glass Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
-            margin-top: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .creator {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Demo Notice */
+        .demo-notice {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            margin: 30px 0;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .demo-notice strong {
+            font-size: 1.2rem;
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        /* Floating elements */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #fff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
         }
-
-        /* Responsive Design */
+        
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            .main-actions {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .action-card {
+                padding: 30px 20px;
+            }
+            
             .features-grid {
                 grid-template-columns: 1fr;
             }
             
-            h1 {
-                font-size: 2.5rem;
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
             }
             
-            .logo {
-                font-size: 4rem;
+            .header {
+                padding: 40px 20px;
             }
             
-            .ai-teacher-img {
-                width: 120px;
-                height: 120px;
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .action-icon {
+                font-size: 3rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Particle Background -->
-    <div class="particles" id="particles"></div>
-
     <div class="container">
-        <!-- Glass Morphism Header -->
-        <header>
-            <div class="logo floating">🎓</div>
-            <h1>educate4all</h1>
-            <p class="tagline">Δωρεάν Εκπαίδευση για Όλους με Τεχνητή Νοημοσύνη</p>
-            <a href="#ai-chatbot" class="cta-button">
-                🚀 Ξεκίνα με τον Δάσκαλο Τώρα!
-            </a>
-        </header>
-
-        <!-- Enhanced AI Highlight Section -->
-        <section class="ai-highlight" id="ai-chatbot">
-            <div style="text-align: center;">
-                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" 
-                     alt="AI Δάσκαλος" 
-                     class="ai-teacher-img floating">
-                <h2 style="color: white; margin-bottom: 20px; font-size: 2.5rem; font-weight: 600;">🤖 Ρώτα τον Δάσκαλο</h2>
-            </div>
-            <p style="color: white; margin-bottom: 25px; font-size: 1.3rem; text-align: center; line-height: 1.6;">
-                💡 <strong>Μαθηματικά • Φυσική • Χημεία • Ιστορία • Γλώσσες • και πολλά άλλα!</strong>
-            </p>
-            <div style="text-align: center;">
-                <a href="real-ai-chatbot.html" class="ai-button">
-                    <span>🎯</span>
-                    <span>Ρώτα τον Δάσκαλο Τώρα!</span>
-                </a>
-            </div>
-            <p style="color: #ffd700; margin-top: 15px; font-size: 1rem; text-align: center; font-weight: 500;">
-                ✅ 100% ΔΩΡΕΑΝ • ✅ ΑΜΕΣΗ ΒΟΗΘΕΙΑ • ✅ ΣΕ ΠΡΑΓΜΑΤΙΚΟ ΧΡΟΝΟ
-            </p>
-        </section>
-
-        <!-- Developer Section -->
-        <section class="developer-section">
-            <div class="developer-card floating">
-                <h2 style="margin-bottom: 15px; color: var(--text); font-weight: 600;">👨‍💻 Δημιουργός</h2>
-                <h3 style="color: var(--primary); margin-bottom: 10px; font-weight: 600;">ΒΑΣΔΕΚΗΣ ΧΡΗΣΤΟΣ</h3>
-                <p style="color: var(--text-light); font-style: italic; font-size: 1.1rem;">"Η γνώση πρέπει να είναι δωρεάν για όλους"</p>
-            </div>
-        </section>
-
-        <!-- Enhanced Features Section -->
-        <section class="features" id="features">
-            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.8rem; font-weight: 700; color: var(--text);">
-                🎯 Τι Προσφέρουμε
-            </h2>
+        <div class="header">
+            <h1>🎓 educate4all</h1>
+            <p>Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης με Τεχνητή Νοημοσύνη</p>
+            <div class="tagline">Όλα τα εργαλεία, κανένα όριο - Καλύτερο από euclides.ai</div>
             
+            <div class="demo-notice">
+                <strong>🚀 ΠΛΗΡΗΣ ΛΕΙΤΟΥΡΓΙΑ!</strong> Όλα τα features είναι ενεργά και δωρεάν!
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">AI Βοηθοί</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">9+</div>
+                <div class="stat-label">Μαθήματα</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Δωρεάν</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Διαθέσιμο</div>
+            </div>
+        </div>
+
+        <div class="main-actions">
+            <a href="courses.html" class="action-card">
+                <div class="action-icon">📚</div>
+                <h3>Δομημένα Μαθήματα</h3>
+                <p>Ολοκληρωμένα μαθήματα με progress tracking και AI υποστήριξη για κάθε θέμα</p>
+                <div class="feature-badge">9+ Θέματα</div>
+            </a>
+            
+            <a href="real-ai-chatbot.html" class="action-card">
+                <div class="action-icon">🤖</div>
+                <h3>Πραγματικός AI</h3>
+                <p>Για σύνθετα προβλήματα, πανεπιστημιακό επίπεδο και λεπτομερείς αναλύσεις</p>
+                <div class="feature-badge">Συνιστάται</div>
+            </a>
+            
+            <a href="smart-chatbot.html" class="action-card">
+                <div class="action-icon">🧠</div>
+                <h3>Έξυπνος AI</h3>
+                <p>Εξηγήσεις βήμα-βήμα με επίπεδο difficulty selector για βαθιά κατανόηση</p>
+                <div class="feature-badge">Βασικός</div>
+            </a>
+            
+            <a href="chatbot.html" class="action-card">
+                <div class="action-icon">😊</div>
+                <h3>Απλός AI</h3>
+                <p>Γρήγορες απαντήσεις, φιλικό ύφος και απλές εξηγήσεις για βασικές έννοιες</p>
+                <div class="feature-badge">Απλός</div>
+            </a>
+        </div>
+
+        <div class="features">
+            <h2>🎯 Γιατί το educate4all είναι Καλύτερο</h2>
             <div class="features-grid">
-                <div class="feature-card" onclick="showAccessInfo()">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Πρόσβαση για Όλους</h3>
-                    <p>100% Δωρεάν - Χωρίς συνδρομές, χωρίς κρυφά κόστη</p>
-                    <div class="status-badge status-ready">
-                        ✅ Βασική Αρχή Μας
-                    </div>
-                </div>
-                
-                <div class="feature-card" onclick="openAIHelp('general')">
+                <div class="feature-item">
                     <div class="feature-icon">🤖</div>
-                    <h3>Πραγματικός AI Βοηθός</h3>
-                    <p>Ρώτα ΟΤΙΔΗΠΟΤΕ για όλα τα μαθήματα με πραγματική Τεχνητή Νοημοσύνη</p>
-                    <div class="status-badge status-live">
-                        <a href="real-ai-chatbot.html" style="color: inherit; text-decoration: none;">
-                            🎯 ΛΕΙΤΟΥΡΓΕΙ ΤΩΡΑ!
-                        </a>
-                    </div>
+                    <h4>3 AI Βοηθοί</h4>
+                    <p>Περισσότερες επιλογές από οποιαδήποτε άλλη πλατφόρμα</p>
                 </div>
                 
-                <div class="feature-card" onclick="openAIHelp('general')">
-                    <div class="feature-icon">💡</div>
-                    <h3>Έξυπνος AI Βοηθός</h3>
-                    <p>Εναλλακτικός AI βοηθός με διαφορετική προσέγγιση</p>
-                    <div class="status-badge status-ready">
-                        <a href="smart-chatbot.html" style="color: inherit; text-decoration: none;">
-                            🚀 Δοκίμασέ τον!
-                        </a>
-                    </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💯</div>
+                    <h4>100% Δωρεάν</h4>
+                    <p>Χωρίς όρια, χωρίς συνδρομές, χωρίς κρυφά κόστη</p>
                 </div>
                 
-                <div class="feature-card" onclick="openAIHelp('general')">
+                <div class="feature-item">
                     <div class="feature-icon">📚</div>
-                    <h3>Structured Courses</h3>
-                    <p>Οργανωμένα μαθήματα με AI υποστήριξη</p>
-                    <div class="status-badge status-ready">
-                        <a href="courses.html" style="color: inherit; text-decoration: none;">
-                            📖 Δες τα Courses!
-                        </a>
-                    </div>
+                    <h4>Δομημένα Μαθήματα</h4>
+                    <p>Όχι μόνο chatbot - πλήρες εκπαιδευτικό σύστημα</p>
                 </div>
                 
-                <div class="feature-card" onclick="showProtectionInfo()">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Προστατευμένος Κώδικας</h3>
-                    <p>Ο κώδικας προστατεύεται για να διασφαλιστεί η ποιότητα και η ασφάλεια</p>
-                    <div class="status-badge status-protected">
-                        🛡️ Προστασία Ιδεών
-                    </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎓</div>
+                    <h4>Για Όλους</h4>
+                    <p>Από Δημοτικό έως Πανεπιστήμιο και επαγγελματίες</p>
                 </div>
                 
-                <div class="feature-card" onclick="showDevelopmentRoadmap()">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Συνεχής Ανάπτυξη</h3>
-                    <p>Νέα features και βελτιώσεις προστίθενται συνεχώς</p>
-                    <div class="status-badge status-coming">
-                        🔄 Σε Εξέλιξη
-                    </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Ταχύτατο</h4>
+                    <p>Groq AI technology για άμεσες απαντήσεις</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h4>Ελληνικά</h4>
+                    <p>Βελτιστοποιημένο για Ελληνική γλώσσα και εκπαίδευση</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <h2 style="margin-bottom: 30px; font-size: 2.2rem; font-weight: 600;">📞 Επικοινωνία & Συνεργασία</h2>
-            <p style="margin-bottom: 20px; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">
-                Ενδιαφέρεσαι να συνεργαστείς; Έχεις ιδέες ή θέλεις να μάθεις περισσότερα;
-            </p>
-            <a href="mailto:christos.vasdekis.cv@gmail.com" class="contact-button">
-                <span>📧</span>
-                <span>Επικοινώνησε Μαζί Μας</span>
-            </a>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <p style="font-size: 1.1rem; font-weight: 600;"><strong>Δημιουργήθηκε με ❤️ από ΒΑΣΔΕΚΗ ΧΡΗΣΤΟ</strong></p>
-            <p style="margin-top: 15px; font-size: 1rem;">📧 Επικοινωνία: christos.vasdekis.cv@gmail.com</p>
-            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">&copy; 2025 educate4all. All rights reserved.</p>
-        </footer>
+        <div class="footer">
+            <p><strong>🎓 educate4all - Καθιστώντας την εκπαίδευση δωρεάν και προσβάσιμη για όλους</strong></p>
+            <p>Η πιο ολοκληρωμένη δωρεάν πλατφόρμα εκπαίδευσης με Τεχνητή Νοημοσύνη</p>
+            <p class="creator">Δημιουργήθηκε με ❤️ από ΒΑΣΔΕΚΗ ΧΡΗΣΤΟ</p>
+            <p style="margin-top: 20px; opacity: 0.7;">&copy; 2025 educate4all. All rights reserved.</p>
+        </div>
     </div>
 
     <script>
-        // Create animated particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                // Random properties
-                const size = Math.random() * 60 + 20;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const delay = Math.random() * 5;
-                const duration = Math.random() * 3 + 3;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Smooth scrolling για anchor links
+        // Add loading animation
         document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
+            // Animate stats counter
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                let current = 0;
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.round(current);
+                }, 40);
+            });
             
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                if (anchor.getAttribute('href').startsWith('#') && anchor.getAttribute('href').length > 1) {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    });
-                }
+            // Add hover effects
+            const actionCards = document.querySelectorAll('.action-card');
+            actionCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
             });
         });
-
-        function showAccessInfo() {
-            alert(`🌍 ΠΡΟΣΒΑΣΗ ΓΙΑ ΟΛΟΥΣ - Βασικές Αρχές μας:\n\n✅ 100% Δωρεάν - Χωρίς κρυφά κόστη\n✅ Ανοιχτή Πρόσβαση - Για όλους τους μαθητές\n✅ Χωρίς Συνδρομές - Ποτέ δεν θα χρεώσουμε\n✅ Ισότιμη Εκπαίδευση - Για κάθε οικονομικό background`);
-        }
-
-        function showDevelopmentRoadmap() {
-            alert(`🚀 ΣΥΝΕΧΗΣ ΑΝΑΠΤΥΞΗ - Τι Έρχεται:\n\n📅 Επόμενα Βήματα:\n• 📚 Πλήρη course content\n• 🎮 Διαδραστικά quizzes\n• 👥 User accounts & progress tracking\n• 📱 Mobile app\n• 🌐 Περισσότερες γλώσσες\n\n💡 Ιδέες; Στείλε μας στο christos.vasdekis.cv@gmail.com`);
-        }
-
-        function showProtectionInfo() {
-            alert(`🛡️ ΠΡΟΣΤΑΤΕΥΜΕΝΟΣ ΚΩΔΙΚΑΣ - Γιατί;\n\n🔒 Προστασία Πνευματικής Ιδιοκτησίας\n🔒 Διασφάλιση Ποιότητας\n🔒 Ασφάλεια Δεδομένων\n🔒 Συνέπεια στην Ανάπτυξη\n\nΟ κώδικας προστατεύεται για το καλό όλων!`);
-        }
-
-        function openAIHelp(subject) {
-            window.location.href = 'real-ai-chatbot.html';
-        }
+        
+        // Save user preferences
+        localStorage.setItem('educate4all_first_visit', new Date().toISOString());
     </script>
 </body>
 </html>
