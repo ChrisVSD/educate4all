@@ -4,61 +4,571 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>educate4all - Πραγματικός AI Βοηθός</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
-        .header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-        .api-section { background: #fff3cd; padding: 15px; text-align: center; border-bottom: 1px solid #ffeaa7; }
-        .api-input { width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px; margin-right: 10px; }
-        .save-api-btn { background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
-        .chat-container { height: 500px; overflow-y: auto; padding: 20px; background: #f8f9fa; }
-        .message { margin-bottom: 15px; padding: 15px; border-radius: 15px; max-width: 85%; line-height: 1.6; }
-        .user-message { background: #007bff; color: white; margin-left: auto; border-bottom-right-radius: 5px; }
-        .bot-message { background: white; border: 1px solid #e9ecef; border-bottom-left-radius: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .input-container { display: flex; padding: 20px; background: white; border-top: 1px solid #e9ecef; }
-        .input-container input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; margin-right: 10px; font-size: 16px; }
-        .input-container button { background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; }
-        .typing-indicator { display: inline-block; padding: 10px 15px; background: #e9ecef; border-radius: 15px; font-style: italic; color: #666; }
-        .home-button { display: inline-block; background: #6c757d; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; margin-top: 10px; font-size: 14px; }
-        .error-message { background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #f5c6cb; }
-        .success-message { background: #d1edff; color: #004085; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #b3d7ff; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #ff6b6b;
+            --success: #28a745;
+            --warning: #ffc107;
+            --text: #2d3748;
+            --text-light: #718096;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-dark: rgba(255, 255, 255, 0.05);
+            --glass-light: rgba(255, 255, 255, 0.15);
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translateY(-25px) rotate(180deg); 
+                opacity: 0.8;
+            }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Glass Morphism Header */
+        .header {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+            border-radius: 25px 25px 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 3px solid var(--accent);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--white), #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+        
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass-light);
+            color: var(--white);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* API Section */
+        .api-section {
+            background: var(--glass-light);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: none;
+            position: relative;
+        }
+
+        .api-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .api-input {
+            width: 300px;
+            padding: 12px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            margin-right: 10px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .api-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .api-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+        
+        .save-api-btn {
+            background: linear-gradient(135deg, var(--success), #20c997);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .save-api-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        /* Chat Container */
+        .chat-container {
+            height: 500px;
+            overflow-y: auto;
+            padding: 30px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: none;
+            border-bottom: none;
+            position: relative;
+        }
+
+        .chat-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+        
+        .message {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 80%;
+            line-height: 1.6;
+            position: relative;
+            animation: messageSlide 0.3s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .user-message {
+            background: linear-gradient(135deg, var(--primary), #5a67d8);
+            color: var(--white);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .bot-message {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            color: var(--text);
+        }
+        
+        .input-container {
+            display: flex;
+            padding: 25px;
+            background: var(--glass-light);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0 0 25px 25px;
+            border-top: none;
+            gap: 15px;
+        }
+        
+        .input-container input {
+            flex: 1;
+            padding: 16px 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .input-container input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-container input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+        
+        .input-container button {
+            background: linear-gradient(135deg, var(--accent), #ee5a24);
+            color: var(--white);
+            border: none;
+            padding: 16px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 140px;
+            justify-content: center;
+        }
+        
+        .input-container button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .input-container button:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            font-style: italic;
+            color: var(--text-light);
+            animation: pulse 1.5s ease-in-out infinite;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-light);
+            animation: typingBounce 1.4s ease-in-out infinite both;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .error-message {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.1);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #d1edff, #b3d7ff);
+            color: #004085;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin: 10px 0;
+            border: 1px solid #b3d7ff;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Message Enhancements */
+        .welcome-message {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation: welcomeSlide 0.6s ease-out;
+        }
+
+        @keyframes welcomeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Scrollbar Styling */
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .api-input {
+                width: 100%;
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            .input-container {
+                flex-direction: column;
+            }
+            
+            .input-container button {
+                width: 100%;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Animated Particle Background -->
+    <div class="particles" id="particles"></div>
+
     <div class="container">
+        <!-- Glass Morphism Header -->
         <div class="header">
             <h1>🎓 educate4all Πραγματικός AI</h1>
-            <p>Με Groq API - Πανέξυπνος & Γρήγορος!</p>
-            <a href="index.html" class="home-button">🏠 Πίσω στην Αρχική</a>
+            <p>Με Groq API - Πανέξυπνος & Υπερταχύς!</p>
+            <a href="index.html" class="home-button">
+                <span>🏠</span>
+                <span>Πίσω στην Αρχική</span>
+            </a>
         </div>
         
+        <!-- API Section -->
         <div class="api-section">
-            <p><strong>Βήμα 1:</strong> Βάλε το Groq API Key σου</p>
+            <p style="color: white; margin-bottom: 15px; font-weight: 500;"><strong>Βήμα 1:</strong> Βάλε το Groq API Key σου</p>
             <input type="password" id="apiKeyInput" class="api-input" placeholder="gsk_xxxxxxxxxxxxxxxx">
-            <button onclick="saveAPIKey()" class="save-api-btn">💾 Αποθήκευση</button>
-            <div id="apiStatus"></div>
+            <button onclick="saveAPIKey()" class="save-api-btn">
+                <span>💾</span>
+                <span>Αποθήκευση</span>
+            </button>
+            <div id="apiStatus" style="margin-top: 15px;"></div>
         </div>
         
+        <!-- Chat Container -->
         <div class="chat-container" id="chat">
-            <div class="message bot-message">
-                <strong>👋 Γεια σου! Είμαι ο AI βοηθός με Groq!</strong><br><br>
-                🎯 <strong>Μπορώ να απαντήσω σε ΟΠΟΙΑΔΗΠΟΤΕ ερώτηση για όλα τα μαθήματα!</strong><br><br>
-                💡 <strong>Παραδείγματα:</strong><br>
-                • "Τι είναι ο αριθμός π;"<br>
-                • "Εξήγησε το Πυθαγόρειο θεώρημα"<br>
-                • "Πώς λύνω εξισώσεις β' βαθμού;"<br><br>
-                <strong>Ρώτα με ΟΤΙΔΗΠΟΤΕ θέλεις! 🚀</strong>
+            <div class="message bot-message welcome-message">
+                <strong style="font-size: 1.3rem; color: var(--primary); display: block; margin-bottom: 15px;">👋 Γεια σου! Είμαι ο Πραγματικός AI Βοηθός!</strong>
+                
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 15px; border-radius: 15px; margin: 15px 0;">
+                    <p style="color: white; margin: 0; font-weight: 600;">🎯 <strong>Μπορώ να απαντήσω σε ΟΠΟΙΑΔΗΠΟΤΕ ερώτηση για όλα τα μαθήματα!</strong></p>
+                </div>
+                
+                <div style="margin: 15px 0;">
+                    <p style="color: var(--text); margin-bottom: 10px; font-weight: 500;">💡 <strong>Παραδείγματα:</strong></p>
+                    <ul style="color: var(--text-light); padding-left: 20px;">
+                        <li>"Τι είναι ο αριθμός π;"</li>
+                        <li>"Εξήγησε το Πυθαγόρειο θεώρημα"</li>
+                        <li>"Πώς λύνω εξισώσεις β' βαθμού;"</li>
+                        <li>"Βοήθησέ με με την φωτοσύνθεση"</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255, 107, 107, 0.1); padding: 12px; border-radius: 10px; border-left: 4px solid var(--accent);">
+                    <p style="color: var(--text); margin: 0; font-weight: 600;">🚀 <strong>Ρώτα με ΟΤΙΔΗΠΟΤΕ θέλεις! Είμαι εδώ για εσένα!</strong></p>
+                </div>
             </div>
         </div>
         
+        <!-- Input Container -->
         <div class="input-container">
             <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για τα μαθήματα..." onkeypress="handleKeyPress(event)">
-            <button onclick="sendMessage()">📨 Αποστολή</button>
+            <button onclick="sendMessage()">
+                <span>📨</span>
+                <span>Αποστολή</span>
+            </button>
         </div>
     </div>
 
     <script>
+        // Create animated particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 12;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 40 + 10;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 4 + 4;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
         // 🔧 GROQ API CONFIG - 100% ΔΩΡΕΑΝ & ΓΡΗΓΟΡΟ
         let apiKey = localStorage.getItem('educate4all_api_key') || "";
         
@@ -67,11 +577,11 @@
             const apiKeyInput = document.getElementById('apiKeyInput');
             
             if (apiKey && apiKey.startsWith('gsk_')) {
-                apiStatus.innerHTML = '<div class="success-message">✅ Groq API Key είναι έτοιμο!</div>';
+                apiStatus.innerHTML = '<div class="success-message">✅ Groq API Key είναι έτοιμο! Μπορείς να ρωτήσεις τον AI.</div>';
                 apiKeyInput.placeholder = '✅ API Key είναι αποθηκευμένο';
                 apiKeyInput.value = '';
             } else {
-                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι Groq API Key</div>';
+                apiStatus.innerHTML = '<div class="error-message">❌ Χρειάζεσαι Groq API Key για να λειτουργήσει ο AI</div>';
                 apiKeyInput.placeholder = 'gsk_xxxxxxxxxxxxxxxx';
             }
         }
@@ -84,13 +594,34 @@
                 apiKey = inputKey;
                 localStorage.setItem('educate4all_api_key', apiKey);
                 updateAPIStatus();
+                
+                // Add success animation
+                apiKeyInput.style.borderColor = '#28a745';
+                apiKeyInput.style.boxShadow = '0 0 0 3px rgba(40, 167, 69, 0.1)';
+                
+                setTimeout(() => {
+                    apiKeyInput.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    apiKeyInput.style.boxShadow = 'none';
+                }, 2000);
+                
             } else if (inputKey) {
                 alert('❌ Λάθος API Key. Πρέπει να ξεκινάει με "gsk_"');
+                
+                // Add error animation
+                apiKeyInput.style.borderColor = '#dc3545';
+                apiKeyInput.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.1)';
+                
+                setTimeout(() => {
+                    apiKeyInput.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    apiKeyInput.style.boxShadow = 'none';
+                }, 2000);
             }
         }
         
         function handleKeyPress(event) {
-            if (event.key === 'Enter') sendMessage();
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
         }
         
         async function sendMessage() {
@@ -102,17 +633,29 @@
             const userInput = document.getElementById('userInput');
             const chat = document.getElementById('chat');
             const message = userInput.value.trim();
+            
             if (message === '') return;
             
+            // Add user message with animation
             const userMessage = document.createElement('div');
             userMessage.className = 'message user-message';
             userMessage.textContent = message;
             chat.appendChild(userMessage);
             userInput.value = '';
             
+            // Add typing indicator with enhanced animation
             const typingIndicator = document.createElement('div');
             typingIndicator.className = 'message bot-message';
-            typingIndicator.innerHTML = '<div class="typing-indicator">🤔 Ο AI σκέφτεται...</div>';
+            typingIndicator.innerHTML = `
+                <div class="typing-indicator">
+                    <span>🤔 Ο AI σκέφτεται</span>
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            `;
             chat.appendChild(typingIndicator);
             chat.scrollTop = chat.scrollHeight;
             
@@ -148,7 +691,8 @@
                         content: `Είσαι ένας φιλικός και βοηθητικός AI εκπαιδευτικός βοηθός για το educate4all. 
                                 Απάντα ΣΤΑ ΕΛΛΗΝΙΚΑ και βοήθησε μαθητές με όλα τα σχολικά μαθήματα.
                                 Δώσε λεπτομερείς και κατανοητές εξηγήσεις με παραδείγματα.
-                                Χρησιμοποίησε emojis για να κάνεις τις απαντήσεις πιο ζωντανές.`
+                                Χρησιμοποίησε emojis για να κάνεις τις απαντήσεις πιο ζωντανές.
+                                Απάντα με ενθουσιασμό και υπομονή.`
                     }, {
                         role: "user", 
                         content: userMessage
@@ -184,7 +728,21 @@
             chat.scrollTop = chat.scrollHeight;
         }
         
-        document.addEventListener('DOMContentLoaded', updateAPIStatus);
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            updateAPIStatus();
+            
+            // Add focus effect to input
+            const userInput = document.getElementById('userInput');
+            userInput.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            userInput.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
     </script>
 </body>
 </html>
