@@ -200,6 +200,53 @@
             border: 1px solid rgba(255,255,255,0.2);
         }
 
+        .ai-selector {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .ai-selector h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .ai-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .ai-option {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .ai-option:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .ai-option.active {
+            background: rgba(255,255,255,0.4);
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+        }
+
+        .ai-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
         @media (max-width: 768px) {
             .courses-grid {
                 grid-template-columns: 1fr;
@@ -213,6 +260,15 @@
             .nav-button {
                 width: 200px;
                 text-align: center;
+            }
+
+            .ai-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .ai-option {
+                width: 200px;
             }
         }
     </style>
@@ -233,6 +289,24 @@
             <a href="real-ai-chatbot.html" class="nav-button">🤖 Πραγματικός AI</a>
             <a href="smart-chatbot.html" class="nav-button">🧠 Έξυπνος AI</a>
             <a href="chatbot.html" class="nav-button">😊 Απλός AI</a>
+        </div>
+
+        <div class="ai-selector">
+            <h3>🎯 Επιλέξτε τον AI Βοηθό Σας:</h3>
+            <div class="ai-options">
+                <div class="ai-option active" onclick="selectAI('real')">
+                    <strong>🤖 Πραγματικός AI</strong>
+                    <div class="ai-description">Για σύνθετα προβλήματα</div>
+                </div>
+                <div class="ai-option" onclick="selectAI('smart')">
+                    <strong>🧠 Έξυπνος AI</strong>
+                    <div class="ai-description">Για βαθιά κατανόηση</div>
+                </div>
+                <div class="ai-option" onclick="selectAI('simple')">
+                    <strong>😊 Απλός AI</strong>
+                    <div class="ai-description">Για γρήγορες ερωτήσεις</div>
+                </div>
+            </div>
         </div>
 
         <div class="courses-grid">
@@ -442,6 +516,18 @@
     </div>
 
     <script>
+        let selectedAI = 'real'; // Προεπιλεγμένος AI
+
+        function selectAI(aiType) {
+            selectedAI = aiType;
+            
+            // Ενημέρωση οπτικής επιλογής
+            document.querySelectorAll('.ai-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+
         function openAIHelp(subject) {
             const subjectMapping = {
                 'math': 'μαθηματικά',
@@ -455,12 +541,19 @@
                 'ai': 'τεχνητή νοημοσύνη'
             };
             
-            // Ανοίγει το real-ai-chatbot.html (τον πιο πλήρη)
-            window.location.href = `real-ai-chatbot.html`;
+            // Ανακατεύθυνση στον επιλεγμένο AI
+            const aiPages = {
+                'real': 'real-ai-chatbot.html',
+                'smart': 'smart-chatbot.html',
+                'simple': 'chatbot.html'
+            };
             
-            // Θα μπορούσαμε να προσθέσουμε localStorage για προ-συμπλήρωση
+            window.location.href = aiPages[selectedAI];
+            
+            // Αποθήκευση του μαθήματος για προ-συμπλήρωση
             setTimeout(() => {
                 localStorage.setItem('last_course_subject', subjectMapping[subject]);
+                localStorage.setItem('preferred_ai', selectedAI);
             }, 1000);
         }
 
@@ -491,6 +584,21 @@
                 progressFill.style.width = progress + '%';
                 progressText.textContent = progress + '% Ολοκληρώθηκε';
             });
+
+            // Επαναφορά προτιμήσεων χρήστη
+            const savedAI = localStorage.getItem('preferred_ai');
+            if (savedAI) {
+                selectedAI = savedAI;
+                document.querySelectorAll('.ai-option').forEach(option => {
+                    option.classList.remove('active');
+                    if (option.querySelector('strong').textContent.includes(
+                        savedAI === 'real' ? 'Πραγματικός' : 
+                        savedAI === 'smart' ? 'Έξυπνος' : 'Απλός'
+                    )) {
+                        option.classList.add('active');
+                    }
+                });
+            }
         });
     </script>
 </body>
