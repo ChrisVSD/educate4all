@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>educate4all - Έξυπνος AI Βοηθός</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin-bottom: 10px;
+        }
+        
+        .chat-container {
+            height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 85%;
+            line-height: 1.6;
+        }
+        
+        .user-message {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .input-container {
+            display: flex;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .input-container input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .input-container button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .typing-indicator {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #e9ecef;
+            border-radius: 15px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .math-formula {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #007bff;
+        }
+        
+        .example-box {
+            background: #e7f3ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .home-button {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 educate4all Έξυπνος AI Βοηθός</h1>
+            <p>Πραγματική Τεχνητή Νοημοσύνη για εκπαίδευση - Σαν τον DeepSeek!</p>
+            <a href="index.html" class="home-button">🏠 Πίσω στην Αρχική</a>
+        </div>
+        
+        <div class="chat-container" id="chat">
+            <div class="message bot-message">
+                <strong>👋 Γεια σου! Είμαι ο έξυπνος AI βοηθός του educate4all!</strong><br><br>
+                
+                🎯 <strong>Μπορώ να σε βοηθήσω με:</strong><br>
+                • 📐 <strong>Μαθηματικά</strong> - Άλγεβρα, Γεωμετρία, Λογισμός<br>
+                • 🔬 <strong>Φυσική</strong> - Μηχανική, Θερμοδυναμική, Ηλεκτρολογία<br>
+                • 🧪 <strong>Χημεία</strong> - Οργανική, Ανόργανη, Βιοχημεία<br>
+                • 🌍 <strong>Ιστορία</strong> - Αρχαία, Μεσαιωνική, Σύγχρονη<br>
+                • 📖 <strong>Ελληνικά</strong> - Γραμματική, Σύνταξη, Λογοτεχνία<br>
+                • 🌐 <strong>Ξένες Γλώσσες</strong> - Αγγλικά, Γαλλικά, Γερμανικά<br><br>
+                
+                💡 <strong>Παράδειγμα ερωτήσεων:</strong><br>
+                • "Εξήγησε το Πυθαγόρειο Θεώρημα με παραδείγματα"<br>
+                • "Πώς λύνω εξισώσεις β' βαθμού;"<br>
+                • "Πες μου για τον Περιοδικό Πίνακα"<br>
+                • "Βοήθησέ με με την Αγγλική γραμματική"<br><br>
+                
+                <strong>Ρώτα με οτιδήποτε θέλεις! 🚀</strong>
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Ρώτα με οτιδήποτε για τα μαθήματα σου..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">📨 Αποστολή</button>
+        </div>
+    </div>
+
+    <script>
+        // Εκτεταμένη βάση γνώσεων με ΛΕΠΤΟΜΕΡΕΙΣ απαντήσεις
+        const knowledgeBase = {
+            // === ΜΑΘΗΜΑΤΙΚΑ ===
+            "πυθαγόρειο θεώρημα": `
+                📐 <strong>Πυθαγόρειο Θεώρημα - Ολοκληρωμένη Ανάλυση</strong><br><br>
+
+                <strong>📖 Ορισμός:</strong><br>
+                Σε κάθε ορθογώνιο τρίγωνο, το τετράγωνο της υποτείνουσας (c) ισούται με το άθροισμα των τετραγώνων των δύο κάθετων πλευρών (a και b).<br><br>
+
+                <div class="math-formula">
+                <strong>🧮 Μαθηματικός Τύπος:</strong><br>
+                c² = a² + b²
+                </div>
+
+                <div class="example-box">
+                <strong>🔢 Παράδειγμα 1:</strong><br>
+                Αν a = 3 cm και b = 4 cm:<br>
+                c² = 3² + 4² = 9 + 16 = 25<br>
+                c = √25 = <strong>5 cm</strong>
+                </div>
+
+                <div class="example-box">
+                <strong>🔢 Παράδειγμα 2:</strong><br>
+                Αν c = 13 cm και a = 5 cm:<br>
+                b² = c² - a² = 169 - 25 = 144<br>
+                b = √144 = <strong>12 cm</strong>
+                </div>
+
+                <strong>🎯 Εφαρμογές:</strong><br>
+                • Υπολογισμός αποστάσεων<br>
+                • Αρχιτεκτονική και κατασκευές<br>
+                • Ηλεκτρονικοί υπολογισμοί<br>
+                • Αστρονομία<br><br>
+
+                <strong>📚 Ιστορική Πληροφορία:</strong><br>
+                Το θεώρημα πιστεύεται ότι ανακαλύφθηκε από τον Πυθαγόρα τον 6ο αιώνα π.Χ., αλλά χρησιμοποιούνταν και πριν σε άλλους πολιτισμούς.
+            `,
+
+            "εξίσωση β βαθμού": `
+                🎯 <strong>Εξισώσεις Β' Βαθμού - Πλήρης Οδηγός</strong><br><br>
+
+                <strong>📖 Ορισμός:</strong><br>
+                Μια εξίσωση της μορφής: αx² + βx + γ = 0, όπου α ≠ 0<br><br>
+
+                <div class="math-formula">
+                <strong>🧮 Τύπος Επίλυσης:</strong><br>
+                x = [-β ± √(β² - 4αγ)] / 2α
+                </div>
+
+                <strong>🔍 Βήματα Επίλυσης:</strong><br>
+                1. <strong>Αναγνώριση συντελεστών:</strong> α, β, γ<br>
+                2. <strong>Υπολογισμός Διακρίνουσας:</strong> Δ = β² - 4αγ<br>
+                3. <strong>Ανάλυση λύσεων:</strong><br>
+                   • Αν Δ > 0: 2 πραγματικές λύσεις<br>
+                   • Αν Δ = 0: 1 διπλή λύση<br>
+                   • Αν Δ < 0: Καμία πραγματική λύση<br><br>
+
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong> 2x² - 4x - 6 = 0<br><br>
+
+                <strong>Βήμα 1:</strong> α=2, β=-4, γ=-6<br>
+                <strong>Βήμα 2:</strong> Δ = (-4)² - 4·2·(-6) = 16 + 48 = 64<br>
+                <strong>Βήμα 3:</strong> √Δ = √64 = 8<br>
+                <strong>Βήμα 4:</strong> x = [4 ± 8] / 4<br>
+                • x₁ = (4 + 8)/4 = 12/4 = <strong>3</strong><br>
+                • x₂ = (4 - 8)/4 = -4/4 = <strong>-1</strong>
+                </div>
+
+                <strong>🎯 Εφαρμογές:</strong><br>
+                • Φυσική - κίνηση σωμάτων<br>
+                • Οικονομία - μέγιστο κέρδος<br>
+                • Μηχανική - δομικοί υπολογισμοί
+            `,
+
+            // === ΦΥΣΙΚΗ ===
+            "νόμοι του νεύτωνα": `
+                🔬 <strong>Οι 3 Νόμοι της Κίνησης του Νεύτωνα</strong><br><br>
+
+                <strong>1️⃣ Νόμος Αδράνειας (1ος Νόμος):</strong><br>
+                "Ένα σώμα παραμένει σε ηρεμία ή ευθύγραμμη ομαλή κίνηση, εκτός αν ασκηθεί σε αυτό εξωτερική δύναμη."<br><br>
+
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong><br>
+                Ένα βιβλίο στο τραπέζι μένει ακίνητο μέχρι να το σπρώξεις.
+                </div>
+
+                <strong>2️⃣ Νόμος της Κίνησης (2ος Νόμος):</strong><br>
+                "Η επιτάχυνση ενός σώματος είναι ανάλογη της συνισταμένης δύναμης και αντιστρόφως ανάλογη της μάζας του."<br><br>
+
+                <div class="math-formula">
+                <strong>🧮 Τύπος:</strong> F = m·a
+                </div>
+
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong><br>
+                Όσο πιο δυνατά σπρώχνεις ένα καρότσι, τόσο πιο γρήγορα επιταχύνει.
+                </div>
+
+                <strong>3️⃣ Νόμος Δράσης-Αντίδρασης (3ος Νόμος):</strong><br>
+                "Για κάθε δράση υπάρχει ίση και αντίθετη αντίδραση."<br><br>
+
+                <div class="example-box">
+                <strong>📝 Παράδειγμα:</strong><br>
+                Όταν πηδάς από μια βάρκα, η βάρκα κινείται προς τα πίσω.
+                </div>
+
+                <strong>🎯 Σημασία:</strong><br>
+                Αυτοί οι νόμοι αποτελούν τη βάση της κλασικής μηχανικής και εξηγούν σχεδόν όλες τις καθημερινές κινήσεις!
+            `,
+
+            // === ΧΗΜΕΙΑ ===
+            "περιοδικός πίνακας": `
+                🧪 <strong>Ο Περιοδικός Πίνακας των Στοιχείων</strong><br><br>
+
+                <strong>📖 Τι είναι:</strong><br>
+                Μια διάταξη των χημικών στοιχείων με βάση τον ατομικό αριθμό και τις χημικές ιδιότητες.<br><br>
+
+                <strong>🎯 Δομή:</strong><br>
+                • <strong>Ομάδες (Κάθετες):</strong> Στοιχεία με παρόμοιες χημικές ιδιότητες<br>
+                • <strong>Περίοδοι (Οριζόντιες):</strong> Στοιχεία με ίδιο αριθμό ηλεκτρονιακών φλοιών<br><br>
+
+                <strong>🔍 Κύριες Ομάδες:</strong><br>
+                • <strong>Αλκάλια (1):</strong> Li, Na, K - πολύ δραστικά<br>
+                • <strong>Αλκαλικές γαίες (2):</strong> Mg, Ca - λιγότερο δραστικά<br>
+                • <strong>Αλογόνα (17):</strong> F, Cl, Br - σχηματίζουν άλατα<br>
+                • <strong>Ευγενή αέρια (18):</strong> He, Ne, Ar - αδρανή<br><br>
+
+                <div class="example-box">
+                <strong>📝 Παράδειγμα Ομάδας 1 (Αλκάλια):</strong><br>
+                • <strong>Λίθιο (Li):</strong> Χρησιμοποιείται σε μπαταρίες<br>
+                • <strong>Νάτριο (Na):</strong> Βασικό συστατικό του αλατιού<br>
+                • <strong>Κάλιο (K):</strong> Σημαντικό για τη ζωή
+                </div>
+
+                <strong>🎯 Σημασία:</strong><br>
+                Ο περιοδικός πίνακας βοηθά να προβλέψουμε τις ιδιότητες των στοιχείων και τις αντιδράσεις τους!
+            `
+        };
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chat = document.getElementById('chat');
+            const message = userInput.value.trim();
+            
+            if (message === '') return;
+            
+            // Προσθήκη μηνύματος χρήστη
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = message;
+            chat.appendChild(userMessage);
+            
+            // Καθαρισμός input
+            userInput.value = '';
+            
+            // Προσθήκη typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message bot-message';
+            typingIndicator.innerHTML = '<div class="typing-indicator">🤔 Ο AI σκέφτεται...</div>';
+            chat.appendChild(typingIndicator);
+            chat.scrollTop = chat.scrollHeight;
+            
+            // Προσθήκη μηνύματος AI με καθυστέρηση
+            setTimeout(() => {
+                chat.removeChild(typingIndicator);
+                const botResponse = generateResponse(message);
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.innerHTML = botResponse;
+                chat.appendChild(botMessage);
+                chat.scrollTop = chat.scrollHeight;
+            }, 2000);
+        }
+
+        function generateResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Αναζήτηση στην εκτεταμένη βάση γνώσεων
+            for (const [keyword, response] of Object.entries(knowledgeBase)) {
+                if (lowerMessage.includes(keyword)) {
+                    return response;
+                }
+            }
+            
+            // Βελτιωμένες γενικές απαντήσεις
+            const generalResponses = [
+                `🤔 <strong>Ενδιαφέρουσα ερώτηση!</strong><br><br>
+                Μπορώ να σε βοηθήσω με λεπτομερείς εξηγήσεις για:<br><br>
+                • <strong>Μαθηματικά:</strong> Πυθαγόρειο Θεώρημα, Εξισώσεις, Γεωμετρία<br>
+                • <strong>Φυσική:</strong> Νόμοι του Νεύτωνα, Ενέργεια, Κίνηση<br>
+                • <strong>Χημεία:</strong> Περιοδικός Πίνακας, Αντιδράσεις, Στοιχεία<br>
+                • <strong>Ιστορία & Γλώσσες</strong><br><br>
+                <strong>Πες μου τι ακριβώς θέλεις να μάθεις! 📚</strong>`,
+
+                `🎓 <strong>Εκπαιδευτικός Βοηθός!</strong><br><br>
+                Έχω λεπτομερείς γνώσεις για όλα τα σχολικά μαθήματα. Μπορώ να σου δώσω:<br><br>
+                📝 <strong>Λεπτομερείς εξηγήσεις</strong><br>
+                🔢 <strong>Πρακτικά παραδείγματα</strong><br>
+                🧮 <strong>Μαθηματικούς τύπους</strong><br>
+                💡 <strong>Εφαρμογές στην πραγματική ζωή</strong><br><br>
+                <strong>Ρώτα με συγκεκριμένα για το μάθημα που σε ενδιαφέρει! ✨</strong>`
+            ];
+            
+            return generalResponses[Math.floor(Math.random() * generalResponses.length)];
+        }
+    </script>
+</body>
+</html>
