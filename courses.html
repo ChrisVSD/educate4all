@@ -3,904 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>educate4all - Structured Courses</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
-    <meta name="theme-color" content="#667eea">
+    <title>Μαθήματα με Εικονικούς Δασκάλους</title>
     <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #10b981;
+            --light: #f8fafc;
+            --dark: #1e293b;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
-            padding: 20px;
+            padding: 2rem;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
-        /* Glass Morphism Header */
         .header {
             text-align: center;
-            padding: 50px 30px;
             color: white;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
         }
         
         .header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
+            font-size: 3rem;
+            margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #fff, #e3f2fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
         }
         
         .header p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
         }
         
-        /* Glass Navigation */
-        .navigation {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .nav-button {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        /* Enhanced AI Selector */
-        .ai-comparison {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            margin: 30px 0;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        .ai-comparison h3 {
-            text-align: center;
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-        
-        .ai-options-detailed {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .ai-option-detailed {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            backdrop-filter: blur(10px);
-            color: white;
-        }
-        
-        .ai-option-detailed:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        
-        .ai-option-detailed.active {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: #ffd700;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-        }
-        
-        .ai-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .ai-header strong {
-            font-size: 1.3rem;
-        }
-        
-        .recommended-badge {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .standard-badge {
-            background: linear-gradient(135deg, #17a2b8, #138496);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .simple-badge {
-            background: linear-gradient(135deg, #6c757d, #5a6268);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .ai-option-detailed p {
-            margin: 8px 0;
-            font-size: 0.95rem;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-        
-        /* Glass Course Grid */
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
         
         .course-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
+            background: white;
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            position: relative;
             overflow: hidden;
-        }
-        
-        .course-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .course-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
         
-        .course-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+        .teacher-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2rem;
             text-align: center;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-        }
-        
-        .course-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
             color: white;
-            text-align: center;
-            font-weight: 600;
+            position: relative;
+        }
+        
+        .teacher-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 1rem;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .teacher-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .teacher-title {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        .course-content {
+            padding: 2rem;
+        }
+        
+        .course-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
         
         .course-description {
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            margin-bottom: 25px;
+            color: #64748b;
             line-height: 1.6;
-            flex-grow: 1;
-            font-size: 1rem;
+            margin-bottom: 1.5rem;
         }
         
-        .course-features {
+        .course-topics {
             list-style: none;
-            margin-bottom: 25px;
+            margin-bottom: 2rem;
         }
         
-        .course-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.9);
-            position: relative;
-            padding-left: 25px;
+        .course-topics li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
         }
         
-        .course-features li:before {
-            content: "✓";
-            color: #4CAF50;
+        .course-topics li:before {
+            content: "✓ ";
+            color: var(--accent);
             font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 1.1rem;
         }
         
-        .progress-container {
-            margin-bottom: 20px;
-        }
-        
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            height: 10px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .progress-fill {
-            background: linear-gradient(90deg, #4CAF50, #45a049);
-            height: 100%;
-            border-radius: 10px;
-            transition: width 1s ease-in-out;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
-        }
-        
-        .progress-text {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        .ai-help-button {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
+        .start-btn {
+            display: block;
             width: 100%;
-            margin-top: auto;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent), #059669);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
         }
         
-        .ai-help-button:hover {
+        .start-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-            background: linear-gradient(135deg, #0056b3, #004494);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
         }
         
-        .ai-badge {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
-        }
-        
-        .course-actions {
-            margin-top: auto;
-        }
-        
-        /* Glass Footer */
-        .footer {
+        .teacher-quote {
+            font-style: italic;
             text-align: center;
-            padding: 40px 20px;
-            color: white;
-            margin-top: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .demo-notice {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            color: white;
-            margin: 25px 0;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Enhanced Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .navigation {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-button {
-                width: 250px;
-                text-align: center;
-            }
-            
-            .ai-options-detailed {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .header p {
-                font-size: 1.1rem;
-            }
-            
-            .ai-header {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header {
-                padding: 30px 20px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .course-card {
-                padding: 20px;
-            }
-            
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Loading Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .course-card {
-            animation: fadeInUp 0.6s ease-out;
-        }
-        
-        .course-card:nth-child(odd) {
-            animation-delay: 0.1s;
-        }
-        
-        .course-card:nth-child(even) {
-            animation-delay: 0.2s;
-        }
-        
-        /* Stats Bar */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            color: white;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            background: linear-gradient(45deg, #fff, #e3f2fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .stat-label {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
             font-size: 0.9rem;
-            opacity: 0.9;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎓 Structured Courses</h1>
-            <p>Ολοκληρωμένα μαθήματα με AI υποστήριξη - Η καλύτερη εκπαιδευτική πλατφόρμα</p>
+            <h1>Εικονικοί Δάσκαλοι</h1>
+            <p>Μαθήστε από τους σπουδαιότερους στοχαστές όλων των εποχών</p>
         </div>
-
-        <div class="demo-notice">
-            <strong>🚀 ΠΛΗΡΗΣ ΛΕΙΤΟΥΡΓΙΑ!</strong> Όλα τα courses έχουν πλήρη AI υποστήριξη μέσω των chatbots μας!
-        </div>
-
-        <div class="navigation">
-            <a href="index.html" class="nav-button">🏠 Αρχική</a>
-            <a href="real-ai-chatbot.html" class="nav-button">🤖 Πραγματικός AI</a>
-            <a href="smart-chatbot.html" class="nav-button">🧠 Έξυπνος AI</a>
-            <a href="chatbot.html" class="nav-button">😊 Απλός AI</a>
-        </div>
-
-        <div class="stats-bar">
-            <div class="stat-card">
-                <div class="stat-number">9+</div>
-                <div class="stat-label">Μαθήματα</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">3</div>
-                <div class="stat-label">AI Βοηθοί</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Δωρεάν</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Διαθέσιμο</div>
-            </div>
-        </div>
-
-        <div class="ai-comparison">
-            <h3>🎯 Επιλέξτε τον Ιδανικό AI Βοηθό:</h3>
-            <div class="ai-options-detailed">
-                <div class="ai-option-detailed active" onclick="selectAI('real')">
-                    <div class="ai-header">
-                        <strong>🤖 Πραγματικός AI</strong>
-                        <span class="recommended-badge">Συνιστάται</span>
-                    </div>
-                    <p>✅ Για σύνθετα προβλήματα & πανεπιστημιακό επίπεδο</p>
-                    <p>✅ Λεπτομερείς αναλύσεις & proofs</p>
-                    <p>🎯 <strong>Ιδανικός για:</strong> Λύκειο, Πανεπιστήμιο, Εξετάσεις</p>
-                </div>
-                
-                <div class="ai-option-detailed" onclick="selectAI('smart')">
-                    <div class="ai-header">
-                        <strong>🧠 Έξυπνος AI</strong>
-                        <span class="standard-badge">Βασικός</span>
-                    </div>
-                    <p>✅ Για βαθιά κατανόηση & εξηγήσεις βήμα-βήμα</p>
-                    <p>✅ Επίπεδο difficulty selector</p>
-                    <p>🎯 <strong>Ιδανικός για:</strong> Γυμνάσιο, Λύκειο, Επανάληψη</p>
-                </div>
-                
-                <div class="ai-option-detailed" onclick="selectAI('simple')">
-                    <div class="ai-header">
-                        <strong>😊 Απλός AI</strong>
-                        <span class="simple-badge">Απλός</span>
-                    </div>
-                    <p>✅ Για γρήγορες ερωτήσεις & βασικές έννοιες</p>
-                    <p>✅ Φιλικό & προσιτό ύφος</p>
-                    <p>🎯 <strong>Ιδανικός για:</strong> Δημοτικό, Γυμνάσιο, Γρήγορες ερωτήσεις</p>
-                </div>
-            </div>
-        </div>
-
+        
         <div class="courses-grid">
-            <!-- Mathematics -->
+            <!-- Φιλοσοφία - Πλάτωνας -->
             <div class="course-card">
-                <div class="course-icon">📐</div>
-                <h3>Mathematics <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Κατανόηση εννοιών - Από τα βασικά έως τα προχωρημένα</p>
-                <ul class="course-features">
-                    <li>Άλγεβρα & Εξισώσεις</li>
-                    <li>Γεωμετρία & Θεωρήματα</li>
-                    <li>Βασικός Λογισμός</li>
-                    <li>Επίλυση Προβλημάτων</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 65%"></div>
-                        </div>
-                        <div class="progress-text">65% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('math')">
-                        🤖 Βοήθεια με Μαθηματικά
-                    </button>
+                <div class="teacher-section">
+                    <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="teacher-name">Πλάτωνας</div>
+                    <div class="teacher-title">Φιλόσοφος - Ιδρυτής της Ακαδημίας</div>
+                    <div class="teacher-quote">"Η γνώση είναι η φωτεινή πηγή που ξεπερνά το σκοτάδι της άγνοιας"</div>
+                </div>
+                <div class="course-content">
+                    <h2 class="course-title">Φιλοσοφία & Ηθική</h2>
+                    <p class="course-description">Εξερευνήστε τις βασικές αρχές της φιλοσοφίας μέσα από τα μάτια του Πλάτωνα.</p>
+                    <ul class="course-topics">
+                        <li>Αλληγορία του Σπηλαίου</li>
+                        <li>Θεωρία των Ιδεών</li>
+                        <li>Ηθική και Δικαιοσύνη</li>
+                        <li>Πολιτική Φιλοσοφία</li>
+                    </ul>
+                    <a href="#" class="start-btn">Ξεκινήστε με τον Πλάτωνα</a>
                 </div>
             </div>
 
-            <!-- Physics -->
+            <!-- Μαθηματικά - Πυθαγόρας -->
             <div class="course-card">
-                <div class="course-icon">🔬</div>
-                <h3>Physics <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Απομυθοποίηση των Δυνάμεων του Σύμπαντος!</p>
-                <ul class="course-features">
-                    <li>Νόμοι του Νεύτωνα</li>
-                    <li>Ενέργεια & Κίνηση</li>
-                    <li>Ηλεκτρισμός & Μαγνητισμός</li>
-                    <li>Σύγχρονη Φυσική</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 55%"></div>
-                        </div>
-                        <div class="progress-text">55% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('physics')">
-                        🤖 Βοήθεια με Φυσική
-                    </button>
+                <div class="teacher-section">
+                    <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="teacher-name">Πυθαγόρας</div>
+                    <div class="teacher-title">Μαθηματικός & Φιλόσοφος</div>
+                    <div class="teacher-quote">"Οι αριθμοί κυβερνούν τον κόσμο"</div>
+                </div>
+                <div class="course-content">
+                    <h2 class="course-title">Μαθηματικά & Γεωμετρία</h2>
+                    <p class="course-description">Αποκαλύψτε τα μυστικά των αριθμών και της γεωμετρίας.</p>
+                    <ul class="course-topics">
+                        <li>Πυθαγόρειο Θεώρημα</li>
+                        <li>Αρμονία και Προportion</li>
+                        <li>Θεωρία Αριθμών</li>
+                        <li>Μουσική των Σφαιρών</li>
+                    </ul>
+                    <a href="#" class="start-btn">Ξεκινήστε με τον Πυθαγόρα</a>
                 </div>
             </div>
 
-            <!-- Chemistry -->
+            <!-- Φυσική - Αριστοτέλης -->
             <div class="course-card">
-                <div class="course-icon">🧪</div>
-                <h3>Chemistry <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Κυριεύστε τα Χημικά Στοιχεία!</p>
-                <ul class="course-features">
-                    <li>Περιοδικός Πίνακας</li>
-                    <li>Χημικές Αντιδράσεις</li>
-                    <li>Άτομα & Μόρια</li>
-                    <li>Οργανική Χημεία</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 48%"></div>
-                        </div>
-                        <div class="progress-text">48% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('chemistry')">
-                        🤖 Βοήθεια με Χημεία
-                    </button>
+                <div class="teacher-section">
+                    <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="teacher-name">Αριστοτέλης</div>
+                    <div class="teacher-title">Φιλόσοφος & Επιστήμονας</div>
+                    <div class="teacher-quote">"Η φύση δεν κάνει τίποτα μάταια"</div>
+                </div>
+                <div class="course-content">
+                    <h2 class="course-title">Φυσική & Λογική</h2>
+                    <p class="course-description">Μελετήστε τις αρχές της φυσικής και της λογικής.</p>
+                    <ul class="course-topics">
+                        <li>Κίνηση και Αλλαγή</li>
+                        <li>Τέσσερις Αιτίες</li>
+                        <li>Συλλογισμός και Λογική</li>
+                        <li>Βιολογία και Φυσιολογία</li>
+                    </ul>
+                    <a href="#" class="start-btn">Ξεκινήστε με τον Αριστοτέλη</a>
                 </div>
             </div>
 
-            <!-- Biology -->
+            <!-- Αστρονομία - Πτολεμαίος -->
             <div class="course-card">
-                <div class="course-icon">🧬</div>
-                <h3>Biology <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Εξερευνήστε τα Μυστήρια της Ζωής!</p>
-                <ul class="course-features">
-                    <li>Δομή Κυττάρων</li>
-                    <li>Φωτοσύνθεση</li>
-                    <li>Γενετική & DNA</li>
-                    <li>Ανθρώπινο Σώμα</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 60%"></div>
-                        </div>
-                        <div class="progress-text">60% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('biology')">
-                        🤖 Βοήθεια με Βιολογία
-                    </button>
+                <div class="teacher-section">
+                    <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="teacher-name">Πτολεμαίος</div>
+                    <div class="teacher-title">Αστρονόμος & Γεωγράφος</div>
+                    <div class="teacher-quote">"Γνωρίζω ότι είμαι θνητός, αλλά όταν παρατηρώ τους αστέρες, αγγίζω τον ουρανό"</div>
+                </div>
+                <div class="course-content">
+                    <h2 class="course-title">Αστρονομία & Κοσμολογία</h2>
+                    <p class="course-description">Εξερευνήστε το σύμπαν μέσα από το γεωκεντρικό μοντέλο.</p>
+                    <ul class="course-topics">
+                        <li>Γεωκεντρικό Σύμπαν</li>
+                        <li>Επιπτώσεις και Κύκλοι</li>
+                        <li>Αστρονομικές Παρατηρήσεις</li>
+                        <li>Καρτογραφία και Γεωγραφία</li>
+                    </ul>
+                    <a href="#" class="start-btn">Ξεκινήστε με τον Πτολεμαίο</a>
                 </div>
             </div>
 
-            <!-- History -->
+            <!-- Ιατρική - Ιπποκράτης -->
             <div class="course-card">
-                <div class="course-icon">🌍</div>
-                <h3>History <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Ταξίδι στο Χρόνο</p>
-                <ul class="course-features">
-                    <li>Αρχαία Ελλάδα</li>
-                    <li>Ρωμαϊκή Αυτοκρατορία</li>
-                    <li>Βυζαντινή Περίοδος</li>
-                    <li>Σύγχρονη Ιστορία</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-text">75% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('history')">
-                        🤖 Βοήθεια με Ιστορία
-                    </button>
+                <div class="teacher-section">
+                    <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="teacher-name">Ιπποκράτης</div>
+                    <div class="teacher-title">Ιατρός - Πατέρας της Ιατρικής</div>
+                    <div class="teacher-quote">"Η ζωή είναι σύντομη, η τέχνη μακρά, η ευκαιρία γρήγορη"</div>
+                </div>
+                <div class="course-content">
+                    <h2 class="course-title">Ιατρική & Υγεία</h2>
+                    <p class="course-description">Μάθετε τις αρχές της ιατρικής και της υγιεινής διαβίωσης.</p>
+                    <ul class="course-topics">
+                        <li>Ιπποκρατικός Όρκος</li>
+                        <li>Τέσσερις Χυμοί</li>
+                        <li>Διαγνωστική και Θεραπευτική</li>
+                        <li>Πρόληψη και Υγιεινή</li>
+                    </ul>
+                    <a href="#" class="start-btn">Ξεκινήστε με τον Ιπποκράτη</a>
                 </div>
             </div>
 
-            <!-- Geography -->
+            <!-- Ρητορική - Δημοσθένης -->
             <div class="course-card">
-                <div class="course-icon">🗺️</div>
-                <h3>Geography <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Εξερευνήστε τον Κόσμο!</p>
-                <ul class="course-features">
-                    <li>Ηπείρους & Ωκεανοί</li>
-                    <li>Κλιματικές Ζώνες</li>
-                    <li>Χώρες & Πολιτισμοί</li>
-                    <li>Περιβαλλοντική Επιστήμη</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 40%"></div>
-                        </div>
-                        <div class="progress-text">40% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('geography')">
-                        🤖 Βοήθεια με Γεωγραφία
-                    </button>
+                <div class="teacher-section">
+                    <div class="teacher-avatar" style="background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="teacher-name">Δημοσθένης</div>
+                    <div class="teacher-title">Ρήτορας & Πολιτικός</div>
+                    <div class="teacher-quote">"Μικρά πράγματα φαίνονται μεγάλα όταν γίνονται με πάθος"</div>
+                </div>
+                <div class="course-content">
+                    <h2 class="course-title">Ρητορική & Δημοσιολογία</h2>
+                    <p class="course-description">Αποκτήστε τις δεξιότητες του πειθούς και της δημοσιολογίας.</p>
+                    <ul class="course-topics">
+                        <li>Τέχνη της Πειθούς</li>
+                        <li>Δομή του Λόγου</li>
+                        <li>Αντιμετώπιση του Πλήθους</li>
+                        <li>Πολιτική Ομιλία</li>
+                    </ul>
+                    <a href="#" class="start-btn">Ξεκινήστε με τον Δημοσθένη</a>
                 </div>
             </div>
-
-            <!-- Economics -->
-            <div class="course-card">
-                <div class="course-icon">💼</div>
-                <h3>Economics <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Κατανοήστε τους Κανόνες της Αγοράς!</p>
-                <ul class="course-features">
-                    <li>Προσφορά & Ζήτηση</li>
-                    <li>Αγορές & Ανταγωνισμός</li>
-                    <li>Χρήμα & Τράπεζες</li>
-                    <li>Παγκόσμια Οικονομία</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 35%"></div>
-                        </div>
-                        <div class="progress-text">35% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('economics')">
-                        🤖 Βοήθεια με Οικονομικά
-                    </button>
-                </div>
-            </div>
-
-            <!-- Robotics & Technology -->
-            <div class="course-card">
-                <div class="course-icon">🤖</div>
-                <h3>Robotics & Technology <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Δημιουργήστε και Ανακαλύψτε!</p>
-                <ul class="course-features">
-                    <li>Βασικά Προγραμματισμού</li>
-                    <li>Αρχές Ρομποτικής</li>
-                    <li>AI & Μηχανική Μάθηση</li>
-                    <li>Μελλοντικές Τεχνολογίες</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 25%"></div>
-                        </div>
-                        <div class="progress-text">25% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('robotics')">
-                        🤖 Βοήθεια με Τεχνολογία
-                    </button>
-                </div>
-            </div>
-
-            <!-- AI Course -->
-            <div class="course-card">
-                <div class="course-icon">🧠</div>
-                <h3>Artificial Intelligence <span class="ai-badge">AI</span></h3>
-                <p class="course-description">Το Μέλλον είναι Εδώ!</p>
-                <ul class="course-features">
-                    <li>Βασικά AI</li>
-                    <li>Μηχανική Μάθηση</li>
-                    <li>Νευρωνικά Δίκτυα</li>
-                    <li>Ηθική AI</li>
-                </ul>
-                <div class="course-actions">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 80%"></div>
-                        </div>
-                        <div class="progress-text">80% Ολοκληρώθηκε</div>
-                    </div>
-                    <button class="ai-help-button" onclick="openAIHelp('ai')">
-                        🤖 Βοήθεια με AI
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p><strong>Create and developed by: Vasdekis Christos</strong></p>
-            <p>📧 Email: <a href="mailto:vasdekisxristos@gmail.com" style="color: #ffd700; text-decoration: none;">vasdekisxristos@gmail.com</a></p>
-            <p style="margin-top: 10px; opacity: 0.8;">&copy; 2025 educate4all. All rights reserved.</p>
         </div>
     </div>
 
     <script>
-        let selectedAI = 'real'; // Προεπιλεγμένος AI
-
-        function selectAI(aiType) {
-            selectedAI = aiType;
-            
-            // Ενημέρωση οπτικής επιλογής
-            document.querySelectorAll('.ai-option-detailed').forEach(option => {
-                option.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-            
-            // Αποθήκευση προτίμησης
-            localStorage.setItem('preferred_ai', selectedAI);
-            
-            // Προσθήκη animation
-            event.currentTarget.style.animation = 'fadeInUp 0.5s ease-out';
-        }
-
-        function openAIHelp(subject) {
-            const subjectMapping = {
-                'math': 'μαθηματικά',
-                'physics': 'φυσική',
-                'chemistry': 'χημεία', 
-                'biology': 'βιολογία',
-                'history': 'ιστορία',
-                'geography': 'γεωγραφία',
-                'economics': 'οικονομικά',
-                'robotics': 'ρομποτική και τεχνολογία',
-                'ai': 'τεχνητή νοημοσύνη'
-            };
-            
-            // Ανακατεύθυνση στον επιλεγμένο AI
-            const aiPages = {
-                'real': 'real-ai-chatbot.html',
-                'smart': 'smart-chatbot.html',
-                'simple': 'chatbot.html'
-            };
-            
-            // Αποθήκευση του μαθήματος για προ-συμπλήρωση
-            localStorage.setItem('last_course_subject', subjectMapping[subject]);
-            localStorage.setItem('preferred_ai', selectedAI);
-            
-            // Προσθήκη animation στο button
-            event.target.style.animation = 'pulse 0.6s ease-out';
-            setTimeout(() => {
-                event.target.style.animation = '';
-            }, 600);
-            
-            // Ανακατεύθυνση
-            setTimeout(() => {
-                window.location.href = aiPages[selectedAI];
-            }, 300);
-        }
-
-        // Προσομοίωση progress με animations
+        // Add interactive effects
         document.addEventListener('DOMContentLoaded', function() {
-            // Προκαθορισμένα progress values - ΒΕΛΤΙΩΜΕΝΑ
-            const progressValues = {
-                'math': 65,
-                'physics': 55, 
-                'chemistry': 48,
-                'biology': 60,
-                'history': 75,
-                'geography': 40,
-                'economics': 35,
-                'robotics': 25,
-                'ai': 80
-            };
+            const cards = document.querySelectorAll('.course-card');
             
-            // Εφαρμογή progress bars με animation
-            setTimeout(() => {
-                const courseCards = document.querySelectorAll('.course-card');
-                courseCards.forEach((card, index) => {
-                    const subjects = ['math', 'physics', 'chemistry', 'biology', 'history', 'geography', 'economics', 'robotics', 'ai'];
-                    const subject = subjects[index];
-                    const progress = progressValues[subject];
-                    
-                    const progressFill = card.querySelector('.progress-fill');
-                    const progressText = card.querySelector('.progress-text');
-                    
-                    // Animate progress bar
-                    setTimeout(() => {
-                        progressFill.style.width = progress + '%';
-                        progressText.textContent = progress + '% Ολοκληρώθηκε';
-                    }, index * 100);
-                });
-            }, 500);
-
-            // Επαναφορά προτιμήσεων χρήστη
-            const savedAI = localStorage.getItem('preferred_ai');
-            if (savedAI) {
-                selectedAI = savedAI;
-                document.querySelectorAll('.ai-option-detailed').forEach(option => {
-                    option.classList.remove('active');
-                    const aiType = option.querySelector('strong').textContent.includes('Πραγματικός') ? 'real' :
-                                  option.querySelector('strong').textContent.includes('Έξυπνος') ? 'smart' : 'simple';
-                    if (aiType === savedAI) {
-                        option.classList.add('active');
-                    }
-                });
-            }
-
-            // Enhanced hover effects
-            document.querySelectorAll('.course-card').forEach(card => {
+            cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.transform = 'translateY(-15px) scale(1.02)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0) scale(1)';
                 });
             });
-            
-            // Load saved progress
-            loadUserProgress();
         });
-
-        function loadUserProgress() {
-            const savedProgress = localStorage.getItem('educate4all_progress');
-            if (savedProgress) {
-                const progress = JSON.parse(savedProgress);
-                const courseCards = document.querySelectorAll('.course-card');
-                const subjects = ['math', 'physics', 'chemistry', 'biology', 'history', 'geography', 'economics', 'robotics', 'ai'];
-                
-                courseCards.forEach((card, index) => {
-                    const subject = subjects[index];
-                    if (progress[subject]) {
-                        const progressFill = card.querySelector('.progress-fill');
-                        const progressText = card.querySelector('.progress-text');
-                        
-                        progressFill.style.width = progress[subject] + '%';
-                        progressText.textContent = progress[subject] + '% Ολοκληρώθηκε';
-                    }
-                });
-            }
-        }
     </script>
 </body>
 </html>
