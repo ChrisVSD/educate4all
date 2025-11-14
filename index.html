@@ -74,7 +74,7 @@
             border-radius: 20px;
             margin-top: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            scroll-margin-top: 80px; /* ΠΡΟΣΘΗΚΗ: Αυτό διορθώνει το scrolling */
+            scroll-margin-top: 80px;
         }
         
         .features-grid {
@@ -168,7 +168,6 @@
             <div class="logo">🎓</div>
             <h1>educate4all</h1>
             <p class="tagline">Δωρεάν Εκπαίδευση για Όλους με Τεχνητή Νοημοσύνη</p>
-            <!-- Απλό anchor link που τώρα θα δουλεύει σωστά -->
             <a href="#features" class="cta-button">🚀 Ξεκίνα Εδώ</a>
         </header>
 
@@ -233,20 +232,23 @@
     </div>
 
     <script>
-        // Απλοποιημένο smooth scrolling που ΔΟΥΛΕΥΕΙ
+        // ΔΙΟΡΘΩΜΕΝΟ JavaScript - Μόνο για internal anchor links
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling για anchor links
+            // Smooth scrolling ΜΟΝΟ για links που έχουν href="#something"
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
+                // Ελέγχουμε αν το link είναι ΜΟΝΟ για internal navigation (όχι external links)
+                if (anchor.getAttribute('href').startsWith('#') && anchor.getAttribute('href').length > 1) {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                }
             });
         });
     </script>
