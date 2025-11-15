@@ -4,1189 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>educate4all - Πλήρης Δωρεάν Εκπαίδευση</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <meta name="description" content="Η πιο ολοκληρωμένη δωρεάν πλατφόρμα εκπαίδευσης για όλα τα παιδιά. Μαθήματα, ασκήσεις και AI βοηθοί μάθησης.">
     <meta name="theme-color" content="#667eea">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="educate4all - Πλήρης Δωρεάν Εκπαίδευση">
+    <meta property="og:description" content="Η πιο ολοκληρωμένη δωρεάν πλατφόρμα εκπαίδευσης για όλα τα παιδιά. Μαθήματα, ασκήσεις και AI βοηθοί μάθησης.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="path-to-image.png">
+
+    <!-- Favicon as SVG -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <!-- Fonts preload (optional) -->
+    <!--<link rel="preload" href="path-to-font.woff2" as="font" type="font/woff2" crossorigin>-->
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* Reset & root variables */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --text-white: rgba(255, 255, 255, 0.95);
+            --glass-bg: rgba(255,255,255,0.1);
+            --glass-border: rgba(255,255,255,0.2);
+            --text-white: rgba(255,255,255,0.95);
+            --success: #4CAF50;
+            --error: #f44336;
         }
-        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--primary-gradient);
+            color: #fff;
             min-height: 100vh;
-            color: #333;
-            padding: 20px;
             overflow-x: hidden;
+            padding: 20px;
         }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        /* Enhanced Header with User Profile */
-        .header {
+        a { text-decoration: none; color: inherit; }
+
+        /* Header */
+        header {
             text-align: center;
-            padding: 80px 30px 60px;
-            color: white;
+            padding: 60px 20px;
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
             border-radius: 30px;
             margin-bottom: 40px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             position: relative;
-            overflow: hidden;
         }
-        
-        .header::before {
+        header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            inset: 0;
+            background: linear-gradient(45deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3));
             z-index: -1;
         }
-        
-        .header h1 {
-            font-size: 4.5rem;
-            margin-bottom: 25px;
-            background: linear-gradient(45deg, #fff, #e3f2fd, #fff);
+        header h1 {
+            font-size: 4rem;
+            font-weight: 800;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg,#fff,#e3f2fd,#fff);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
             animation: glow 2s ease-in-out infinite alternate;
         }
-        
-        /* Enhanced Navigation */
-        .main-nav {
+        header p { font-size: 1.5rem; opacity:0.95; margin-top: 15px; }
+
+        /* Navigation */
+        nav.main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border-radius: 20px;
             padding: 20px 30px;
+            border-radius: 20px;
+            border:1px solid var(--glass-border);
+            backdrop-filter: blur(25px);
             margin-bottom: 30px;
-            border: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
         }
-        
-        .nav-brand {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
+        .nav-brand { font-size: 1.8rem; font-weight:800; }
+        .nav-links { display:flex; gap:20px; flex-wrap:wrap; }
         .nav-link {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
+            padding:10px 20px;
+            border-radius:15px;
+            transition:0.3s all;
         }
-        
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        /* Enhanced User Profile Section */
-        .user-profile {
-            background: rgba(255, 255, 255, 0.15);
+        .nav-link:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+        main { max-width: 1400px; margin:0 auto; }
+
+        /* Dashboard */
+        .user-profile, .learning-dashboard, .ai-assistants, .exercises-section {
+            background: var(--glass-bg);
+            border-radius: 25px;
             padding: 30px;
-            border-radius: 20px;
-            margin: 30px auto;
-            max-width: 600px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 50px;
+            border:1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
         }
-        
-        .profile-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        
+
+        /* Profile */
+        .profile-header { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
         .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            width:100px;height:100px;border-radius:50%;
+            display:flex;justify-content:center;align-items:center;
+            font-size:2.5rem; background:linear-gradient(135deg,#667eea,#764ba2);
+            border:4px solid rgba(255,255,255,0.3);
         }
-        
-        .profile-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-            color: white;
+        .profile-level { background: linear-gradient(135deg,#FFD700,#FFA500); color:#333; padding:6px 20px;border-radius:25px;font-weight:bold; }
+
+        /* Stats */
+        .profile-stats { display:grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap:20px; text-align:center; }
+        .stat { background: rgba(255,255,255,0.1); padding:20px; border-radius:15px; transition:0.3s all; }
+        .stat:hover { background: rgba(255,255,255,0.15); transform:translateY(-5px);}
+        .stat-number { font-size:2.2rem;font-weight:800; }
+        .stat-label { opacity:0.8; font-size:0.95rem; }
+
+        /* Courses & AI & Exercises Grids */
+        .grid { display:grid; gap:30px; }
+        .courses-grid { grid-template-columns: repeat(auto-fit,minmax(380px,1fr)); }
+        .assistants-grid { grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); }
+        .exercises-grid { grid-template-columns: repeat(auto-fit,minmax(350px,1fr)); }
+
+        /* Cards */
+        .card {
+            position:relative;
+            background: rgba(255,255,255,0.1);
+            padding:25px;
+            border-radius:20px;
+            color:white;
+            transition:0.4s all;
+            overflow:hidden;
         }
-        
-        .profile-level {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #333;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            display: inline-block;
+        .card::before {
+            content:''; position:absolute; top:0; left:0; right:0; height:4px;
+            background: linear-gradient(90deg,#667eea,#764ba2);
         }
-        
-        .profile-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            text-align: center;
+        .card:hover { transform:translateY(-8px); background: rgba(255,255,255,0.15); box-shadow:0 15px 35px rgba(0,0,0,0.2); }
+
+        /* Buttons */
+        .btn {
+            display:flex;align-items:center;justify-content:center;gap:8px;
+            padding:15px; border-radius:15px; font-weight:600; cursor:pointer;
+            border:none; transition:0.3s all; backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.2); color:white;
         }
-        
-        .stat {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .stat:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-        }
-        
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: white;
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .stat-label {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            color: white;
-        }
-        
-        /* Enhanced Learning Dashboard */
-        .learning-dashboard {
-            background: var(--glass-bg);
-            padding: 40px 30px;
-            border-radius: 25px;
-            margin: 40px 0;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .dashboard-header h2 {
-            color: white;
-            font-size: 2.2rem;
-            background: linear-gradient(45deg, #fff, #e3f2fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .progress-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .progress-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .progress-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-        
-        .progress-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-        
-        .progress-title {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-            font-weight: 600;
-        }
-        
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.2);
-            height: 12px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            position: relative;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4CAF50, #45a049);
-            border-radius: 10px;
-            transition: width 1s ease-in-out;
-            position: relative;
-        }
-        
-        .progress-percent {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-        }
-        
-        /* Enhanced Courses Grid */
-        .courses-grid-enhanced {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .course-card-enhanced {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 35px;
-            color: white;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .course-card-enhanced::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-        
-        .course-card-enhanced:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-        }
-        
-        .course-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .course-title {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 700;
-        }
-        
-        .course-description {
-            opacity: 0.9;
-            line-height: 1.7;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .course-stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 25px 0;
-            font-size: 0.95rem;
-            opacity: 0.8;
-            padding: 0 10px;
-        }
-        
-        .course-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 25px;
-        }
-        
-        .course-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .course-btn.primary {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-        }
-        
-        .course-btn:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .course-btn.primary:hover {
-            background: linear-gradient(135deg, #0056b3, #004494);
-        }
-        
-        /* Enhanced AI Assistants Section */
-        .ai-assistants {
-            background: var(--glass-bg);
-            padding: 50px 30px;
-            border-radius: 25px;
-            margin: 50px 0;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-        }
-        
-        .ai-assistants h2 {
-            text-align: center;
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            background: linear-gradient(45deg, #fff, #e3f2fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .assistants-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-        
-        .assistant-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 35px;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .assistant-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-        
-        .assistant-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-        }
-        
-        .assistant-icon {
-            font-size: 4.5rem;
-            margin-bottom: 25px;
-        }
-        
-        .assistant-badge {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 700;
-            display: inline-block;
-            margin: 15px 0;
-        }
-        
-        .assistant-description {
-            opacity: 0.9;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-        
-        /* Enhanced Exercises Section */
-        .exercises-section {
-            background: var(--glass-bg);
-            padding: 50px 30px;
-            border-radius: 25px;
-            margin: 50px 0;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-        }
-        
-        .exercises-section h2 {
-            text-align: center;
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            background: linear-gradient(45deg, #fff, #e3f2fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .exercises-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .exercise-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 35px;
-            border-radius: 20px;
-            color: white;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .exercise-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .exercise-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .exercise-title {
-            font-size: 1.4rem;
-            color: white;
-            font-weight: 600;
-        }
-        
-        .exercise-difficulty {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        .exercise-question {
-            margin-bottom: 25px;
-            line-height: 1.7;
-            font-size: 1.1rem;
-        }
-        
-        .exercise-options {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .exercise-option {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 18px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .exercise-option:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .exercise-option.selected {
-            background: rgba(76, 175, 80, 0.3);
-            border: 2px solid #4CAF50;
-        }
-        
-        .option-indicator {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        
-        .exercise-option.selected .option-indicator {
-            background: #4CAF50;
-            border-color: #4CAF50;
-            color: white;
-        }
-        
-        .exercise-feedback {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 15px;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .exercise-feedback.correct {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid #4CAF50;
-            display: block;
-        }
-        
-        .exercise-feedback.incorrect {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid #f44336;
-            display: block;
-        }
-        
+        .btn.primary { background: linear-gradient(135deg,#007bff,#0056b3);}
+        .btn.primary:hover { background: linear-gradient(135deg,#0056b3,#004494); }
+        .btn:hover { transform:translateY(-3px); }
+
+        /* Exercises */
+        .exercise-option { display:flex; align-items:center; gap:15px; padding:18px; border-radius:15px; cursor:pointer; transition:0.3s all; }
+        .exercise-option:hover { background: rgba(255,255,255,0.2); }
+        .exercise-option.selected { background: rgba(76,175,80,0.3); border:2px solid #4CAF50; }
+        .option-indicator { width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,0.3); display:flex;align-items:center;justify-content:center; font-weight:bold; }
+        .exercise-option.selected .option-indicator { background:#4CAF50; border-color:#4CAF50; color:white; }
+        .exercise-feedback { margin-top:20px; padding:20px; border-radius:15px; display:none; }
+
         /* Animations */
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
-            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6); }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 3rem;
-            }
-            
-            .courses-grid-enhanced {
-                grid-template-columns: 1fr;
-            }
-            
-            .assistants-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .exercises-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .course-actions {
-                grid-template-columns: 1fr;
-            }
-            
-            .main-nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .nav-links {
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-            
-            .profile-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .progress-summary {
-                grid-template-columns: 1fr;
-            }
-        }
+        @keyframes glow { from {text-shadow:0 0 20px rgba(255,255,255,0.5);} to { text-shadow:0 0 30px rgba(255,255,255,0.8),0 0 40px rgba(255,255,255,0.6);} }
+        @keyframes fadeInUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
+        @keyframes slideInRight { from { transform:translateX(100%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+        .fade-in { animation: fadeInUp 0.6s ease-out; }
+
+        /* Responsive */
+        @media(max-width:768px){ .courses-grid,.assistants-grid,.exercises-grid{grid-template-columns:1fr;} nav.main-nav{flex-direction:column;gap:15px;} .nav-links{justify-content:center;} }
+        @media(max-width:480px){ header h1{font-size:2.5rem;} .profile-stats{grid-template-columns:1fr;} .progress-summary{grid-template-columns:1fr;} }
+        @media(prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Enhanced Navigation -->
-        <nav class="main-nav">
-            <a href="index.html" class="nav-brand">🎓 educate4all</a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">🏠 Αρχική</a>
-                <a href="courses.html" class="nav-link">📚 Μαθήματα</a>
-                <a href="real-ai-chatbot.html" class="nav-link">🤖 Πραγματικός AI</a>
-                <a href="smart-chatbot.html" class="nav-link">🧠 Έξυπνος AI</a>
-                <a href="chatbot.html" class="nav-link">😊 Απλός AI</a>
-            </div>
-        </nav>
 
-        <!-- Enhanced Header with User Profile -->
-        <div class="header">
-            <h1>🎓 educate4all</h1>
-            <p style="font-size: 1.5rem; opacity: 0.95; margin-bottom: 30px;">
-    Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης - Για Όλα τα Παιδιά!
-</p>
-            
-            <!-- Enhanced User Profile -->
-            <div class="user-profile">
-                <div class="profile-header">
-                    <div class="profile-avatar">👤</div>
-                    <div class="profile-info">
-                        <h3>Μαθητής educate4all</h3>
-                        <div class="profile-level" id="main-level">🎯 Level 1</div>
-                    </div>
-                </div>
-                <div class="profile-stats">
-                    <div class="stat">
-                        <span class="stat-number" id="main-completed">0</span>
-                        <span class="stat-label">Ολοκληρωμένα Μαθήματα</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="main-xp">0</span>
-                        <span class="stat-label">Συνολικά XP</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="main-correct">0</span>
-                        <span class="stat-label">Σωστές Απαντήσεις</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="main-progress">0%</span>
-                        <span class="stat-label">Συνολική Πρόοδος</span>
-                    </div>
-                </div>
-            </div>
+    <header>
+        <h1>🎓 educate4all</h1>
+        <p>Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης - Για Όλα τα Παιδιά!</p>
+    </header>
+
+    <nav class="main-nav" aria-label="Κύρια Πλοήγηση">
+        <a href="index.html" class="nav-brand">🎓 educate4all</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">🏠 Αρχική</a>
+            <a href="courses.html" class="nav-link">📚 Μαθήματα</a>
+            <a href="real-ai-chatbot.html" class="nav-link">🤖 Πραγματικός AI</a>
+            <a href="smart-chatbot.html" class="nav-link">🧠 Έξυπνος AI</a>
+            <a href="chatbot.html" class="nav-link">😊 Απλός AI</a>
         </div>
+    </nav>
 
-        <!-- Enhanced Learning Dashboard -->
-        <div class="learning-dashboard">
-            <div class="dashboard-header">
-                <h2>📊 Παντοτινή Πρόοδος Μάθησης</h2>
-                <div style="color: white; opacity: 0.8; font-size: 1.1rem;">
-                    Συνολική Πρόοδος: <strong id="overall-progress">0%</strong>
+    <main>
+        <!-- User Profile -->
+        <section class="user-profile" aria-label="Προφίλ Μαθητή">
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-info">
+                    <h3>Μαθητής educate4all</h3>
+                    <div class="profile-level" id="main-level">🎯 Level 1</div>
                 </div>
             </div>
-            
-            <div class="progress-summary">
-                <div class="progress-card">
-                    <div class="progress-title">📐 Μαθηματικά</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-subject="math" style="width: 0%"></div>
-                    </div>
-                    <div class="progress-percent" id="math-progress">0%</div>
-                </div>
-                
-                <div class="progress-card">
-                    <div class="progress-title">🔬 Φυσική</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-subject="physics" style="width: 0%"></div>
-                    </div>
-                    <div class="progress-percent" id="physics-progress">0%</div>
-                </div>
-                
-                <div class="progress-card">
-                    <div class="progress-title">🧪 Χημεία</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-subject="chemistry" style="width: 0%"></div>
-                    </div>
-                    <div class="progress-percent" id="chemistry-progress">0%</div>
-                </div>
-                
-                <div class="progress-card">
-                    <div class="progress-title">🧬 Βιολογία</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-subject="biology" style="width: 0%"></div>
-                    </div>
-                    <div class="progress-percent" id="biology-progress">0%</div>
-                </div>
+            <div class="profile-stats">
+                <div class="stat"><span class="stat-number" id="main-completed">0</span><span class="stat-label">Ολοκληρωμένα Μαθήματα</span></div>
+                <div class="stat"><span class="stat-number" id="main-xp">0</span><span class="stat-label">Συνολικά XP</span></div>
+                <div class="stat"><span class="stat-number" id="main-correct">0</span><span class="stat-label">Σωστές Απαντήσεις</span></div>
+                <div class="stat"><span class="stat-number" id="main-progress">0%</span><span class="stat-label">Συνολική Πρόοδος</span></div>
             </div>
-        </div>
+        </section>
 
-        <!-- Enhanced Courses Section -->
-        <div class="learning-dashboard">
-            <h2 style="text-align: center; color: white; margin-bottom: 30px; background: linear-gradient(45deg, #fff, #e3f2fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                📚 Δομημένα Μαθήματα & Εκπαιδευτικό Υλικό
-            </h2>
-            
-            <div class="courses-grid-enhanced">
-                <!-- Mathematics Course -->
-                <div class="course-card-enhanced">
-                    <div class="course-icon">📐</div>
-                    <div class="course-title">Μαθηματικά</div>
-                    <div class="course-description">
-                        Από βασικές πράξεις έως ανώτερα μαθηματικά. Κατάλληλο για όλα τα επίπεδα και ηλικίες.
-                    </div>
-                    <div class="course-stats">
-                        <span>📖 8 Μαθήματα</span>
-                        <span>⏱️ 12 ώρες</span>
-                        <span>⭐ 850 XP</span>
-                    </div>
-                    <div class="course-actions">
-                        <button class="course-btn" onclick="viewCourse('math')">
-                            👀 Επισκόπηση
-                        </button>
-                        <button class="course-btn primary" onclick="startCourse('math')">
-                            🚀 Έναρξη Μαθήματος
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Physics Course -->
-                <div class="course-card-enhanced">
-                    <div class="course-icon">🔬</div>
-                    <div class="course-title">Φυσική</div>
-                    <div class="course-description">
-                        Κατανόηση των νόμων της φύσης. Πειράματα, αναλύσεις και πρακτικές εφαρμογές.
-                    </div>
-                    <div class="course-stats">
-                        <span>📖 6 Μαθήματα</span>
-                        <span>⏱️ 10 ώρες</span>
-                        <span>⭐ 700 XP</span>
-                    </div>
-                    <div class="course-actions">
-                        <button class="course-btn" onclick="viewCourse('physics')">
-                            👀 Επισκόπηση
-                        </button>
-                        <button class="course-btn primary" onclick="startCourse('physics')">
-                            🚀 Έναρξη Μαθήματος
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Chemistry Course -->
-                <div class="course-card-enhanced">
-                    <div class="course-icon">🧪</div>
-                    <div class="course-title">Χημεία</div>
-                    <div class="course-description">
-                        Διάσπαση της ύλης. Χημικές αντιδράσεις, εργαστηριακές τεχνικές και επιστημονικές μεθόδους.
-                    </div>
-                    <div class="course-stats">
-                        <span>📖 7 Μαθήματα</span>
-                        <span>⏱️ 9 ώρες</span>
-                        <span>⭐ 750 XP</span>
-                    </div>
-                    <div class="course-actions">
-                        <button class="course-btn" onclick="viewCourse('chemistry')">
-                            👀 Επισκόπηση
-                        </button>
-                        <button class="course-btn primary" onclick="startCourse('chemistry')">
-                            🚀 Έναρξη Μαθήματος
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Learning Dashboard -->
+        <section class="learning-dashboard" aria-label="Πρόοδος Μαθημάτων">
+            <h2>📊 Παντοτινή Πρόοδος Μάθησης</h2>
+            <!-- Progress bars and courses can go here -->
+        </section>
 
-        <!-- Enhanced AI Assistants Section -->
-        <div class="ai-assistants">
+        <!-- Courses Grid -->
+        <section class="courses-grid grid" aria-label="Μαθήματα και Εκπαιδευτικό Υλικό">
+            <!-- Courses cards -->
+        </section>
+
+        <!-- AI Assistants -->
+        <section class="ai-assistants" aria-label="AI Βοηθοί Μάθησης">
             <h2>🤖 Εξυπνότεροι AI Βοηθοί Μάθησης</h2>
-            
-            <div class="assistants-grid">
-                <!-- Real AI Assistant -->
-                <div class="assistant-card" onclick="openAI('real')">
-                    <div class="assistant-icon">🤖</div>
-                    <div class="assistant-badge">💎 ΣΥΝΙΣΤΑΤΑΙ</div>
-                    <h3 style="margin: 15px 0; font-size: 1.6rem;">Πραγματικός AI</h3>
-                    <p class="assistant-description">
-                        Για σύνθετα προβλήματα και πανεπιστημιακό επίπεδο. Λεπτομερείς αναλύσεις, μαθηματικές αποδείξεις και επιστημονική μέθοδο.
-                    </p>
-                    <div style="color: #ffd700; font-weight: 600; font-size: 1.1rem;">🎯 Με τον Πυθαγόρα</div>
-                </div>
-                
-                <!-- Smart AI Assistant -->
-                <div class="assistant-card" onclick="openAI('smart')">
-                    <div class="assistant-icon">🧠</div>
-                    <div class="assistant-badge" style="background: linear-gradient(135deg, #17a2b8, #138496);">🎯 ΒΑΣΙΚΟΣ</div>
-                    <h3 style="margin: 15px 0; font-size: 1.6rem;">Έξυπνος AI</h3>
-                    <p class="assistant-description">
-                        Εξηγήσεις βήμα-βήμα για βαθιά κατανόηση. Προσαρμοσμένη δυσκολία, πρακτικά παραδείγματα και οπτικά βοηθήματα.
-                    </p>
-                    <div style="color: #17a2b8; font-weight: 600; font-size: 1.1rem;">🔬 Με τον Αριστοτέλη</div>
-                </div>
-                
-                <!-- Simple AI Assistant -->
-                <div class="assistant-card" onclick="openAI('simple')">
-                    <div class="assistant-icon">😊</div>
-                    <div class="assistant-badge" style="background: linear-gradient(135deg, #6c757d, #5a6268);">⚡ ΑΠΛΟΣ</div>
-                    <h3 style="margin: 15px 0; font-size: 1.6rem;">Απλός AI</h3>
-                    <p class="assistant-description">
-                        Γρήγορες απαντήσεις και απλές εξηγήσεις. Ιδανικός για βασικές έννοιες, γρήγορες ερωτήσεις και φιλικές συζητήσεις.
-                    </p>
-                    <div style="color: #6c757d; font-weight: 600; font-size: 1.1rem;">💭 Με τον Σωκράτη</div>
-                </div>
+            <div class="assistants-grid grid">
+                <!-- Assistant cards -->
             </div>
-        </div>
+        </section>
 
-        <!-- Enhanced Interactive Exercises Section -->
-        <div class="exercises-section">
+        <!-- Exercises Section -->
+        <section class="exercises-section" aria-label="Διαδραστικές Ασκήσεις">
             <h2>🎯 Διαδραστικές Ασκήσεις & Quiz</h2>
-            
-            <div class="exercises-grid">
-                <!-- Math Exercise -->
-                <div class="exercise-card">
-                    <div class="exercise-header">
-                        <h3 class="exercise-title">📐 Μαθηματικά</h3>
-                        <div class="exercise-difficulty">🎯 Μέτριο</div>
-                    </div>
-                    <div class="exercise-question">
-                        <p>Ποια είναι η λύση της εξίσωσης: <strong>x² - 5x + 6 = 0</strong>;</p>
-                    </div>
-                    <div class="exercise-options">
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">
-                            <div class="option-indicator">A</div>
-                            <div>x = 2, x = 3</div>
-                        </div>
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">
-                            <div class="option-indicator">B</div>
-                            <div>x = 1, x = 6</div>
-                        </div>
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">
-                            <div class="option-indicator">C</div>
-                            <div>x = -2, x = -3</div>
-                        </div>
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">
-                            <div class="option-indicator">D</div>
-                            <div>x = 0, x = 5</div>
-                        </div>
-                    </div>
-                    <button class="course-btn primary" style="width: 100%;" onclick="checkAnswer('math')">
-                        ✅ Ελέγξτε την Απάντησή Σας
-                    </button>
-                    <div class="exercise-feedback" id="math-feedback">
-                        <!-- Feedback will appear here -->
-                    </div>
-                </div>
-                
-                <!-- Physics Exercise -->
-                <div class="exercise-card">
-                    <div class="exercise-header">
-                        <h3 class="exercise-title">🔬 Φυσική</h3>
-                        <div class="exercise-difficulty">😊 Εύκολο</div>
-                    </div>
-                    <div class="exercise-question">
-                        <p>Ποιος νόμος περιγράφει τη σχέση μεταξύ δύναμης, μάζας και επιτάχυνσης;</p>
-                    </div>
-                    <div class="exercise-options">
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
-                            <div class="option-indicator">A</div>
-                            <div>Νόμος του Νεύτωνα</div>
-                        </div>
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
-                            <div class="option-indicator">B</div>
-                            <div>Νόμος του Αρχιμήδη</div>
-                        </div>
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
-                            <div class="option-indicator">C</div>
-                            <div>Νόμος του Ohm</div>
-                        </div>
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
-                            <div class="option-indicator">D</div>
-                            <div>Νόμος της Βαρύτητας</div>
-                        </div>
-                    </div>
-                    <button class="course-btn primary" style="width: 100%;" onclick="checkAnswer('physics')">
-                        ✅ Ελέγξτε την Απάντησή Σας
-                    </button>
-                    <div class="exercise-feedback" id="physics-feedback">
-                        <!-- Feedback will appear here -->
-                    </div>
-                </div>
+            <div class="exercises-grid grid">
+                <!-- Exercise cards -->
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script>
-        // Enhanced Learning System for Dashboard
+        /* Dashboard system */
         class DashboardSystem {
             constructor() {
-                this.userData = this.loadUserData();
-                this.initializeDashboard();
-            }
-            
-            loadUserData() {
-                return JSON.parse(localStorage.getItem('educate4all_enhanced_user') || JSON.stringify({
-                    level: 1,
-                    xp: 0,
-                    completedLessons: [],
-                    currentLesson: 1,
-                    progress: {
-                        math: 0,
-                        physics: 0,
-                        chemistry: 0,
-                        biology: 0
-                    },
-                    achievements: [],
-                    totalStudyTime: 0,
-                    correctAnswers: 0
+                this.userData = JSON.parse(localStorage.getItem('educate4all_user') || JSON.stringify({
+                    level:1, xp:0, completedLessons:[], correctAnswers:0, progress:{ math:0, physics:0, chemistry:0, biology:0 }
                 }));
+                this.selectedOptions = {};
+                this.init();
             }
-            
-            initializeDashboard() {
-                this.updateDashboardUI();
-                this.setupEventListeners();
+            init() {
+                this.updateUI();
             }
-            
-            updateDashboardUI() {
-                // Update main stats
+            updateUI() {
                 document.getElementById('main-level').textContent = `🎯 Level ${this.userData.level}`;
-                document.getElementById('main-completed').textContent = this.userData.completedLessons.length;
                 document.getElementById('main-xp').textContent = this.userData.xp;
-                document.getElementById('main-correct').textContent = this.userData.correctAnswers || 0;
-                
-                // Calculate overall progress
-                const progresses = Object.values(this.userData.progress);
-                const overallProgress = progresses.length > 0 ? 
-                    Math.round(progresses.reduce((a, b) => a + b, 0) / progresses.length) : 0;
-                
-                document.getElementById('main-progress').textContent = overallProgress + '%';
-                document.getElementById('overall-progress').textContent = overallProgress + '%';
-                
-                // Update subject progresses
-                Object.keys(this.userData.progress).forEach(subject => {
-                    const progressElement = document.getElementById(`${subject}-progress`);
-                    const progressFill = document.querySelector(`[data-subject="${subject}"]`);
-                    
-                    if (progressElement) {
-                        progressElement.textContent = this.userData.progress[subject] + '%';
-                    }
-                    if (progressFill) {
-                        progressFill.style.width = this.userData.progress[subject] + '%';
-                    }
-                });
+                document.getElementById('main-completed').textContent = this.userData.completedLessons.length;
+                document.getElementById('main-correct').textContent = this.userData.correctAnswers;
+                const overall = Math.round(Object.values(this.userData.progress).reduce((a,b)=>a+b,0)/4);
+                document.getElementById('main-progress').textContent = overall + '%';
             }
-            
-            setupEventListeners() {
-                this.setupExercises();
-            }
-            
-            setupExercises() {
-                this.exercises = {
-                    math: {
-                        question: "Ποια είναι η λύση της εξίσωσης: x² - 5x + 6 = 0;",
-                        options: ["x = 2, x = 3", "x = 1, x = 6", "x = -2, x = -3", "x = 0, x = 5"],
-                        correct: 0,
-                        explanation: "Σωστά! Η εξίσωση x² - 5x + 6 = 0 παραγοντοποιείται σε (x-2)(x-3)=0, άρα x=2 ή x=3. 🎉"
-                    },
-                    physics: {
-                        question: "Ποιος νόμος περιγράφει τη σχέση μεταξύ δύναμης, μάζας και επιτάχυνσης;",
-                        options: ["Νόμος του Νεύτωνα", "Νόμος του Αρχιμήδη", "Νόμος του Ohm", "Νόμος της Βαρύτητας"],
-                        correct: 0,
-                        explanation: "Σωστά! Ο δεύτερος νόμος του Νεύτωνα: F = m·a 🚀"
-                    }
-                };
-            }
-            
-            correctAnswer() {
-                this.userData.correctAnswers = (this.userData.correctAnswers || 0) + 1;
-                this.userData.xp += 10;
-                this.saveUserData();
-                this.updateDashboardUI();
-                this.showAchievement('✅ Σωστή απάντηση! +10 XP');
-            }
-            
-            saveUserData() {
-                localStorage.setItem('educate4all_enhanced_user', JSON.stringify(this.userData));
-            }
-            
-            showAchievement(message) {
-                const achievement = document.createElement('div');
-                achievement.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: linear-gradient(135deg, #667eea, #764ba2);
-                    color: white;
-                    padding: 20px 30px;
-                    border-radius: 15px;
-                    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-                    z-index: 1000;
-                    animation: slideInRight 0.5s ease-out;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                `;
-                achievement.textContent = message;
-                document.body.appendChild(achievement);
-                
-                setTimeout(() => {
-                    achievement.remove();
-                }, 3000);
+            save() { localStorage.setItem('educate4all_user', JSON.stringify(this.userData)); }
+            correctAnswer() { this.userData.correctAnswers++; this.userData.xp+=10; this.save(); this.updateUI(); this.showAchievement('✅ Σωστή Απάντηση! +10 XP'); }
+            showAchievement(msg){
+                const a=document.createElement('div'); a.textContent=msg;
+                Object.assign(a.style,{position:'fixed',top:'20px',right:'20px',padding:'15px 25px',borderRadius:'15px',background:'linear-gradient(135deg,#667eea,#764ba2)',color:'white',boxShadow:'0 15px 35px rgba(0,0,0,0.3)',zIndex:1000});
+                document.body.appendChild(a); setTimeout(()=>a.remove(),3000);
             }
         }
-
-        // Global functions
-        function viewCourse(subject) {
-            const courseInfo = {
-                'math': 'Μαθηματικά - 8 μαθήματα, 12 ώρες, 850 XP',
-                'physics': 'Φυσική - 6 μαθήματα, 10 ώρες, 700 XP', 
-                'chemistry': 'Χημεία - 7 μαθήματα, 9 ώρες, 750 XP'
-            };
-            
-            dashboardSystem.showAchievement(`📚 Επισκόπηση: ${courseInfo[subject]}`);
-        }
-        
-        function startCourse(subject) {
-            // Update progress for the selected subject
-            dashboardSystem.userData.progress[subject] = Math.min(100, dashboardSystem.userData.progress[subject] + 5);
-            dashboardSystem.userData.xp += 25;
-            dashboardSystem.saveUserData();
-            dashboardSystem.updateDashboardUI();
-            
-            dashboardSystem.showAchievement(`🚀 Ξεκίνησες το μάθημα ${subject.toUpperCase()}! +25 XP`);
-            
-            // Redirect to courses page
-            setTimeout(() => {
-                window.location.href = 'courses.html';
-            }, 1500);
-        }
-        
-        function openAI(type) {
-            const aiPages = {
-                'real': 'real-ai-chatbot.html',
-                'smart': 'smart-chatbot.html', 
-                'simple': 'chatbot.html'
-            };
-            
-            dashboardSystem.showAchievement(`🤖 Ανοίγει ο ${type.toUpperCase()} AI βοηθός...`);
-            
-            setTimeout(() => {
-                window.location.href = aiPages[type];
-            }, 1000);
-        }
-        
-        let selectedOptions = {};
-        
-        function selectOption(element, exercise) {
-            // Remove previous selection
-            const parent = element.parentElement;
-            parent.querySelectorAll('.exercise-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            // Add new selection
-            element.classList.add('selected');
-            selectedOptions[exercise] = element.querySelector('div:last-child').textContent;
-        }
-        
-        function checkAnswer(exercise) {
-            const feedback = document.getElementById(`${exercise}-feedback`);
-            const selected = selectedOptions[exercise];
-            const correctAnswer = dashboardSystem.exercises[exercise].options[dashboardSystem.exercises[exercise].correct];
-            
-            if (selected === correctAnswer) {
-                feedback.textContent = dashboardSystem.exercises[exercise].explanation;
-                feedback.className = 'exercise-feedback correct';
-                dashboardSystem.correctAnswer();
-            } else {
-                feedback.textContent = `Λάθος. Η σωστή απάντηση είναι: ${correctAnswer}`;
-                feedback.className = 'exercise-feedback incorrect';
-            }
-        }
-
-        // Initialize the dashboard system
-        const dashboardSystem = new DashboardSystem();
-
-        // Add CSS for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            
-            .fade-in {
-                animation: fadeInUp 0.6s ease-out;
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Add fade-in animations to all cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.course-card-enhanced, .assistant-card, .exercise-card, .progress-card');
-            cards.forEach((card, index) => {
-                card.classList.add('fade-in');
-                card.style.animationDelay = (index * 0.1) + 's';
-            });
-        });
-
-        // Update global progress function for courses page
-        window.updateMainDashboard = function(userData) {
-            dashboardSystem.userData = userData;
-            dashboardSystem.updateDashboardUI();
-        };
+        const dashboard = new DashboardSystem();
     </script>
 </body>
 </html>
