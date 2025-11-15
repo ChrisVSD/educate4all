@@ -1,229 +1,296 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>educate4all - Δωρεάν Εκπαίδευση</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
-<style>
-:root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --text-white: rgba(255, 255, 255, 0.95);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--primary-gradient);
-    color:#fff;
-    min-height:100vh;
-    padding:20px;
-    overflow-x:hidden;
-}
-.container { max-width:1400px; margin:0 auto; }
-
-/* Navigation */
-nav { display:flex; justify-content:space-between; align-items:center; background:var(--glass-bg); padding:15px 25px; border-radius:15px; backdrop-filter:blur(15px); border:1px solid var(--glass-border); flex-wrap:wrap; margin-bottom:30px; }
-.nav-brand { font-size:1.8rem; font-weight:800; color:white; text-decoration:none; }
-.nav-links { display:flex; gap:15px; flex-wrap:wrap; }
-.nav-link { color:white; text-decoration:none; padding:8px 15px; border-radius:10px; transition:all 0.3s; background:rgba(255,255,255,0.1); }
-.nav-link:hover { background:rgba(255,255,255,0.2); transform:translateY(-2px); }
-
-/* Header */
-.header { text-align:center; padding:60px 30px 40px; background:var(--glass-bg); border-radius:25px; backdrop-filter:blur(20px); border:1px solid var(--glass-border); box-shadow:0 20px 40px rgba(0,0,0,0.15); margin-bottom:40px; position:relative; }
-.header::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:linear-gradient(45deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3)); z-index:-1; }
-.header h1 { font-size:4rem; font-weight:800; background:linear-gradient(45deg,#fff,#e3f2fd,#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 4px 15px rgba(0,0,0,0.2); animation:glow 2s ease-in-out infinite alternate; margin-bottom:20px; }
-@keyframes glow { from{ text-shadow:0 0 20px rgba(255,255,255,0.5);} to{ text-shadow:0 0 30px rgba(255,255,255,0.8),0 0 40px rgba(255,255,255,0.6); } }
-
-/* Profile */
-.user-profile { background:rgba(255,255,255,0.15); padding:25px; border-radius:20px; margin:30px auto; max-width:600px; backdrop-filter:blur(15px); border:1px solid rgba(255,255,255,0.2); }
-.profile-header { display:flex; align-items:center; justify-content:center; gap:20px; margin-bottom:20px; flex-wrap:wrap; }
-.profile-avatar { width:90px; height:90px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; font-size:2rem; border:3px solid rgba(255,255,255,0.3); }
-.profile-info h3 { font-size:1.5rem; margin-bottom:5px; }
-.profile-level { background:linear-gradient(135deg,#FFD700,#FFA500); color:#333; padding:6px 15px; border-radius:20px; font-weight:700; font-size:1rem; display:inline-block; }
-.profile-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:15px; text-align:center; }
-.stat { background:rgba(255,255,255,0.1); padding:15px; border-radius:12px; transition:all 0.3s ease; }
-.stat:hover { transform:translateY(-5px); background:rgba(255,255,255,0.15); }
-.stat-number { font-size:1.5rem; font-weight:700; margin-bottom:5px; display:block; }
-.stat-label { font-size:0.85rem; opacity:0.8; }
-
-/* Learning Dashboard */
-.learning-dashboard { background:var(--glass-bg); padding:30px; border-radius:20px; margin:30px 0; backdrop-filter:blur(15px); border:1px solid var(--glass-border); }
-.dashboard-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:15px; }
-.dashboard-header h2 { font-size:1.8rem; background:linear-gradient(45deg,#fff,#e3f2fd); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-
-/* Progress */
-.progress-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; }
-.progress-card { background:rgba(255,255,255,0.1); padding:20px; border-radius:15px; text-align:center; position:relative; overflow:hidden; transition:all 0.3s ease; }
-.progress-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#667eea,#764ba2);}
-.progress-card:hover { transform:translateY(-5px); background:rgba(255,255,255,0.15); box-shadow:0 10px 25px rgba(0,0,0,0.2); }
-.progress-title { font-size:1rem; margin-bottom:10px; font-weight:600; opacity:0.9; }
-.progress-bar { background:rgba(255,255,255,0.2); height:10px; border-radius:8px; overflow:hidden; margin-bottom:5px; }
-.progress-fill { height:100%; background:linear-gradient(90deg,#4CAF50,#45a049); width:0%; transition:width 1s ease-in-out; }
-.progress-percent { font-size:1rem; font-weight:700; }
-
-/* Courses */
-.courses-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:20px; }
-.course-card { background:rgba(255,255,255,0.1); padding:20px; border-radius:15px; transition:all 0.3s ease; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.1); }
-.course-card:hover { transform:translateY(-5px); background:rgba(255,255,255,0.15); box-shadow:0 15px 30px rgba(0,0,0,0.2);}
-.course-icon { font-size:2.5rem; text-align:center; margin-bottom:10px; }
-.course-title { font-size:1.2rem; font-weight:700; text-align:center; margin-bottom:10px; }
-.course-description { opacity:0.9; font-size:0.9rem; line-height:1.5; text-align:center; margin-bottom:10px; }
-.course-actions { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-.course-btn { background:rgba(255,255,255,0.2); color:white; border:none; padding:10px; border-radius:10px; cursor:pointer; font-weight:600; transition:all 0.3s; }
-.course-btn.primary { background:linear-gradient(135deg,#007bff,#0056b3);}
-.course-btn:hover { transform:translateY(-2px); background:rgba(255,255,255,0.3);}
-.course-btn.primary:hover { background:linear-gradient(135deg,#0056b3,#004494); }
-
-/* Exercises */
-.exercises-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:20px; }
-.exercise-card { background:rgba(255,255,255,0.1); padding:20px; border-radius:15px; transition:all 0.3s; }
-.exercise-card:hover { transform:translateY(-5px); background:rgba(255,255,255,0.15);}
-.exercise-title { font-size:1rem; margin-bottom:5px; font-weight:600; }
-.exercise-options { display:grid; gap:10px; margin-bottom:10px; }
-.exercise-option { background:rgba(255,255,255,0.1); padding:8px; border-radius:10px; cursor:pointer; display:flex; gap:8px; align-items:center; }
-.exercise-option:hover { background:rgba(255,255,255,0.2); }
-.exercise-option.selected { background:rgba(76,175,80,0.3); border:2px solid #4CAF50; }
-.option-indicator { width:20px; height:20px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); display:flex; justify-content:center; align-items:center; font-size:0.7rem; font-weight:bold; }
-.exercise-option.selected .option-indicator { background:#4CAF50; border-color:#4CAF50; color:white; }
-.exercise-feedback { padding:10px; border-radius:10px; display:none; margin-top:5px; }
-.exercise-feedback.correct { background:rgba(76,175,80,0.2); border:1px solid #4CAF50; display:block; }
-.exercise-feedback.incorrect { background:rgba(244,67,54,0.2); border:1px solid #f44336; display:block; }
-
-/* Responsive */
-@media(max-width:768px){ .courses-grid,.exercises-grid{grid-template-columns:1fr;} .profile-stats{grid-template-columns:repeat(2,1fr);} .nav-links{justify-content:center;} }
-@media(max-width:480px){ .profile-stats{grid-template-columns:1fr;} }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Δωρεάν Εκπαίδευση για Όλους</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        .cta-button.secondary {
+            background: #28a745;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .features {
+            background: white;
+            padding: 80px 20px;
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            scroll-margin-top: 80px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .status-badge {
+            margin-top: 15px;
+            padding: 8px 12px;
+            background: #e9ecef;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        
+        .status-ready {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .developer-section {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .developer-card {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<nav>
-    <a href="#" class="nav-brand">🎓 educate4all</a>
-    <div class="nav-links">
-        <a href="#" class="nav-link">Αρχική</a>
-        <a href="#" class="nav-link">Μαθήματα</a>
-        <a href="#" class="nav-link">AI Βοηθός</a>
-        <a href="#" class="nav-link">Ασκήσεις</a>
-    </div>
-</nav>
+    <div class="container">
+        <header>
+            <div class="logo">🎓</div>
+            <h1>EduLearn</h1>
+            <p class="tagline">Δωρεάν Εκπαίδευση για Όλους με Τεχνητή Νοημοσύνη</p>
+            
+            <div class="cta-buttons">
+                <a href="smart-tutor.html" class="cta-button">🚀 Έξυπνος Βοηθός</a>
+                <a href="courses.html" class="cta-button secondary">📚 Μαθήματα</a>
+            </div>
+        </header>
 
-<div class="header">
-<h1>🎓 educate4all</h1>
-<p style="opacity:0.9;">Δωρεάν Εκπαίδευση για Όλους τους Μαθητές!</p>
-
-<div class="user-profile">
-    <div class="profile-header">
-        <div class="profile-avatar">👤</div>
-        <div class="profile-info">
-            <h3 id="profile-name">Μαθητής</h3>
-            <div class="profile-level" id="profile-level">Level 1</div>
+        <!-- Statistics -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">9+</div>
+                <div>Πλήρη Μαθήματα</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">AI</div>
+                <div>Έξυπνος Βοηθός</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div>Δωρεάν Πρόσβαση</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div>Διαθέσιμο</div>
+            </div>
         </div>
-    </div>
-    <div class="profile-stats">
-        <div class="stat"><span class="stat-number" id="completed-lessons">0</span><span class="stat-label">Ολοκληρωμένα Μαθήματα</span></div>
-        <div class="stat"><span class="stat-number" id="total-xp">0</span><span class="stat-label">Συνολικά XP</span></div>
-        <div class="stat"><span class="stat-number" id="correct-answers">0</span><span class="stat-label">Σωστές Απαντήσεις</span></div>
-    </div>
-</div>
-</div>
 
-<div class="learning-dashboard">
-<h2>📊 Προόδος Μαθημάτων</h2>
-<div class="progress-summary">
-    <div class="progress-card">
-        <div class="progress-title">Μαθηματικά</div>
-        <div class="progress-bar"><div class="progress-fill" id="progress-math"></div></div>
-        <div class="progress-percent" id="percent-math">0%</div>
-    </div>
-    <div class="progress-card">
-        <div class="progress-title">Φυσική</div>
-        <div class="progress-bar"><div class="progress-fill" id="progress-physics"></div></div>
-        <div class="progress-percent" id="percent-physics">0%</div>
-    </div>
-</div>
-</div>
+        <!-- Developer Section -->
+        <section class="developer-section">
+            <div class="developer-card">
+                <h2 style="margin-bottom: 15px; color: #333;">👨‍💻 Δημιουργός</h2>
+                <h3 style="color: #667eea; margin-bottom: 10px;">ΒΑΣΔΕΚΗΣ ΧΡΗΣΤΟΣ</h3>
+                <p style="color: #666; font-style: italic;">"Η γνώση πρέπει να είναι δωρεάν για όλους"</p>
+            </div>
+        </section>
 
-<div class="learning-dashboard">
-<h2>📚 Μαθήματα</h2>
-<div class="courses-grid">
-    <div class="course-card">
-        <div class="course-icon">📐</div>
-        <div class="course-title">Μαθηματικά</div>
-        <div class="course-description">Βασικές πράξεις έως ανώτερα μαθηματικά</div>
-        <div class="course-actions">
-            <button class="course-btn" onclick="viewCourse('math')">Προβολή</button>
-            <button class="course-btn primary" onclick="startCourse('math')">Ξεκίνα</button>
-        </div>
-    </div>
-    <div class="course-card">
-        <div class="course-icon">🔬</div>
-        <div class="course-title">Φυσική</div>
-        <div class="course-description">Νόμοι, πειράματα και εφαρμογές</div>
-        <div class="course-actions">
-            <button class="course-btn" onclick="viewCourse('physics')">Προβολή</button>
-            <button class="course-btn primary" onclick="startCourse('physics')">Ξεκίνα</button>
-        </div>
-    </div>
-</div>
-</div>
+        <section class="features" id="features">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">🎯 Γιατί το EduLearn;</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card" onclick="location.href='smart-tutor.html'">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Έξυπνος Βοηθός</h3>
+                    <p>AI που απαντά σε οποιαδήποτε ερώτηση για όλα τα μαθήματα με λεπτομερείς εξηγήσεις</p>
+                    <div class="status-badge status-ready">
+                        🚀 Δωρεάν Πρόσβαση
+                    </div>
+                </div>
+                
+                <div class="feature-card" onclick="location.href='courses.html'">
+                    <div class="feature-icon">📚</div>
+                    <h3>Οργανωμένα Μαθήματα</h3>
+                    <p>9 πλήρη μαθήματα με δομημένο υλικό, ασκήσεις και προόδους</p>
+                    <div class="status-badge status-ready">
+                        📊 Προοδούμενο Σύστημα
+                    </div>
+                </div>
+                
+                <div class="feature-card" onclick="location.href='exercises.html'">
+                    <div class="feature-icon">💪</div>
+                    <h3>Διαδραστικές Ασκήσεις</h3>
+                    <p>Quizzes, προβλήματα και ασκήσεις με άμεση ανατροφοδότηση</p>
+                    <div class="status-badge status-ready">
+                        ✅ Άμεση Βοήθεια
+                    </div>
+                </div>
+                
+                <div class="feature-card" onclick="location.href='progress.html'">
+                    <div class="feature-icon">📈</div>
+                    <h3>Παρακολούθηση Προόδου</h3>
+                    <p>Στατιστικά, επιτεύγματα και προσωπική ανάλυση μάθησης</p>
+                    <div class="status-badge status-ready">
+                        🏆 Achievements
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="learning-dashboard">
-<h2>🎯 Ασκήσεις</h2>
-<div class="exercises-grid">
-    <div class="exercise-card" id="exercise-math">
-        <div class="exercise-title">Μαθηματικά: x² - 5x + 6 = 0</div>
-        <div class="exercise-options">
-            <div class="exercise-option" onclick="selectOption(this,'math')"><div class="option-indicator">A</div><div>x=2,x=3</div></div>
-            <div class="exercise-option" onclick="selectOption(this,'math')"><div class="option-indicator">B</div><div>x=1,x=6</div></div>
-        </div>
-        <button class="course-btn primary" onclick="checkAnswer('math')">Έλεγχος</button>
-        <div class="exercise-feedback" id="feedback-math"></div>
+        <footer>
+            <p><strong>Δημιουργήθηκε με ❤️ για την εκπαίδευση</strong></p>
+            <p style="margin-top: 10px;">📧 Επικοινωνία: christos.vasdekis.cv@gmail.com</p>
+            <p style="margin-top: 10px;">&copy; 2025 EduLearn. All rights reserved.</p>
+        </footer>
     </div>
-</div>
-</div>
-</div>
 
-<script>
-// User Data
-const dashboard={
-    userData:{level:1,xp:0,completedLessons:[],correctAnswers:0,progress:{math:0,physics:0}},
-    selectedOptions:{},
-    save:function(){localStorage.setItem('educate4all',JSON.stringify(this.userData));},
-    updateUI:function(){
-        document.getElementById('profile-level').textContent='Level '+this.userData.level;
-        document.getElementById('completed-lessons').textContent=this.userData.completedLessons.length;
-        document.getElementById('total-xp').textContent=this.userData.xp;
-        document.getElementById('correct-answers').textContent=this.userData.correctAnswers;
-        document.getElementById('progress-math').style.width=this.userData.progress.math+'%';
-        document.getElementById('percent-math').textContent=this.userData.progress.math+'%';
-        document.getElementById('progress-physics').style.width=this.userData.progress.physics+'%';
-        document.getElementById('percent-physics').textContent=this.userData.progress.physics+'%';
-    },
-    correctAnswer:function(){this.userData.correctAnswers++; this.userData.xp+=10; this.save(); this.updateUI();}
-};
-
-function selectOption(elem,exercise){elem.parentElement.querySelectorAll('.exercise-option').forEach(o=>o.classList.remove('selected')); elem.classList.add('selected'); dashboard.selectedOptions[exercise]=elem.querySelector('div:last-child').textContent;}
-function checkAnswer(exercise){
-    const selected=dashboard.selectedOptions[exercise];
-    const feedback=document.getElementById('feedback-'+exercise);
-    if(!selected){alert('Επιλέξτε απάντηση!'); return;}
-    let correct=(exercise=='math')?'x=2,x=3':'';
-    if(selected===correct){feedback.textContent='Σωστά!'; feedback.className='exercise-feedback correct'; dashboard.correctAnswer();}
-    else{feedback.textContent='Λάθος. Σωστή: '+correct; feedback.className='exercise-feedback incorrect';}
-}
-function viewCourse(course){alert('Προβολή μαθήματος: '+course);}
-function startCourse(course){
-    if(!dashboard.userData.completedLessons.includes(course)) dashboard.userData.completedLessons.push(course);
-    dashboard.userData.progress[course]=100;
-    dashboard.userData.xp+=50;
-    dashboard.save(); dashboard.updateUI();
-    alert('Ξεκινήσατε το μάθημα: '+course+' ✅');
-}
-// Load data
-const saved=JSON.parse(localStorage.getItem('educate4all'));
-if(saved){dashboard.userData=saved;}
-dashboard.updateUI();
-</script>
+    <script>
+        // Smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                if (anchor.getAttribute('href').startsWith('#') && anchor.getAttribute('href').length > 1) {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
