@@ -75,6 +75,25 @@
             transform: translateY(-2px);
         }
         
+        /* User Profile in Nav */
+        .user-profile-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
         /* Course Layout */
         .course-layout {
             display: grid;
@@ -83,7 +102,7 @@
             min-height: 80vh;
         }
         
-        /* Sidebar */
+        /* Enhanced Sidebar */
         .course-sidebar {
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
@@ -112,11 +131,20 @@
             margin-bottom: 10px;
         }
         
+        /* Enhanced Progress System */
         .course-progress {
             background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
         }
         
         .progress-text {
@@ -124,13 +152,15 @@
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
+            font-weight: 600;
         }
         
         .progress-bar {
             background: rgba(255, 255, 255, 0.2);
-            height: 8px;
+            height: 12px;
             border-radius: 10px;
             overflow: hidden;
+            margin-bottom: 15px;
         }
         
         .progress-fill {
@@ -138,6 +168,25 @@
             background: linear-gradient(90deg, #4CAF50, #45a049);
             border-radius: 10px;
             transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .xp-system {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .xp-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
         
         .modules-list {
@@ -145,14 +194,15 @@
         }
         
         .module-item {
-            padding: 15px;
-            margin-bottom: 10px;
+            padding: 18px;
+            margin-bottom: 12px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
+            position: relative;
         }
         
         .module-item:hover {
@@ -171,7 +221,13 @@
             opacity: 0.7;
         }
         
-        /* Main Content */
+        .module-duration {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 5px;
+        }
+        
+        /* Enhanced Main Content */
         .course-content {
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
@@ -199,15 +255,23 @@
             gap: 20px;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         
-        /* Video Player */
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Enhanced Video Player */
         .video-container {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 30px;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .video-placeholder {
@@ -222,17 +286,6 @@
             font-size: 1.2rem;
             position: relative;
             overflow: hidden;
-        }
-        
-        .video-placeholder::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80') center/cover;
-            opacity: 0.3;
         }
         
         .play-button {
@@ -253,7 +306,7 @@
             background: white;
         }
         
-        /* Lesson Content */
+        /* Enhanced Lesson Content */
         .lesson-content {
             color: white;
             line-height: 1.8;
@@ -266,15 +319,24 @@
             border-radius: 15px;
             margin-bottom: 25px;
             border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .content-section:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
         
         .section-title {
             font-size: 1.4rem;
             margin-bottom: 15px;
             color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        /* Interactive Elements */
+        /* Enhanced Interactive Elements */
         .interactive-elements {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -304,7 +366,7 @@
             margin-bottom: 15px;
         }
         
-        /* Exercise Section */
+        /* Enhanced Exercise Section */
         .exercise-section {
             background: rgba(255, 255, 255, 0.1);
             padding: 30px;
@@ -313,10 +375,26 @@
             border-left: 4px solid #4CAF50;
         }
         
+        .exercise-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
         .exercise-title {
             color: white;
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 0;
+        }
+        
+        .exercise-xp {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
         
         .exercise-question {
@@ -340,6 +418,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .exercise-option:hover {
@@ -348,6 +429,21 @@
         
         .exercise-option.selected {
             background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+        
+        .option-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .exercise-option.selected .option-indicator {
+            background: #4CAF50;
             border-color: #4CAF50;
         }
         
@@ -371,7 +467,7 @@
             display: block;
         }
         
-        /* Navigation Controls */
+        /* Enhanced Navigation Controls */
         .lesson-navigation {
             display: flex;
             justify-content: space-between;
@@ -390,6 +486,9 @@
             font-weight: 600;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .nav-btn:hover {
@@ -405,10 +504,31 @@
             background: linear-gradient(135deg, #5a6fd8, #6a4190);
         }
         
+        /* Achievement System */
+        .achievement-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: popIn 0.5s ease-out;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes popIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
         
         @keyframes glow {
@@ -446,12 +566,22 @@
             .interactive-elements {
                 grid-template-columns: 1fr;
             }
+            
+            .lesson-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Enhanced Navigation -->
+        <!-- Enhanced Navigation with User Profile -->
         <nav class="main-nav">
             <a href="index.html" class="nav-brand">🎓 educate4all</a>
             <div class="nav-links">
@@ -461,11 +591,18 @@
                 <a href="smart-chatbot.html" class="nav-link">🧠 Έξυπνος AI</a>
                 <a href="chatbot.html" class="nav-link">😊 Απλός AI</a>
             </div>
+            <div class="user-profile-nav">
+                <div class="user-avatar">👤</div>
+                <div>
+                    <div style="font-weight: 600;">Μαθητής</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;" id="user-level">Επίπεδο 1</div>
+                </div>
+            </div>
         </nav>
 
         <!-- Course Layout -->
         <div class="course-layout">
-            <!-- Sidebar -->
+            <!-- Enhanced Sidebar -->
             <div class="course-sidebar">
                 <div class="sidebar-header">
                     <div class="course-icon-large">📐</div>
@@ -473,57 +610,75 @@
                     <div style="color: rgba(255,255,255,0.8);">Βασικά Μαθηματικά & Άλγεβρα</div>
                 </div>
                 
+                <!-- Enhanced Progress System -->
                 <div class="course-progress">
                     <div class="progress-text">
                         <span>Πρόοδος Μαθήματος</span>
-                        <span id="course-progress">65%</span>
+                        <span id="course-progress">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 65%"></div>
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="xp-system">
+                        <div style="color: white; font-size: 0.9rem;">
+                            <strong>XP:</strong> <span id="user-xp">0</span>
+                        </div>
+                        <div class="xp-badge" id="level-badge">🎯 Level 1</div>
                     </div>
                 </div>
                 
+                <!-- Modules List -->
                 <ul class="modules-list">
-                    <li class="module-item active" onclick="loadLesson(1)">
+                    <li class="module-item active" onclick="loadLesson(1)" data-lesson="1">
                         📚 Εισαγωγή στις Μαθηματικές Έννοιες
-                        <span class="module-status">✅</span>
+                        <span class="module-status" id="status-1">⏳</span>
+                        <div class="module-duration">⏱️ 30 λεπτά</div>
                     </li>
-                    <li class="module-item active" onclick="loadLesson(2)">
+                    <li class="module-item" onclick="loadLesson(2)" data-lesson="2">
                         🔢 Αριθμοί και Πράξεις
-                        <span class="module-status">✅</span>
+                        <span class="module-status" id="status-2">🔒</span>
+                        <div class="module-duration">⏱️ 45 λεπτά</div>
                     </li>
-                    <li class="module-item active" onclick="loadLesson(3)">
+                    <li class="module-item" onclick="loadLesson(3)" data-lesson="3">
                         📊 Κλάσματα & Δεκαδικοί
-                        <span class="module-status">✅</span>
+                        <span class="module-status" id="status-3">🔒</span>
+                        <div class="module-duration">⏱️ 60 λεπτά</div>
                     </li>
-                    <li class="module-item" onclick="loadLesson(4)">
+                    <li class="module-item" onclick="loadLesson(4)" data-lesson="4">
                         📈 Εξισώσεις Β΄ Βαθμού
-                        <span class="module-status">🎯</span>
+                        <span class="module-status" id="status-4">🔒</span>
+                        <div class="module-duration">⏱️ 90 λεπτά</div>
                     </li>
-                    <li class="module-item" onclick="loadLesson(5)">
+                    <li class="module-item" onclick="loadLesson(5)" data-lesson="5">
                         📏 Βασική Γεωμετρία
-                        <span class="module-status">🔒</span>
-                    </li>
-                    <li class="module-item" onclick="loadLesson(6)">
-                        📐 Τριγωνομετρία
-                        <span class="module-status">🔒</span>
-                    </li>
-                    <li class="module-item" onclick="loadLesson(7)">
-                        📊 Στατιστική & Πιθανότητες
-                        <span class="module-status">🔒</span>
+                        <span class="module-status" id="status-5">🔒</span>
+                        <div class="module-duration">⏱️ 75 λεπτά</div>
                     </li>
                 </ul>
             </div>
 
-            <!-- Main Content -->
+            <!-- Enhanced Main Content -->
             <div class="course-content">
                 <!-- Lesson Header -->
                 <div class="lesson-header">
-                    <h1 class="lesson-title">📈 Εξισώσεις Β΄ Βαθμού</h1>
+                    <h1 class="lesson-title" id="lesson-title">📚 Εισαγωγή στις Μαθηματικές Έννοιες</h1>
                     <div class="lesson-meta">
-                        <span>⏱️ Διάρκεια: 45 λεπτά</span>
-                        <span>🎯 Δυσκολία: Μέτρια</span>
-                        <span>📖 Μάθημα 4 από 7</span>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>Διάρκεια: 30 λεπτά</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>🎯</span>
+                            <span>Δυσκολία: Εύκολη</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>📖</span>
+                            <span>Μάθημα 1 από 5</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⭐</span>
+                            <span>XP: 50</span>
+                        </div>
                     </div>
                 </div>
 
@@ -531,7 +686,7 @@
                 <div class="video-container">
                     <div class="video-placeholder">
                         <button class="play-button" onclick="playVideo()">
-                            ▶️ Αναπαραγωγή Βίντεο
+                            ▶️ Αναπαραγωγή Βίντεο Μαθήματος
                         </button>
                     </div>
                 </div>
@@ -539,34 +694,32 @@
                 <!-- Lesson Content -->
                 <div class="lesson-content">
                     <div class="content-section">
-                        <h3 class="section-title">🎯 Τι είναι οι Εξισώσεις Β΄ Βαθμού;</h3>
-                        <p>Οι εξισώσεις β΄ βαθμού είναι μαθηματικές εκφράσεις της μορφής:</p>
-                        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 15px 0; text-align: center;">
-                            <strong style="color: #4CAF50; font-size: 1.2rem;">ax² + bx + c = 0</strong>
-                        </div>
-                        <p>όπου α, β, γ είναι πραγματικοί αριθμοί και α ≠ 0.</p>
+                        <h3 class="section-title">🎯 Τι είναι τα Μαθηματικά;</h3>
+                        <p>Τα μαθηματικά είναι η επιστήμη που μελετάει τους αριθμούς, τις ποσότητες, τις δομές και τις αλλαγές. Είναι η βάση όλων των επιστημών!</p>
                     </div>
 
                     <div class="content-section">
-                        <h3 class="section-title">📝 Ο Τύπος Επίλυσης</h3>
-                        <p>Για να λύσουμε μια εξίσωση β΄ βαθμού, χρησιμοποιούμε τον τύπο:</p>
-                        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 15px 0; text-align: center;">
-                            <strong style="color: #667eea; font-size: 1.2rem;">x = [-β ± √(β² - 4αγ)] / 2α</strong>
-                        </div>
-                        <p>Η παράσταση <strong>β² - 4αγ</strong> ονομάζεται <em>διακρίνουσα</em> και καθορίζει τον αριθμό των λύσεων.</p>
+                        <h3 class="section-title">📝 Βασικές Έννοιες</h3>
+                        <p>Θα μάθουμε για:</p>
+                        <ul style="color: white; margin: 15px 0; padding-left: 20px;">
+                            <li style="margin-bottom: 10px;">📊 Αριθμητικές πράξεις</li>
+                            <li style="margin-bottom: 10px;">📐 Βασική γεωμετρία</li>
+                            <li style="margin-bottom: 10px;">📈 Μαθηματική λογική</li>
+                            <li style="margin-bottom: 10px;">🎯 Επίλυση προβλημάτων</li>
+                        </ul>
                     </div>
 
                     <!-- Interactive Elements -->
                     <div class="interactive-elements">
                         <div class="interactive-card" onclick="showExample()">
                             <div class="interactive-icon">💡</div>
-                            <h4>Παράδειγμα</h4>
-                            <p>Δες ένα πρακτικό παράδειγμα επίλυσης</p>
+                            <h4>Πρακτικό Παράδειγμα</h4>
+                            <p>Δες πώς εφαρμόζονται οι έννοιες</p>
                         </div>
                         <div class="interactive-card" onclick="showPractice()">
                             <div class="interactive-icon">✏️</div>
-                            <h4>Πρακτική Άσκηση</h4>
-                            <p>Δοκίμασε να λύσεις μόνος σου</p>
+                            <h4>Προσθήκη Άσκησης</h4>
+                            <p>Δοκίμασε τις γνώσεις σου</p>
                         </div>
                         <div class="interactive-card" onclick="askAI()">
                             <div class="interactive-icon">🤖</div>
@@ -576,31 +729,47 @@
                     </div>
 
                     <div class="content-section">
-                        <h3 class="section-title">🔍 Οι Τρεις Περιπτώσεις</h3>
-                        <p>Ανάλογα με τη διακρίνουσα, έχουμε:</p>
+                        <h3 class="section-title">🔍 Γιατί είναι Σημαντικά;</h3>
+                        <p>Τα μαθηματικά μας βοηθούν να:</p>
                         <ul style="color: white; margin: 15px 0; padding-left: 20px;">
-                            <li style="margin-bottom: 10px;"><strong>Δ > 0:</strong> Δύο πραγματικές και άνισες ρίζες</li>
-                            <li style="margin-bottom: 10px;"><strong>Δ = 0:</strong> Μία διπλή πραγματική ρίζα</li>
-                            <li style="margin-bottom: 10px;"><strong>Δ < 0:</strong> Καμία πραγματική ρίζα</li>
+                            <li style="margin-bottom: 10px;">💡 Αναπτύξουμε κριτική σκέψη</li>
+                            <li style="margin-bottom: 10px;">🎯 Λύσουμε προβλήματα</li>
+                            <li style="margin-bottom: 10px;">📊 Κατανοήσουμε τον κόσμο γύρω μας</li>
+                            <li style="margin-bottom: 10px;">🚀 Προετοιμαστούμε για το μέλλον</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Exercise Section -->
+                <!-- Enhanced Exercise Section -->
                 <div class="exercise-section">
-                    <h3 class="exercise-title">🎯 Δοκίμασε τις Γνώσεις Σου</h3>
+                    <div class="exercise-header">
+                        <h3 class="exercise-title">🎯 Δοκίμασε τις Γνώσεις Σου</h3>
+                        <div class="exercise-xp">+10 XP</div>
+                    </div>
                     <div class="exercise-question">
-                        <p>Ποια είναι η λύση της εξίσωσης: <strong>x² - 5x + 6 = 0</strong>;</p>
+                        <p>Ποια από τις παρακάτω είναι η σωστή απάντηση στην πράξη: <strong>15 + 27 = ?</strong></p>
                     </div>
                     
                     <div class="exercise-options">
-                        <div class="exercise-option" onclick="selectExerciseOption(this)">x = 2, x = 3</div>
-                        <div class="exercise-option" onclick="selectExerciseOption(this)">x = 1, x = 6</div>
-                        <div class="exercise-option" onclick="selectExerciseOption(this)">x = -2, x = -3</div>
-                        <div class="exercise-option" onclick="selectExerciseOption(this)">x = 0, x = 5</div>
+                        <div class="exercise-option" onclick="selectExerciseOption(this, 'math')">
+                            <div class="option-indicator">A</div>
+                            <div>32</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectExerciseOption(this, 'math')">
+                            <div class="option-indicator">B</div>
+                            <div>42</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectExerciseOption(this, 'math')">
+                            <div class="option-indicator">C</div>
+                            <div>52</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectExerciseOption(this, 'math')">
+                            <div class="option-indicator">D</div>
+                            <div>38</div>
+                        </div>
                     </div>
                     
-                    <button class="nav-btn primary" style="width: 100%;" onclick="checkExercise()">
+                    <button class="nav-btn primary" style="width: 100%;" onclick="checkAnswer('math')">
                         ✅ Ελέγξτε την Απάντησή Σας
                     </button>
                     
@@ -609,16 +778,16 @@
                     </div>
                 </div>
 
-                <!-- Navigation -->
+                <!-- Enhanced Navigation -->
                 <div class="lesson-navigation">
-                    <button class="nav-btn" onclick="previousLesson()">
-                        ⬅️ Προηγούμενο Μάθημα
+                    <button class="nav-btn" onclick="previousLesson()" id="prev-btn" disabled>
+                        ⬅️ Προηγούμενο
                     </button>
-                    <button class="nav-btn primary" onclick="completeLesson()">
+                    <button class="nav-btn primary" onclick="completeLesson()" id="complete-btn">
                         ✅ Ολοκλήρωση Μαθήματος
                     </button>
-                    <button class="nav-btn" onclick="nextLesson()">
-                        Επόμενο Μάθημα ➡️
+                    <button class="nav-btn" onclick="nextLesson()" id="next-btn">
+                        Επόμενο ➡️
                     </button>
                 </div>
             </div>
@@ -626,81 +795,219 @@
     </div>
 
     <script>
-        // Enhanced Course System
-        class CourseSystem {
+        // Enhanced Course System with XP and Progress Tracking
+        class EnhancedCourseSystem {
             constructor() {
-                this.currentLesson = 4;
-                this.totalLessons = 7;
-                this.userProgress = this.loadProgress();
-                this.initializeCourse();
+                this.currentLesson = 1;
+                this.totalLessons = 5;
+                this.userData = this.loadUserData();
+                this.initializeSystem();
             }
             
-            loadProgress() {
-                return JSON.parse(localStorage.getItem('math_course_progress') || JSON.stringify({
-                    completedLessons: [1, 2, 3],
-                    currentLesson: 4,
-                    scores: {},
-                    timeSpent: 0
-                }));
-            }
-            
-            saveProgress() {
-                localStorage.setItem('math_course_progress', JSON.stringify(this.userProgress));
-            }
-            
-            initializeCourse() {
-                this.updateProgressUI();
-                this.setupEventListeners();
-            }
-            
-            updateProgressUI() {
-                const progress = (this.userProgress.completedLessons.length / this.totalLessons) * 100;
-                document.getElementById('course-progress').textContent = Math.round(progress) + '%';
+            loadUserData() {
+                const defaultData = {
+                    level: 1,
+                    xp: 0,
+                    completedLessons: [],
+                    currentLesson: 1,
+                    progress: {
+                        math: 0,
+                        physics: 0,
+                        chemistry: 0,
+                        biology: 0
+                    },
+                    achievements: [],
+                    totalStudyTime: 0
+                };
                 
-                // Update progress bar
-                const progressFill = document.querySelector('.progress-fill');
-                if (progressFill) {
-                    progressFill.style.width = progress + '%';
+                return JSON.parse(localStorage.getItem('educate4all_enhanced_user') || JSON.stringify(defaultData));
+            }
+            
+            saveUserData() {
+                localStorage.setItem('educate4all_enhanced_user', JSON.stringify(this.userData));
+                this.updateGlobalProgress();
+            }
+            
+            initializeSystem() {
+                this.updateUI();
+                this.setupEventListeners();
+                this.loadLesson(this.currentLesson);
+            }
+            
+            updateUI() {
+                // Update progress
+                const progress = (this.userData.completedLessons.length / this.totalLessons) * 100;
+                document.getElementById('course-progress').textContent = Math.round(progress) + '%';
+                document.getElementById('progress-fill').style.width = progress + '%';
+                
+                // Update XP and level
+                document.getElementById('user-xp').textContent = this.userData.xp;
+                document.getElementById('level-badge').textContent = `🎯 Level ${this.userData.level}`;
+                document.getElementById('user-level').textContent = `Επίπεδο ${this.userData.level}`;
+                
+                // Update lesson statuses
+                this.updateLessonStatuses();
+            }
+            
+            updateLessonStatuses() {
+                for (let i = 1; i <= this.totalLessons; i++) {
+                    const statusElement = document.getElementById(`status-${i}`);
+                    if (this.userData.completedLessons.includes(i)) {
+                        statusElement.textContent = '✅';
+                        statusElement.style.color = '#4CAF50';
+                    } else if (i === this.currentLesson) {
+                        statusElement.textContent = '🎯';
+                        statusElement.style.color = '#667eea';
+                    } else if (i < this.currentLesson) {
+                        statusElement.textContent = '🔓';
+                        statusElement.style.color = '#FFD700';
+                    } else {
+                        statusElement.textContent = '🔒';
+                        statusElement.style.color = '#666';
+                    }
                 }
             }
             
             setupEventListeners() {
-                // Setup exercise system
                 this.setupExercises();
             }
             
             setupExercises() {
                 this.exercises = {
-                    current: {
-                        question: "Ποια είναι η λύση της εξίσωσης: x² - 5x + 6 = 0;",
-                        options: ["x = 2, x = 3", "x = 1, x = 6", "x = -2, x = -3", "x = 0, x = 5"],
-                        correct: 0,
-                        explanation: "Σωστά! Η εξίσωση x² - 5x + 6 = 0 παραγοντοποιείται σε (x-2)(x-3)=0, άρα οι λύσεις είναι x=2 και x=3."
+                    math: {
+                        question: "Ποια από τις παρακάτω είναι η σωστή απάντηση στην πράξη: 15 + 27 = ?",
+                        options: ["32", "42", "52", "38"],
+                        correct: 1, // Index of correct answer (42)
+                        explanation: "Σωστά! 15 + 27 = 42. Μπράβο για την προσοχή σου! 🎉"
                     }
                 };
             }
             
-            completeLesson() {
-                if (!this.userProgress.completedLessons.includes(this.currentLesson)) {
-                    this.userProgress.completedLessons.push(this.currentLesson);
-                    this.userProgress.currentLesson = this.currentLesson + 1;
-                    this.saveProgress();
-                    this.updateProgressUI();
-                    this.showAchievement('🎉 Ολοκλήρωσες το μάθημα! +50 XP');
-                    
-                    // Update global progress
-                    this.updateGlobalProgress();
+            loadLesson(lessonNumber) {
+                this.currentLesson = lessonNumber;
+                
+                // Update active module
+                document.querySelectorAll('.module-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector(`[data-lesson="${lessonNumber}"]`).classList.add('active');
+                
+                // Update lesson content based on lesson number
+                this.updateLessonContent(lessonNumber);
+                
+                // Update navigation buttons
+                this.updateNavigationButtons();
+                
+                // Save current progress
+                this.userData.currentLesson = lessonNumber;
+                this.saveUserData();
+            }
+            
+            updateLessonContent(lessonNumber) {
+                const lessons = {
+                    1: {
+                        title: "📚 Εισαγωγή στις Μαθηματικές Έννοιες",
+                        duration: "30 λεπτά",
+                        difficulty: "Εύκολη",
+                        xp: 50
+                    },
+                    2: {
+                        title: "🔢 Αριθμοί και Πράξεις",
+                        duration: "45 λεπτά", 
+                        difficulty: "Εύκολη",
+                        xp: 75
+                    },
+                    3: {
+                        title: "📊 Κλάσματα & Δεκαδικοί",
+                        duration: "60 λεπτά",
+                        difficulty: "Μέτρια",
+                        xp: 100
+                    },
+                    4: {
+                        title: "📈 Εξισώσεις Β΄ Βαθμού",
+                        duration: "90 λεπτά",
+                        difficulty: "Δύσκολη",
+                        xp: 150
+                    },
+                    5: {
+                        title: "📏 Βασική Γεωμετρία",
+                        duration: "75 λεπτά",
+                        difficulty: "Μέτρια",
+                        xp: 125
+                    }
+                };
+                
+                const lesson = lessons[lessonNumber];
+                if (lesson) {
+                    document.getElementById('lesson-title').textContent = lesson.title;
+                    document.querySelector('.meta-item:nth-child(1) span:last-child').textContent = `Διάρκεια: ${lesson.duration}`;
+                    document.querySelector('.meta-item:nth-child(2) span:last-child').textContent = `Δυσκολία: ${lesson.difficulty}`;
+                    document.querySelector('.meta-item:nth-child(4) span:last-child').textContent = `XP: ${lesson.xp}`;
                 }
             }
             
-            updateGlobalProgress() {
-                const globalData = JSON.parse(localStorage.getItem('educate4all_user') || '{}');
-                if (globalData.progress) {
-                    globalData.progress.math = Math.min(100, globalData.progress.math + 15);
-                    globalData.xp = (globalData.xp || 0) + 50;
-                    globalData.completedLessons = (globalData.completedLessons || 0) + 1;
-                    localStorage.setItem('educate4all_user', JSON.stringify(globalData));
+            updateNavigationButtons() {
+                const prevBtn = document.getElementById('prev-btn');
+                const nextBtn = document.getElementById('next-btn');
+                const completeBtn = document.getElementById('complete-btn');
+                
+                prevBtn.disabled = this.currentLesson === 1;
+                nextBtn.disabled = this.currentLesson === this.totalLessons;
+                
+                // Check if current lesson is completed
+                const isCompleted = this.userData.completedLessons.includes(this.currentLesson);
+                completeBtn.textContent = isCompleted ? '✅ Ολοκληρωμένο' : '✅ Ολοκλήρωση Μαθήματος';
+                completeBtn.disabled = isCompleted;
+            }
+            
+            completeLesson() {
+                if (!this.userData.completedLessons.includes(this.currentLesson)) {
+                    this.userData.completedLessons.push(this.currentLesson);
+                    
+                    // Add XP based on lesson
+                    const xpRewards = {1: 50, 2: 75, 3: 100, 4: 150, 5: 125};
+                    const xpEarned = xpRewards[this.currentLesson] || 50;
+                    this.userData.xp += xpEarned;
+                    
+                    // Check level up
+                    this.checkLevelUp();
+                    
+                    this.saveUserData();
+                    this.updateUI();
+                    this.showAchievement(`🎉 Ολοκλήρωσες το μάθημα! +${xpEarned} XP`);
+                    
+                    // Enable next lesson if available
+                    if (this.currentLesson < this.totalLessons) {
+                        setTimeout(() => this.loadLesson(this.currentLesson + 1), 2000);
+                    }
                 }
+            }
+            
+            checkLevelUp() {
+                const oldLevel = this.userData.level;
+                const newLevel = Math.floor(this.userData.xp / 100) + 1;
+                
+                if (newLevel > oldLevel) {
+                    this.userData.level = newLevel;
+                    this.showLevelUp(newLevel);
+                }
+            }
+            
+            showLevelUp(newLevel) {
+                const popup = document.createElement('div');
+                popup.className = 'achievement-popup';
+                popup.innerHTML = `
+                    <div style="font-size: 4rem; margin-bottom: 20px;">🎉</div>
+                    <h2 style="margin-bottom: 10px;">LEVEL UP!</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 20px;">Έφτασες το Level ${newLevel}!</p>
+                    <p style="opacity: 0.8;">Συνέχισε την εξαιρετική δουλειά! 🚀</p>
+                `;
+                
+                document.body.appendChild(popup);
+                
+                setTimeout(() => {
+                    popup.remove();
+                }, 3000);
             }
             
             showAchievement(message) {
@@ -726,15 +1033,32 @@
                     setTimeout(() => achievement.remove(), 500);
                 }, 3000);
             }
+            
+            updateGlobalProgress() {
+                const globalProgress = (this.userData.completedLessons.length / this.totalLessons) * 100;
+                this.userData.progress.math = Math.round(globalProgress);
+                
+                // Update main dashboard if it exists
+                if (typeof updateMainDashboard === 'function') {
+                    updateMainDashboard(this.userData);
+                }
+            }
+            
+            correctAnswer() {
+                this.userData.xp += 10;
+                this.saveUserData();
+                this.updateUI();
+            }
         }
 
         // Global variables
-        let courseSystem;
+        let enhancedCourseSystem;
         let selectedExerciseOption = null;
+        let currentExercise = '';
 
-        // Initialize course system
+        // Initialize enhanced course system
         document.addEventListener('DOMContentLoaded', function() {
-            courseSystem = new CourseSystem();
+            enhancedCourseSystem = new EnhancedCourseSystem();
             
             // Add CSS animations
             const style = document.createElement('style');
@@ -752,63 +1076,48 @@
             document.head.appendChild(style);
         });
 
-        // Lesson navigation
+        // Lesson navigation functions
         function loadLesson(lessonNumber) {
-            // Update active module
-            document.querySelectorAll('.module-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Show loading state
-            const content = document.querySelector('.course-content');
-            content.style.opacity = '0.5';
-            
-            setTimeout(() => {
-                content.style.opacity = '1';
-                // In a real app, this would load actual lesson content
-                console.log(`Loading lesson ${lessonNumber}`);
-            }, 500);
+            enhancedCourseSystem.loadLesson(lessonNumber);
         }
 
         function previousLesson() {
-            if (courseSystem.currentLesson > 1) {
-                courseSystem.currentLesson--;
-                loadLesson(courseSystem.currentLesson);
+            if (enhancedCourseSystem.currentLesson > 1) {
+                enhancedCourseSystem.loadLesson(enhancedCourseSystem.currentLesson - 1);
             }
         }
 
         function nextLesson() {
-            if (courseSystem.currentLesson < courseSystem.totalLessons) {
-                courseSystem.currentLesson++;
-                loadLesson(courseSystem.currentLesson);
+            if (enhancedCourseSystem.currentLesson < enhancedCourseSystem.totalLessons) {
+                enhancedCourseSystem.loadLesson(enhancedCourseSystem.currentLesson + 1);
             }
         }
 
         function completeLesson() {
-            courseSystem.completeLesson();
+            enhancedCourseSystem.completeLesson();
         }
 
         // Interactive elements
         function playVideo() {
-            courseSystem.showAchievement('🎬 Βίντεο μαθήματος σύντομα διαθέσιμο!');
+            enhancedCourseSystem.showAchievement('🎬 Βίντεο μαθήματος σύντομα διαθέσιμο!');
         }
 
         function showExample() {
             const exampleHTML = `
                 <div class="content-section">
-                    <h4 class="section-title">📖 Παράδειγμα: x² - 5x + 6 = 0</h4>
-                    <p><strong>Βήμα 1:</strong> Εφαρμόζουμε τον τύπο: x = [5 ± √(25 - 24)] / 2</p>
-                    <p><strong>Βήμα 2:</strong> x = [5 ± √1] / 2</p>
-                    <p><strong>Βήμα 3:</strong> x = [5 ± 1] / 2</p>
-                    <p><strong>Βήμα 4:</strong> x₁ = (5 + 1)/2 = 3, x₂ = (5 - 1)/2 = 2</p>
+                    <h4 class="section-title">📖 Παράδειγμα: Πρόσθεση</h4>
+                    <p>Ας δούμε ένα απλό παράδειγμα πρόσθεσης:</p>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                        <strong>8 + 5 = 13</strong>
+                    </div>
+                    <p>Στο επόμενο μάθημα θα μάθουμε πιο σύνθετες πράξεις!</p>
                 </div>
             `;
             document.querySelector('.lesson-content').insertAdjacentHTML('beforeend', exampleHTML);
         }
 
         function showPractice() {
-            courseSystem.showAchievement('✏️ Πρακτικές ασκήσεις σύντομα διαθέσιμες!');
+            enhancedCourseSystem.showAchievement('✏️ Πρακτικές ασκήσεις σύντομα διαθέσιμες!');
         }
 
         function askAI() {
@@ -816,30 +1125,29 @@
         }
 
         // Exercise system
-        function selectExerciseOption(element) {
+        function selectExerciseOption(element, exercise) {
             // Remove previous selection
-            const options = element.parentElement.querySelectorAll('.exercise-option');
-            options.forEach(opt => opt.classList.remove('selected'));
+            const parent = element.parentElement;
+            parent.querySelectorAll('.exercise-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
             
             // Add new selection
             element.classList.add('selected');
-            selectedExerciseOption = element.textContent;
+            selectedExerciseOption = element;
+            currentExercise = exercise;
         }
 
-        function checkExercise() {
+        function checkAnswer(exercise) {
             const feedback = document.getElementById('exercise-feedback');
-            const correctAnswer = courseSystem.exercises.current.options[courseSystem.exercises.current.correct];
+            const correctAnswer = enhancedCourseSystem.exercises[exercise].options[enhancedCourseSystem.exercises[exercise].correct];
+            const selectedText = selectedExerciseOption ? selectedExerciseOption.querySelector('div:last-child').textContent : '';
             
-            if (selectedExerciseOption === correctAnswer) {
-                feedback.textContent = courseSystem.exercises.current.explanation;
+            if (selectedText === correctAnswer) {
+                feedback.textContent = enhancedCourseSystem.exercises[exercise].explanation;
                 feedback.className = 'exercise-feedback correct';
-                courseSystem.showAchievement('✅ Σωστή απάντηση! +10 XP');
-                
-                // Update global progress
-                const globalData = JSON.parse(localStorage.getItem('educate4all_user') || '{}');
-                globalData.correctAnswers = (globalData.correctAnswers || 0) + 1;
-                globalData.xp = (globalData.xp || 0) + 10;
-                localStorage.setItem('educate4all_user', JSON.stringify(globalData));
+                enhancedCourseSystem.correctAnswer();
+                enhancedCourseSystem.showAchievement('✅ Σωστή απάντηση! +10 XP');
             } else {
                 feedback.textContent = `Λάθος. Η σωστή απάντηση είναι: ${correctAnswer}`;
                 feedback.className = 'exercise-feedback incorrect';
