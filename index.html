@@ -71,13 +71,54 @@
             animation: glow 2s ease-in-out infinite alternate;
         }
         
-        /* User Profile Section */
+        /* Enhanced Navigation */
+        .main-nav {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Enhanced User Profile Section */
         .user-profile {
             background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
+            padding: 30px;
             border-radius: 20px;
             margin: 30px auto;
-            max-width: 500px;
+            max-width: 600px;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -86,55 +127,74 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 25px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
         
         .profile-avatar {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: white;
+            border: 4px solid rgba(255, 255, 255, 0.3);
         }
         
         .profile-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
             color: white;
+        }
+        
+        .profile-level {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
         }
         
         .profile-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
             text-align: center;
         }
         
         .stat {
             background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
+            padding: 20px;
             border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
         }
         
         .stat-number {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: white;
             display: block;
+            margin-bottom: 8px;
         }
         
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             opacity: 0.8;
             color: white;
         }
         
-        /* Learning Dashboard */
+        /* Enhanced Learning Dashboard */
         .learning-dashboard {
             background: var(--glass-bg);
             padding: 40px 30px;
@@ -149,6 +209,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
         
         .dashboard-header h2 {
@@ -161,39 +223,54 @@
         
         .progress-summary {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
             margin-bottom: 30px;
         }
         
         .progress-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
+            padding: 30px;
             border-radius: 20px;
             text-align: center;
             color: white;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
         
         .progress-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
         .progress-title {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
             opacity: 0.9;
+            font-weight: 600;
         }
         
         .progress-bar {
             background: rgba(255, 255, 255, 0.2);
-            height: 8px;
+            height: 12px;
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
         }
         
         .progress-fill {
@@ -201,26 +278,27 @@
             background: linear-gradient(90deg, #4CAF50, #45a049);
             border-radius: 10px;
             transition: width 1s ease-in-out;
+            position: relative;
         }
         
         .progress-percent {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: white;
         }
         
-        /* Courses Grid with Interactive Elements */
+        /* Enhanced Courses Grid */
         .courses-grid-enhanced {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
             margin-top: 30px;
         }
         
         .course-card-enhanced {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 30px;
+            padding: 35px;
             color: white;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -240,49 +318,61 @@
         }
         
         .course-card-enhanced:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
         }
         
         .course-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
             text-align: center;
         }
         
         .course-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
             text-align: center;
             font-weight: 700;
+        }
+        
+        .course-description {
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: center;
         }
         
         .course-stats {
             display: flex;
             justify-content: space-between;
-            margin: 20px 0;
-            font-size: 0.9rem;
+            margin: 25px 0;
+            font-size: 0.95rem;
             opacity: 0.8;
+            padding: 0 10px;
         }
         
         .course-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 25px;
         }
         
         .course-btn {
             background: rgba(255, 255, 255, 0.2);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 15px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .course-btn.primary {
@@ -290,7 +380,7 @@
         }
         
         .course-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.3);
         }
         
@@ -298,7 +388,7 @@
             background: linear-gradient(135deg, #0056b3, #004494);
         }
         
-        /* AI Assistants Section */
+        /* Enhanced AI Assistants Section */
         .ai-assistants {
             background: var(--glass-bg);
             padding: 50px 30px;
@@ -320,13 +410,13 @@
         
         .assistants-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
         
         .assistant-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 35px;
             border-radius: 20px;
             text-align: center;
             color: white;
@@ -335,6 +425,7 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .assistant-card::before {
@@ -348,28 +439,34 @@
         }
         
         .assistant-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
         }
         
         .assistant-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
+            font-size: 4.5rem;
+            margin-bottom: 25px;
         }
         
         .assistant-badge {
             background: linear-gradient(135deg, #ff6b6b, #ee5a52);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
             font-weight: 700;
             display: inline-block;
-            margin: 10px 0;
+            margin: 15px 0;
         }
         
-        /* Exercises Section */
+        .assistant-description {
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        /* Enhanced Exercises Section */
         .exercises-section {
             background: var(--glass-bg);
             padding: 50px 30px;
@@ -391,13 +488,13 @@
         
         .exercises-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
         
         .exercise-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 35px;
             border-radius: 20px;
             color: white;
             backdrop-filter: blur(15px);
@@ -406,7 +503,7 @@
         }
         
         .exercise-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.15);
         }
         
@@ -414,34 +511,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .exercise-title {
+            font-size: 1.4rem;
+            color: white;
+            font-weight: 600;
         }
         
         .exercise-difficulty {
             background: rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
         }
         
         .exercise-question {
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 1.1rem;
         }
         
         .exercise-options {
             display: grid;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
         
         .exercise-option {
             background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 12px;
+            padding: 18px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .exercise-option:hover {
@@ -453,11 +560,30 @@
             border: 2px solid #4CAF50;
         }
         
+        .option-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .exercise-option.selected .option-indicator {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
+        
         .exercise-feedback {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 12px;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
             display: none;
+            animation: fadeIn 0.5s ease;
         }
         
         .exercise-feedback.correct {
@@ -489,6 +615,11 @@
             }
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .header h1 {
@@ -508,11 +639,20 @@
             }
             
             .profile-stats {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .course-actions {
                 grid-template-columns: 1fr;
+            }
+            
+            .main-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                justify-content: center;
             }
         }
         
@@ -524,82 +664,108 @@
             .container {
                 padding: 10px;
             }
+            
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-summary {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Enhanced Navigation -->
+        <nav class="main-nav">
+            <a href="index.html" class="nav-brand">🎓 educate4all</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Αρχική</a>
+                <a href="courses.html" class="nav-link">📚 Μαθήματα</a>
+                <a href="real-ai-chatbot.html" class="nav-link">🤖 Πραγματικός AI</a>
+                <a href="smart-chatbot.html" class="nav-link">🧠 Έξυπνος AI</a>
+                <a href="chatbot.html" class="nav-link">😊 Απλός AI</a>
+            </div>
+        </nav>
+
         <!-- Enhanced Header with User Profile -->
         <div class="header">
             <h1>🎓 educate4all</h1>
             <p style="font-size: 1.5rem; opacity: 0.95; margin-bottom: 30px;">
-                Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης - Για Όλα τα Παιδιά!
+                Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης - Καλύτερη από το euclides.ai!
             </p>
             
-            <!-- User Profile -->
+            <!-- Enhanced User Profile -->
             <div class="user-profile">
                 <div class="profile-header">
                     <div class="profile-avatar">👤</div>
                     <div class="profile-info">
                         <h3>Μαθητής educate4all</h3>
-                        <p style="opacity: 0.8;">🎓 Επίπεδο 5 - 1,250 XP</p>
+                        <div class="profile-level" id="main-level">🎯 Level 1</div>
                     </div>
                 </div>
                 <div class="profile-stats">
                     <div class="stat">
-                        <span class="stat-number" id="completedLessons">12</span>
-                        <span class="stat-label">Μαθήματα</span>
+                        <span class="stat-number" id="main-completed">0</span>
+                        <span class="stat-label">Ολοκληρωμένα Μαθήματα</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number" id="correctAnswers">48</span>
+                        <span class="stat-number" id="main-xp">0</span>
+                        <span class="stat-label">Συνολικά XP</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="main-correct">0</span>
                         <span class="stat-label">Σωστές Απαντήσεις</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number" id="studyTime">15</span>
-                        <span class="stat-label">Ώρες Μελέτης</span>
+                        <span class="stat-number" id="main-progress">0%</span>
+                        <span class="stat-label">Συνολική Πρόοδος</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Learning Dashboard -->
+        <!-- Enhanced Learning Dashboard -->
         <div class="learning-dashboard">
             <div class="dashboard-header">
-                <h2>📊 Πρόοδος Μάθησης</h2>
-                <div style="color: white; opacity: 0.8;">Συνολική Πρόοδος: <strong id="overallProgress">65%</strong></div>
+                <h2>📊 Παντοτινή Πρόοδος Μάθησης</h2>
+                <div style="color: white; opacity: 0.8; font-size: 1.1rem;">
+                    Συνολική Πρόοδος: <strong id="overall-progress">0%</strong>
+                </div>
             </div>
             
             <div class="progress-summary">
                 <div class="progress-card">
                     <div class="progress-title">📐 Μαθηματικά</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 75%"></div>
+                        <div class="progress-fill" data-subject="math" style="width: 0%"></div>
                     </div>
-                    <div class="progress-percent">75%</div>
+                    <div class="progress-percent" id="math-progress">0%</div>
                 </div>
                 
                 <div class="progress-card">
                     <div class="progress-title">🔬 Φυσική</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 60%"></div>
+                        <div class="progress-fill" data-subject="physics" style="width: 0%"></div>
                     </div>
-                    <div class="progress-percent">60%</div>
+                    <div class="progress-percent" id="physics-progress">0%</div>
                 </div>
                 
                 <div class="progress-card">
                     <div class="progress-title">🧪 Χημεία</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 45%"></div>
+                        <div class="progress-fill" data-subject="chemistry" style="width: 0%"></div>
                     </div>
-                    <div class="progress-percent">45%</div>
+                    <div class="progress-percent" id="chemistry-progress">0%</div>
                 </div>
                 
                 <div class="progress-card">
                     <div class="progress-title">🧬 Βιολογία</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 80%"></div>
+                        <div class="progress-fill" data-subject="biology" style="width: 0%"></div>
                     </div>
-                    <div class="progress-percent">80%</div>
+                    <div class="progress-percent" id="biology-progress">0%</div>
                 </div>
             </div>
         </div>
@@ -607,7 +773,7 @@
         <!-- Enhanced Courses Section -->
         <div class="learning-dashboard">
             <h2 style="text-align: center; color: white; margin-bottom: 30px; background: linear-gradient(45deg, #fff, #e3f2fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                📚 Δομημένα Μαθήματα
+                📚 Δομημένα Μαθήματα & Εκπαιδευτικό Υλικό
             </h2>
             
             <div class="courses-grid-enhanced">
@@ -615,16 +781,21 @@
                 <div class="course-card-enhanced">
                     <div class="course-icon">📐</div>
                     <div class="course-title">Μαθηματικά</div>
+                    <div class="course-description">
+                        Από βασικές πράξεις έως ανώτερα μαθηματικά. Κατάλληλο για όλα τα επίπεδα και ηλικίες.
+                    </div>
                     <div class="course-stats">
                         <span>📖 8 Μαθήματα</span>
                         <span>⏱️ 12 ώρες</span>
+                        <span>⭐ 850 XP</span>
                     </div>
-                    <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
-                        Από βασικές πράξεις έως ανώτερα μαθηματικά. Κατάλληλο για όλα τα επίπεδα.
-                    </p>
                     <div class="course-actions">
-                        <button class="course-btn" onclick="viewCourse('math')">👀 Επισκόπηση</button>
-                        <button class="course-btn primary" onclick="startCourse('math')">🚀 Έναρξη</button>
+                        <button class="course-btn" onclick="viewCourse('math')">
+                            👀 Επισκόπηση
+                        </button>
+                        <button class="course-btn primary" onclick="startCourse('math')">
+                            🚀 Έναρξη Μαθήματος
+                        </button>
                     </div>
                 </div>
                 
@@ -632,16 +803,21 @@
                 <div class="course-card-enhanced">
                     <div class="course-icon">🔬</div>
                     <div class="course-title">Φυσική</div>
+                    <div class="course-description">
+                        Κατανόηση των νόμων της φύσης. Πειράματα, αναλύσεις και πρακτικές εφαρμογές.
+                    </div>
                     <div class="course-stats">
                         <span>📖 6 Μαθήματα</span>
                         <span>⏱️ 10 ώρες</span>
+                        <span>⭐ 700 XP</span>
                     </div>
-                    <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
-                        Κατανόηση των νόμων της φύσης. Πειράματα και πρακτικές εφαρμογές.
-                    </p>
                     <div class="course-actions">
-                        <button class="course-btn" onclick="viewCourse('physics')">👀 Επισκόπηση</button>
-                        <button class="course-btn primary" onclick="startCourse('physics')">🚀 Έναρξη</button>
+                        <button class="course-btn" onclick="viewCourse('physics')">
+                            👀 Επισκόπηση
+                        </button>
+                        <button class="course-btn primary" onclick="startCourse('physics')">
+                            🚀 Έναρξη Μαθήματος
+                        </button>
                     </div>
                 </div>
                 
@@ -649,82 +825,101 @@
                 <div class="course-card-enhanced">
                     <div class="course-icon">🧪</div>
                     <div class="course-title">Χημεία</div>
+                    <div class="course-description">
+                        Διάσπαση της ύλης. Χημικές αντιδράσεις, εργαστηριακές τεχνικές και επιστημονικές μεθόδους.
+                    </div>
                     <div class="course-stats">
                         <span>📖 7 Μαθήματα</span>
                         <span>⏱️ 9 ώρες</span>
+                        <span>⭐ 750 XP</span>
                     </div>
-                    <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
-                        Διάσπαση της ύλης. Χημικές αντιδράσεις και εργαστηριακές τεχνικές.
-                    </p>
                     <div class="course-actions">
-                        <button class="course-btn" onclick="viewCourse('chemistry')">👀 Επισκόπηση</button>
-                        <button class="course-btn primary" onclick="startCourse('chemistry')">🚀 Έναρξη</button>
+                        <button class="course-btn" onclick="viewCourse('chemistry')">
+                            👀 Επισκόπηση
+                        </button>
+                        <button class="course-btn primary" onclick="startCourse('chemistry')">
+                            🚀 Έναρξη Μαθήματος
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- AI Assistants Section -->
+        <!-- Enhanced AI Assistants Section -->
         <div class="ai-assistants">
-            <h2>🤖 AI Βοηθοί Μάθησης</h2>
+            <h2>🤖 Εξυπνότεροι AI Βοηθοί Μάθησης</h2>
             
             <div class="assistants-grid">
                 <!-- Real AI Assistant -->
                 <div class="assistant-card" onclick="openAI('real')">
                     <div class="assistant-icon">🤖</div>
                     <div class="assistant-badge">💎 ΣΥΝΙΣΤΑΤΑΙ</div>
-                    <h3 style="margin: 15px 0; font-size: 1.4rem;">Πραγματικός AI</h3>
-                    <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
-                        Για σύνθετα προβλήματα και πανεπιστημιακό επίπεδο. Λεπτομερείς αναλύσεις.
+                    <h3 style="margin: 15px 0; font-size: 1.6rem;">Πραγματικός AI</h3>
+                    <p class="assistant-description">
+                        Για σύνθετα προβλήματα και πανεπιστημιακό επίπεδο. Λεπτομερείς αναλύσεις, μαθηματικές αποδείξεις και επιστημονική μέθοδο.
                     </p>
-                    <div style="color: #ffd700; font-weight: 600;">🎯 Με τον Πυθαγόρα</div>
+                    <div style="color: #ffd700; font-weight: 600; font-size: 1.1rem;">🎯 Με τον Πυθαγόρα</div>
                 </div>
                 
                 <!-- Smart AI Assistant -->
                 <div class="assistant-card" onclick="openAI('smart')">
                     <div class="assistant-icon">🧠</div>
                     <div class="assistant-badge" style="background: linear-gradient(135deg, #17a2b8, #138496);">🎯 ΒΑΣΙΚΟΣ</div>
-                    <h3 style="margin: 15px 0; font-size: 1.4rem;">Έξυπνος AI</h3>
-                    <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
-                        Εξηγήσεις βήμα-βήμα για βαθιά κατανόηση. Προσαρμοσμένη δυσκολία.
+                    <h3 style="margin: 15px 0; font-size: 1.6rem;">Έξυπνος AI</h3>
+                    <p class="assistant-description">
+                        Εξηγήσεις βήμα-βήμα για βαθιά κατανόηση. Προσαρμοσμένη δυσκολία, πρακτικά παραδείγματα και οπτικά βοηθήματα.
                     </p>
-                    <div style="color: #17a2b8; font-weight: 600;">🔬 Με τον Αριστοτέλη</div>
+                    <div style="color: #17a2b8; font-weight: 600; font-size: 1.1rem;">🔬 Με τον Αριστοτέλη</div>
                 </div>
                 
                 <!-- Simple AI Assistant -->
                 <div class="assistant-card" onclick="openAI('simple')">
                     <div class="assistant-icon">😊</div>
                     <div class="assistant-badge" style="background: linear-gradient(135deg, #6c757d, #5a6268);">⚡ ΑΠΛΟΣ</div>
-                    <h3 style="margin: 15px 0; font-size: 1.4rem;">Απλός AI</h3>
-                    <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
-                        Γρήγορες απαντήσεις και απλές εξηγήσεις. Ιδανικός για βασικές έννοιες.
+                    <h3 style="margin: 15px 0; font-size: 1.6rem;">Απλός AI</h3>
+                    <p class="assistant-description">
+                        Γρήγορες απαντήσεις και απλές εξηγήσεις. Ιδανικός για βασικές έννοιες, γρήγορες ερωτήσεις και φιλικές συζητήσεις.
                     </p>
-                    <div style="color: #6c757d; font-weight: 600;">💭 Με τον Σωκράτη</div>
+                    <div style="color: #6c757d; font-weight: 600; font-size: 1.1rem;">💭 Με τον Σωκράτη</div>
                 </div>
             </div>
         </div>
 
-        <!-- Interactive Exercises Section -->
+        <!-- Enhanced Interactive Exercises Section -->
         <div class="exercises-section">
-            <h2>🎯 Διαδραστικές Ασκήσεις</h2>
+            <h2>🎯 Διαδραστικές Ασκήσεις & Quiz</h2>
             
             <div class="exercises-grid">
                 <!-- Math Exercise -->
                 <div class="exercise-card">
                     <div class="exercise-header">
-                        <h3 style="color: white;">📐 Μαθηματικά</h3>
+                        <h3 class="exercise-title">📐 Μαθηματικά</h3>
                         <div class="exercise-difficulty">🎯 Μέτριο</div>
                     </div>
                     <div class="exercise-question">
                         <p>Ποια είναι η λύση της εξίσωσης: <strong>x² - 5x + 6 = 0</strong>;</p>
                     </div>
                     <div class="exercise-options">
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">x = 2, x = 3</div>
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">x = 1, x = 6</div>
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">x = -2, x = -3</div>
-                        <div class="exercise-option" onclick="selectOption(this, 'math')">x = 0, x = 5</div>
+                        <div class="exercise-option" onclick="selectOption(this, 'math')">
+                            <div class="option-indicator">A</div>
+                            <div>x = 2, x = 3</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectOption(this, 'math')">
+                            <div class="option-indicator">B</div>
+                            <div>x = 1, x = 6</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectOption(this, 'math')">
+                            <div class="option-indicator">C</div>
+                            <div>x = -2, x = -3</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectOption(this, 'math')">
+                            <div class="option-indicator">D</div>
+                            <div>x = 0, x = 5</div>
+                        </div>
                     </div>
-                    <button class="course-btn primary" style="width: 100%;" onclick="checkAnswer('math')">✅ Ελέγξτε Απάντηση</button>
+                    <button class="course-btn primary" style="width: 100%;" onclick="checkAnswer('math')">
+                        ✅ Ελέγξτε την Απάντησή Σας
+                    </button>
                     <div class="exercise-feedback" id="math-feedback">
                         <!-- Feedback will appear here -->
                     </div>
@@ -733,19 +928,33 @@
                 <!-- Physics Exercise -->
                 <div class="exercise-card">
                     <div class="exercise-header">
-                        <h3 style="color: white;">🔬 Φυσική</h3>
+                        <h3 class="exercise-title">🔬 Φυσική</h3>
                         <div class="exercise-difficulty">😊 Εύκολο</div>
                     </div>
                     <div class="exercise-question">
                         <p>Ποιος νόμος περιγράφει τη σχέση μεταξύ δύναμης, μάζας και επιτάχυνσης;</p>
                     </div>
                     <div class="exercise-options">
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">Νόμος του Νεύτωνα</div>
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">Νόμος του Αρχιμήδη</div>
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">Νόμος του Ohm</div>
-                        <div class="exercise-option" onclick="selectOption(this, 'physics')">Νόμος της Βαρύτητας</div>
+                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
+                            <div class="option-indicator">A</div>
+                            <div>Νόμος του Νεύτωνα</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
+                            <div class="option-indicator">B</div>
+                            <div>Νόμος του Αρχιμήδη</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
+                            <div class="option-indicator">C</div>
+                            <div>Νόμος του Ohm</div>
+                        </div>
+                        <div class="exercise-option" onclick="selectOption(this, 'physics')">
+                            <div class="option-indicator">D</div>
+                            <div>Νόμος της Βαρύτητας</div>
+                        </div>
                     </div>
-                    <button class="course-btn primary" style="width: 100%;" onclick="checkAnswer('physics')">✅ Ελέγξτε Απάντηση</button>
+                    <button class="course-btn primary" style="width: 100%;" onclick="checkAnswer('physics')">
+                        ✅ Ελέγξτε την Απάντησή Σας
+                    </button>
                     <div class="exercise-feedback" id="physics-feedback">
                         <!-- Feedback will appear here -->
                     </div>
@@ -755,52 +964,59 @@
     </div>
 
     <script>
-        // Enhanced Learning System
-        class LearningSystem {
+        // Enhanced Learning System for Dashboard
+        class DashboardSystem {
             constructor() {
                 this.userData = this.loadUserData();
-                this.initializeSystem();
+                this.initializeDashboard();
             }
             
             loadUserData() {
-                return JSON.parse(localStorage.getItem('educate4all_user') || JSON.stringify({
-                    level: 5,
-                    xp: 1250,
-                    completedLessons: 12,
-                    correctAnswers: 48,
-                    studyTime: 15,
+                return JSON.parse(localStorage.getItem('educate4all_enhanced_user') || JSON.stringify({
+                    level: 1,
+                    xp: 0,
+                    completedLessons: [],
+                    currentLesson: 1,
                     progress: {
-                        math: 75,
-                        physics: 60,
-                        chemistry: 45,
-                        biology: 80
-                    }
+                        math: 0,
+                        physics: 0,
+                        chemistry: 0,
+                        biology: 0
+                    },
+                    achievements: [],
+                    totalStudyTime: 0,
+                    correctAnswers: 0
                 }));
             }
             
-            saveUserData() {
-                localStorage.setItem('educate4all_user', JSON.stringify(this.userData));
-            }
-            
-            initializeSystem() {
-                this.updateUI();
+            initializeDashboard() {
+                this.updateDashboardUI();
                 this.setupEventListeners();
             }
             
-            updateUI() {
-                // Update user stats
-                document.getElementById('completedLessons').textContent = this.userData.completedLessons;
-                document.getElementById('correctAnswers').textContent = this.userData.correctAnswers;
-                document.getElementById('studyTime').textContent = this.userData.studyTime;
+            updateDashboardUI() {
+                // Update main stats
+                document.getElementById('main-level').textContent = `🎯 Level ${this.userData.level}`;
+                document.getElementById('main-completed').textContent = this.userData.completedLessons.length;
+                document.getElementById('main-xp').textContent = this.userData.xp;
+                document.getElementById('main-correct').textContent = this.userData.correctAnswers || 0;
                 
                 // Calculate overall progress
                 const progresses = Object.values(this.userData.progress);
-                const overallProgress = Math.round(progresses.reduce((a, b) => a + b, 0) / progresses.length);
-                document.getElementById('overallProgress').textContent = overallProgress + '%';
+                const overallProgress = progresses.length > 0 ? 
+                    Math.round(progresses.reduce((a, b) => a + b, 0) / progresses.length) : 0;
                 
-                // Update progress bars
+                document.getElementById('main-progress').textContent = overallProgress + '%';
+                document.getElementById('overall-progress').textContent = overallProgress + '%';
+                
+                // Update subject progresses
                 Object.keys(this.userData.progress).forEach(subject => {
+                    const progressElement = document.getElementById(`${subject}-progress`);
                     const progressFill = document.querySelector(`[data-subject="${subject}"]`);
+                    
+                    if (progressElement) {
+                        progressElement.textContent = this.userData.progress[subject] + '%';
+                    }
                     if (progressFill) {
                         progressFill.style.width = this.userData.progress[subject] + '%';
                     }
@@ -808,44 +1024,36 @@
             }
             
             setupEventListeners() {
-                // Setup exercise system
                 this.setupExercises();
             }
             
             setupExercises() {
-                // Exercise data
                 this.exercises = {
                     math: {
                         question: "Ποια είναι η λύση της εξίσωσης: x² - 5x + 6 = 0;",
                         options: ["x = 2, x = 3", "x = 1, x = 6", "x = -2, x = -3", "x = 0, x = 5"],
                         correct: 0,
-                        explanation: "Σωστά! Η εξίσωση x² - 5x + 6 = 0 παραγοντοποιείται σε (x-2)(x-3)=0, άρα x=2 ή x=3."
+                        explanation: "Σωστά! Η εξίσωση x² - 5x + 6 = 0 παραγοντοποιείται σε (x-2)(x-3)=0, άρα x=2 ή x=3. 🎉"
                     },
                     physics: {
                         question: "Ποιος νόμος περιγράφει τη σχέση μεταξύ δύναμης, μάζας και επιτάχυνσης;",
                         options: ["Νόμος του Νεύτωνα", "Νόμος του Αρχιμήδη", "Νόμος του Ohm", "Νόμος της Βαρύτητας"],
                         correct: 0,
-                        explanation: "Σωστά! Ο δεύτερος νόμος του Νεύτωνα: F = m·a"
+                        explanation: "Σωστά! Ο δεύτερος νόμος του Νεύτωνα: F = m·a 🚀"
                     }
                 };
             }
             
-            completeLesson(subject) {
-                this.userData.completedLessons++;
-                this.userData.xp += 50;
-                this.userData.progress[subject] = Math.min(100, this.userData.progress[subject] + 10);
-                this.saveUserData();
-                this.updateUI();
-                
-                // Show achievement
-                this.showAchievement(`🎉 Ολοκλήρωσες μάθημα ${subject.toUpperCase()}! +50 XP`);
-            }
-            
             correctAnswer() {
-                this.userData.correctAnswers++;
+                this.userData.correctAnswers = (this.userData.correctAnswers || 0) + 1;
                 this.userData.xp += 10;
                 this.saveUserData();
-                this.updateUI();
+                this.updateDashboardUI();
+                this.showAchievement('✅ Σωστή απάντηση! +10 XP');
+            }
+            
+            saveUserData() {
+                localStorage.setItem('educate4all_enhanced_user', JSON.stringify(this.userData));
             }
             
             showAchievement(message) {
@@ -856,11 +1064,13 @@
                     right: 20px;
                     background: linear-gradient(135deg, #667eea, #764ba2);
                     color: white;
-                    padding: 15px 25px;
+                    padding: 20px 30px;
                     border-radius: 15px;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
                     z-index: 1000;
                     animation: slideInRight 0.5s ease-out;
+                    font-weight: 600;
+                    font-size: 1.1rem;
                 `;
                 achievement.textContent = message;
                 document.body.appendChild(achievement);
@@ -873,12 +1083,28 @@
 
         // Global functions
         function viewCourse(subject) {
-            alert(`📚 Επισκόπηση μαθήματος ${subject.toUpperCase()}\n\nΣύντολα θα προστεθεί πλήρης περιεχόμενο!`);
+            const courseInfo = {
+                'math': 'Μαθηματικά - 8 μαθήματα, 12 ώρες, 850 XP',
+                'physics': 'Φυσική - 6 μαθήματα, 10 ώρες, 700 XP', 
+                'chemistry': 'Χημεία - 7 μαθήματα, 9 ώρες, 750 XP'
+            };
+            
+            dashboardSystem.showAchievement(`📚 Επισκόπηση: ${courseInfo[subject]}`);
         }
         
         function startCourse(subject) {
-            learningSystem.completeLesson(subject);
-            window.location.href = 'courses.html';
+            // Update progress for the selected subject
+            dashboardSystem.userData.progress[subject] = Math.min(100, dashboardSystem.userData.progress[subject] + 5);
+            dashboardSystem.userData.xp += 25;
+            dashboardSystem.saveUserData();
+            dashboardSystem.updateDashboardUI();
+            
+            dashboardSystem.showAchievement(`🚀 Ξεκίνησες το μάθημα ${subject.toUpperCase()}! +25 XP`);
+            
+            // Redirect to courses page
+            setTimeout(() => {
+                window.location.href = 'courses.html';
+            }, 1500);
         }
         
         function openAI(type) {
@@ -887,7 +1113,12 @@
                 'smart': 'smart-chatbot.html', 
                 'simple': 'chatbot.html'
             };
-            window.location.href = aiPages[type];
+            
+            dashboardSystem.showAchievement(`🤖 Ανοίγει ο ${type.toUpperCase()} AI βοηθός...`);
+            
+            setTimeout(() => {
+                window.location.href = aiPages[type];
+            }, 1000);
         }
         
         let selectedOptions = {};
@@ -901,27 +1132,26 @@
             
             // Add new selection
             element.classList.add('selected');
-            selectedOptions[exercise] = element.textContent;
+            selectedOptions[exercise] = element.querySelector('div:last-child').textContent;
         }
         
         function checkAnswer(exercise) {
             const feedback = document.getElementById(`${exercise}-feedback`);
             const selected = selectedOptions[exercise];
-            const correctAnswer = learningSystem.exercises[exercise].options[learningSystem.exercises[exercise].correct];
+            const correctAnswer = dashboardSystem.exercises[exercise].options[dashboardSystem.exercises[exercise].correct];
             
             if (selected === correctAnswer) {
-                feedback.textContent = learningSystem.exercises[exercise].explanation;
+                feedback.textContent = dashboardSystem.exercises[exercise].explanation;
                 feedback.className = 'exercise-feedback correct';
-                learningSystem.correctAnswer();
-                learningSystem.showAchievement('✅ Σωστή απάντηση! +10 XP');
+                dashboardSystem.correctAnswer();
             } else {
                 feedback.textContent = `Λάθος. Η σωστή απάντηση είναι: ${correctAnswer}`;
                 feedback.className = 'exercise-feedback incorrect';
             }
         }
 
-        // Initialize the system
-        const learningSystem = new LearningSystem();
+        // Initialize the dashboard system
+        const dashboardSystem = new DashboardSystem();
 
         // Add CSS for animations
         const style = document.createElement('style');
@@ -945,12 +1175,18 @@
 
         // Add fade-in animations to all cards
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.course-card-enhanced, .assistant-card, .exercise-card');
+            const cards = document.querySelectorAll('.course-card-enhanced, .assistant-card, .exercise-card, .progress-card');
             cards.forEach((card, index) => {
                 card.classList.add('fade-in');
                 card.style.animationDelay = (index * 0.1) + 's';
             });
         });
+
+        // Update global progress function for courses page
+        window.updateMainDashboard = function(userData) {
+            dashboardSystem.userData = userData;
+            dashboardSystem.updateDashboardUI();
+        };
     </script>
 </body>
 </html>
