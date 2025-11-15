@@ -4,271 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>educate4all - Πλήρης Δωρεάν Εκπαίδευση</title>
-    <meta name="description" content="Η πιο ολοκληρωμένη δωρεάν πλατφόρμα εκπαίδευσης για όλα τα παιδιά. Μαθήματα, ασκήσεις και AI βοηθοί μάθησης.">
-    <meta name="theme-color" content="#667eea">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="educate4all - Πλήρης Δωρεάν Εκπαίδευση">
-    <meta property="og:description" content="Η πιο ολοκληρωμένη δωρεάν πλατφόρμα εκπαίδευσης για όλα τα παιδιά. Μαθήματα, ασκήσεις και AI βοηθοί μάθησης.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="path-to-image.png">
-
-    <!-- Favicon as SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
-
-    <!-- Fonts preload (optional) -->
-    <!--<link rel="preload" href="path-to-font.woff2" as="font" type="font/woff2" crossorigin>-->
-
+    <meta name="theme-color" content="#667eea">
     <style>
-        /* Reset & root variables */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- Base Reset and Variables --- */
+        * { margin:0; padding:0; box-sizing:border-box; }
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --glass-bg: rgba(255,255,255,0.1);
             --glass-border: rgba(255,255,255,0.2);
             --text-white: rgba(255,255,255,0.95);
-            --success: #4CAF50;
-            --error: #f44336;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--primary-gradient);
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 20px;
-        }
-        a { text-decoration: none; color: inherit; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--primary-gradient); color:#fff; padding:20px; min-height:100vh; }
+        .container { max-width:1400px; margin:0 auto; }
 
-        /* Header */
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border-radius: 30px;
-            margin-bottom: 40px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            position: relative;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3));
-            z-index: -1;
-        }
-        header h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background: linear-gradient(45deg,#fff,#e3f2fd,#fff);
-            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        header p { font-size: 1.5rem; opacity:0.95; margin-top: 15px; }
-
-        /* Navigation */
-        nav.main-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            background: var(--glass-bg);
-            padding: 20px 30px;
-            border-radius: 20px;
-            border:1px solid var(--glass-border);
-            backdrop-filter: blur(25px);
-            margin-bottom: 30px;
-        }
-        .nav-brand { font-size: 1.8rem; font-weight:800; }
+        /* --- Navigation --- */
+        .main-nav { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; background:var(--glass-bg); padding:20px 30px; border-radius:20px; border:1px solid var(--glass-border); backdrop-filter:blur(25px); margin-bottom:40px; }
+        .nav-brand { font-size:1.8rem; font-weight:800; color:white; text-decoration:none; }
         .nav-links { display:flex; gap:20px; flex-wrap:wrap; }
-        .nav-link {
-            background: rgba(255,255,255,0.1);
-            padding:10px 20px;
-            border-radius:15px;
-            transition:0.3s all;
-        }
-        .nav-link:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .nav-link { color:white; text-decoration:none; padding:10px 20px; border-radius:15px; background: rgba(255,255,255,0.1); transition:0.3s; }
+        .nav-link:hover { background: rgba(255,255,255,0.2); transform:translateY(-2px); }
 
-        main { max-width: 1400px; margin:0 auto; }
+        /* --- Header --- */
+        .header { text-align:center; padding:80px 30px 60px; border-radius:30px; background:var(--glass-bg); backdrop-filter:blur(25px); border:1px solid var(--glass-border); box-shadow:0 20px 40px rgba(0,0,0,0.15); position:relative; overflow:hidden; margin-bottom:40px; }
+        .header::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:linear-gradient(45deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3)); z-index:-1; }
+        .header h1 { font-size:4.5rem; font-weight:800; text-shadow:0 4px 15px rgba(0,0,0,0.2); background:linear-gradient(45deg,#fff,#e3f2fd,#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:glow 2s ease-in-out infinite alternate; margin-bottom:25px; }
+        .header p { font-size:1.5rem; opacity:0.95; margin-bottom:30px; }
 
-        /* Dashboard */
-        .user-profile, .learning-dashboard, .ai-assistants, .exercises-section {
-            background: var(--glass-bg);
-            border-radius: 25px;
-            padding: 30px;
-            margin-bottom: 50px;
-            border:1px solid var(--glass-border);
-            backdrop-filter: blur(20px);
-        }
+        /* --- User Profile --- */
+        .user-profile { background: rgba(255,255,255,0.15); padding:30px; border-radius:20px; margin:30px auto; max-width:600px; backdrop-filter: blur(15px); border:1px solid rgba(255,255,255,0.2); }
+        .profile-header { display:flex; align-items:center; justify-content:center; gap:25px; margin-bottom:25px; flex-wrap:wrap; }
+        .profile-avatar { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; font-size:2.5rem; border:4px solid rgba(255,255,255,0.3); }
+        .profile-info h3 { font-size:1.8rem; margin-bottom:8px; }
+        .profile-level { background:linear-gradient(135deg,#FFD700,#FFA500); color:#333; padding:8px 20px; border-radius:25px; font-weight:bold; font-size:1.1rem; display:inline-block; }
+        .profile-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:20px; text-align:center; }
+        .stat { background: rgba(255,255,255,0.1); padding:20px; border-radius:15px; transition:0.3s; }
+        .stat:hover { background: rgba(255,255,255,0.15); transform:translateY(-5px); }
+        .stat-number { font-size:2.2rem; font-weight:800; display:block; margin-bottom:8px; }
+        .stat-label { font-size:0.95rem; opacity:0.8; }
 
-        /* Profile */
-        .profile-header { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
-        .profile-avatar {
-            width:100px;height:100px;border-radius:50%;
-            display:flex;justify-content:center;align-items:center;
-            font-size:2.5rem; background:linear-gradient(135deg,#667eea,#764ba2);
-            border:4px solid rgba(255,255,255,0.3);
-        }
-        .profile-level { background: linear-gradient(135deg,#FFD700,#FFA500); color:#333; padding:6px 20px;border-radius:25px;font-weight:bold; }
+        /* --- Dashboard --- */
+        .learning-dashboard { background:var(--glass-bg); padding:40px 30px; border-radius:25px; margin:40px 0; backdrop-filter:blur(20px); border:1px solid var(--glass-border); }
+        .dashboard-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; flex-wrap:wrap; gap:20px; }
+        .dashboard-header h2 { color:white; font-size:2.2rem; background:linear-gradient(45deg,#fff,#e3f2fd); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .progress-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; margin-bottom:30px; }
+        .progress-card { background: rgba(255,255,255,0.1); padding:30px; border-radius:20px; text-align:center; color:white; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.1); transition:0.3s; position:relative; overflow:hidden; }
+        .progress-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#667eea,#764ba2); }
+        .progress-card:hover { transform:translateY(-8px); background:rgba(255,255,255,0.15); box-shadow:0 15px 35px rgba(0,0,0,0.2); }
+        .progress-title { font-size:1.2rem; margin-bottom:20px; opacity:0.9; font-weight:600; }
+        .progress-bar { background: rgba(255,255,255,0.2); height:12px; border-radius:10px; overflow:hidden; margin-bottom:15px; }
+        .progress-fill { height:100%; background:linear-gradient(90deg,#4CAF50,#45a049); border-radius:10px; transition:width 1s ease-in-out; }
+        .progress-percent { font-size:1.5rem; font-weight:700; }
 
-        /* Stats */
-        .profile-stats { display:grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap:20px; text-align:center; }
-        .stat { background: rgba(255,255,255,0.1); padding:20px; border-radius:15px; transition:0.3s all; }
-        .stat:hover { background: rgba(255,255,255,0.15); transform:translateY(-5px);}
-        .stat-number { font-size:2.2rem;font-weight:800; }
-        .stat-label { opacity:0.8; font-size:0.95rem; }
+        /* --- Courses --- */
+        .courses-grid-enhanced { display:grid; grid-template-columns:repeat(auto-fit,minmax(380px,1fr)); gap:30px; margin-top:30px; }
+        .course-card-enhanced { background: rgba(255,255,255,0.1); border-radius:20px; padding:35px; color:white; backdrop-filter:blur(15px); border:1px solid rgba(255,255,255,0.1); transition:0.4s; position:relative; overflow:hidden; }
+        .course-card-enhanced::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#667eea,#764ba2); }
+        .course-card-enhanced:hover { transform:translateY(-10px); background: rgba(255,255,255,0.15); box-shadow:0 20px 40px rgba(0,0,0,0.25); }
+        .course-icon { font-size:3.5rem; margin-bottom:25px; text-align:center; }
+        .course-title { font-size:1.6rem; font-weight:700; text-align:center; margin-bottom:20px; }
+        .course-description { opacity:0.9; line-height:1.7; margin-bottom:25px; text-align:center; }
+        .course-stats { display:flex; justify-content:space-between; margin:25px 0; font-size:0.95rem; opacity:0.8; padding:0 10px; }
+        .course-actions { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:25px; }
+        .course-btn { background: rgba(255,255,255,0.2); color:white; border:none; padding:15px; border-radius:15px; cursor:pointer; font-weight:600; transition:0.3s; backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center; gap:8px; }
+        .course-btn.primary { background: linear-gradient(135deg,#007bff,#0056b3); }
+        .course-btn:hover { transform:translateY(-3px); background: rgba(255,255,255,0.3); }
+        .course-btn.primary:hover { background:linear-gradient(135deg,#0056b3,#004494); }
 
-        /* Courses & AI & Exercises Grids */
-        .grid { display:grid; gap:30px; }
-        .courses-grid { grid-template-columns: repeat(auto-fit,minmax(380px,1fr)); }
-        .assistants-grid { grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); }
-        .exercises-grid { grid-template-columns: repeat(auto-fit,minmax(350px,1fr)); }
+        /* --- AI Assistants --- */
+        .ai-assistants { background: var(--glass-bg); padding:50px 30px; border-radius:25px; margin:50px 0; backdrop-filter:blur(20px); border:1px solid var(--glass-border); }
+        .ai-assistants h2 { text-align:center; color:white; font-size:2.5rem; margin-bottom:40px; background:linear-gradient(45deg,#fff,#e3f2fd); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .assistants-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:30px; }
+        .assistant-card { background: rgba(255,255,255,0.1); padding:35px; border-radius:20px; text-align:center; color:white; backdrop-filter:blur(15px); border:1px solid rgba(255,255,255,0.1); transition:0.4s; position:relative; overflow:hidden; cursor:pointer; }
+        .assistant-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#667eea,#764ba2); }
+        .assistant-card:hover { transform:translateY(-10px); background: rgba(255,255,255,0.15); box-shadow:0 20px 40px rgba(0,0,0,0.25); }
+        .assistant-icon { font-size:4.5rem; margin-bottom:25px; }
+        .assistant-badge { padding:10px 20px; border-radius:25px; font-size:1rem; font-weight:700; display:inline-block; margin:15px 0; }
 
-        /* Cards */
-        .card {
-            position:relative;
-            background: rgba(255,255,255,0.1);
-            padding:25px;
-            border-radius:20px;
-            color:white;
-            transition:0.4s all;
-            overflow:hidden;
-        }
-        .card::before {
-            content:''; position:absolute; top:0; left:0; right:0; height:4px;
-            background: linear-gradient(90deg,#667eea,#764ba2);
-        }
-        .card:hover { transform:translateY(-8px); background: rgba(255,255,255,0.15); box-shadow:0 15px 35px rgba(0,0,0,0.2); }
-
-        /* Buttons */
-        .btn {
-            display:flex;align-items:center;justify-content:center;gap:8px;
-            padding:15px; border-radius:15px; font-weight:600; cursor:pointer;
-            border:none; transition:0.3s all; backdrop-filter: blur(10px);
-            background: rgba(255,255,255,0.2); color:white;
-        }
-        .btn.primary { background: linear-gradient(135deg,#007bff,#0056b3);}
-        .btn.primary:hover { background: linear-gradient(135deg,#0056b3,#004494); }
-        .btn:hover { transform:translateY(-3px); }
-
-        /* Exercises */
-        .exercise-option { display:flex; align-items:center; gap:15px; padding:18px; border-radius:15px; cursor:pointer; transition:0.3s all; }
+        /* --- Exercises --- */
+        .exercises-section { background: var(--glass-bg); padding:50px 30px; border-radius:25px; margin:50px 0; backdrop-filter:blur(20px); border:1px solid var(--glass-border); }
+        .exercises-section h2 { text-align:center; color:white; font-size:2.5rem; margin-bottom:40px; background:linear-gradient(45deg,#fff,#e3f2fd); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .exercises-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:30px; }
+        .exercise-card { background: rgba(255,255,255,0.1); padding:35px; border-radius:20px; color:white; backdrop-filter:blur(15px); border:1px solid rgba(255,255,255,0.1); transition:0.3s ease; }
+        .exercise-card:hover { transform:translateY(-8px); background: rgba(255,255,255,0.15); }
+        .exercise-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; }
+        .exercise-title { font-size:1.4rem; font-weight:600; }
+        .exercise-difficulty { background: rgba(255,255,255,0.2); padding:8px 16px; border-radius:20px; font-size:0.9rem; font-weight:600; }
+        .exercise-question { margin-bottom:25px; line-height:1.7; font-size:1.1rem; }
+        .exercise-options { display:grid; gap:15px; margin-bottom:25px; }
+        .exercise-option { background: rgba(255,255,255,0.1); padding:18px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; transition:0.3s; }
         .exercise-option:hover { background: rgba(255,255,255,0.2); }
         .exercise-option.selected { background: rgba(76,175,80,0.3); border:2px solid #4CAF50; }
-        .option-indicator { width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,0.3); display:flex;align-items:center;justify-content:center; font-weight:bold; }
+        .option-indicator { width:24px; height:24px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.9rem; }
         .exercise-option.selected .option-indicator { background:#4CAF50; border-color:#4CAF50; color:white; }
         .exercise-feedback { margin-top:20px; padding:20px; border-radius:15px; display:none; }
+        .exercise-feedback.correct { background: rgba(76,175,80,0.2); border:1px solid #4CAF50; display:block; }
+        .exercise-feedback.incorrect { background: rgba(244,67,54,0.2); border:1px solid #f44336; display:block; }
 
-        /* Animations */
-        @keyframes glow { from {text-shadow:0 0 20px rgba(255,255,255,0.5);} to { text-shadow:0 0 30px rgba(255,255,255,0.8),0 0 40px rgba(255,255,255,0.6);} }
-        @keyframes fadeInUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
-        @keyframes slideInRight { from { transform:translateX(100%); opacity:0; } to { transform:translateX(0); opacity:1; } }
-        .fade-in { animation: fadeInUp 0.6s ease-out; }
+        /* --- Animations --- */
+        @keyframes glow { from{ text-shadow:0 0 20px rgba(255,255,255,0.5);} to{ text-shadow:0 0 30px rgba(255,255,255,0.8),0 0 40px rgba(255,255,255,0.6); } }
+        @keyframes fadeInUp { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
+        @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
-        /* Responsive */
-        @media(max-width:768px){ .courses-grid,.assistants-grid,.exercises-grid{grid-template-columns:1fr;} nav.main-nav{flex-direction:column;gap:15px;} .nav-links{justify-content:center;} }
-        @media(max-width:480px){ header h1{font-size:2.5rem;} .profile-stats{grid-template-columns:1fr;} .progress-summary{grid-template-columns:1fr;} }
-        @media(prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+        /* --- Responsive --- */
+        @media (max-width:768px){ .header h1{ font-size:3rem; } .courses-grid-enhanced, .assistants-grid, .exercises-grid{ grid-template-columns:1fr; } .profile-stats{ grid-template-columns:repeat(2,1fr); } .course-actions{ grid-template-columns:1fr; } .main-nav{ flex-direction:column; gap:15px; } .nav-links{ justify-content:center; }}
+        @media (max-width:480px){ .header h1{ font-size:2.5rem; } .container{ padding:10px; } .profile-stats{ grid-template-columns:1fr; } .progress-summary{ grid-template-columns:1fr; } }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>🎓 educate4all</h1>
-        <p>Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης - Για Όλα τα Παιδιά!</p>
-    </header>
-
-    <nav class="main-nav" aria-label="Κύρια Πλοήγηση">
-        <a href="index.html" class="nav-brand">🎓 educate4all</a>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">🏠 Αρχική</a>
-            <a href="courses.html" class="nav-link">📚 Μαθήματα</a>
-            <a href="real-ai-chatbot.html" class="nav-link">🤖 Πραγματικός AI</a>
-            <a href="smart-chatbot.html" class="nav-link">🧠 Έξυπνος AI</a>
-            <a href="chatbot.html" class="nav-link">😊 Απλός AI</a>
-        </div>
-    </nav>
-
-    <main>
-        <!-- User Profile -->
-        <section class="user-profile" aria-label="Προφίλ Μαθητή">
-            <div class="profile-header">
-                <div class="profile-avatar">👤</div>
-                <div class="profile-info">
-                    <h3>Μαθητής educate4all</h3>
-                    <div class="profile-level" id="main-level">🎯 Level 1</div>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <a href="index.html" class="nav-brand">🎓 educate4all</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Αρχική</a>
+                <a href="courses.html" class="nav-link">📚 Μαθήματα</a>
+                <a href="real-ai-chatbot.html" class="nav-link">🤖 Πραγματικός AI</a>
+                <a href="smart-chatbot.html" class="nav-link">🧠 Έξυπνος AI</a>
+                <a href="chatbot.html" class="nav-link">😊 Απλός AI</a>
+            </div>
+        </nav>
+        <!-- Header -->
+        <div class="header">
+            <h1>🎓 educate4all</h1>
+            <p>Η Πιο Ολοκληρωμένη Δωρεάν Πλατφόρμα Εκπαίδευσης - Για Όλα τα Παιδιά!</p>
+            <div class="user-profile">
+                <div class="profile-header">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-info">
+                        <h3>Μαθητής educate4all</h3>
+                        <div class="profile-level" id="main-level">🎯 Level 1</div>
+                    </div>
                 </div>
-            </div>
-            <div class="profile-stats">
-                <div class="stat"><span class="stat-number" id="main-completed">0</span><span class="stat-label">Ολοκληρωμένα Μαθήματα</span></div>
-                <div class="stat"><span class="stat-number" id="main-xp">0</span><span class="stat-label">Συνολικά XP</span></div>
-                <div class="stat"><span class="stat-number" id="main-correct">0</span><span class="stat-label">Σωστές Απαντήσεις</span></div>
-                <div class="stat"><span class="stat-number" id="main-progress">0%</span><span class="stat-label">Συνολική Πρόοδος</span></div>
-            </div>
-        </section>
-
-        <!-- Learning Dashboard -->
-        <section class="learning-dashboard" aria-label="Πρόοδος Μαθημάτων">
-            <h2>📊 Παντοτινή Πρόοδος Μάθησης</h2>
-            <!-- Progress bars and courses can go here -->
-        </section>
-
-        <!-- Courses Grid -->
-        <section class="courses-grid grid" aria-label="Μαθήματα και Εκπαιδευτικό Υλικό">
-            <!-- Courses cards -->
-        </section>
-
-        <!-- AI Assistants -->
-        <section class="ai-assistants" aria-label="AI Βοηθοί Μάθησης">
-            <h2>🤖 Εξυπνότεροι AI Βοηθοί Μάθησης</h2>
-            <div class="assistants-grid grid">
-                <!-- Assistant cards -->
-            </div>
-        </section>
-
-        <!-- Exercises Section -->
-        <section class="exercises-section" aria-label="Διαδραστικές Ασκήσεις">
-            <h2>🎯 Διαδραστικές Ασκήσεις & Quiz</h2>
-            <div class="exercises-grid grid">
-                <!-- Exercise cards -->
-            </div>
-        </section>
-    </main>
-
-    <script>
-        /* Dashboard system */
-        class DashboardSystem {
-            constructor() {
-                this.userData = JSON.parse(localStorage.getItem('educate4all_user') || JSON.stringify({
-                    level:1, xp:0, completedLessons:[], correctAnswers:0, progress:{ math:0, physics:0, chemistry:0, biology:0 }
-                }));
-                this.selectedOptions = {};
-                this.init();
-            }
-            init() {
-                this.updateUI();
-            }
-            updateUI() {
-                document.getElementById('main-level').textContent = `🎯 Level ${this.userData.level}`;
-                document.getElementById('main-xp').textContent = this.userData.xp;
-                document.getElementById('main-completed').textContent = this.userData.completedLessons.length;
-                document.getElementById('main-correct').textContent = this.userData.correctAnswers;
-                const overall = Math.round(Object.values(this.userData.progress).reduce((a,b)=>a+b,0)/4);
-                document.getElementById('main-progress').textContent = overall + '%';
-            }
-            save() { localStorage.setItem('educate4all_user', JSON.stringify(this.userData)); }
-            correctAnswer() { this.userData.correctAnswers++; this.userData.xp+=10; this.save(); this.updateUI(); this.showAchievement('✅ Σωστή Απάντηση! +10 XP'); }
-            showAchievement(msg){
-                const a=document.createElement('div'); a.textContent=msg;
-                Object.assign(a.style,{position:'fixed',top:'20px',right:'20px',padding:'15px 25px',borderRadius:'15px',background:'linear-gradient(135deg,#667eea,#764ba2)',color:'white',boxShadow:'0 15px 35px rgba(0,0,0,0.3)',zIndex:1000});
-                document.body.appendChild(a); setTimeout(()=>a.remove(),3000);
-            }
-        }
-        const dashboard = new DashboardSystem();
-    </script>
-</body>
-</html>
+                <div
