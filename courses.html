@@ -1137,21 +1137,18 @@
     </div>
 
     <script>
-        let selectedAI = 'real'; // Προεπιλεγμένος AI
+        let selectedAI = 'real';
 
         function selectAI(aiType) {
             selectedAI = aiType;
             
-            // Ενημέρωση οπτικής επιλογής
             document.querySelectorAll('.ai-option-detailed').forEach(option => {
                 option.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
             
-            // Αποθήκευση προτίμησης ΜΟΝΟ σε sessionStorage
             sessionStorage.setItem('preferred_ai', selectedAI);
             
-            // Προσθήκη animation
             event.currentTarget.style.animation = 'bounce 0.6s ease-out';
             setTimeout(() => {
                 event.currentTarget.style.animation = '';
@@ -1171,31 +1168,62 @@
                 'ai': 'τεχνητή νοημοσύνη'
             };
             
-            // Ανακατεύθυνση στον επιλεγμένο AI
             const aiPages = {
                 'real': 'real-ai-chatbot.html',
                 'smart': 'smart-chatbot.html',
                 'simple': 'chatbot.html'
             };
             
-            // Αποθήκευση του μαθήματος ΜΟΝΟ σε sessionStorage (διαγράφεται όταν κλείσει ο browser)
+            // Clear all chat histories before opening new chat
+            clearAllChatHistories();
+            
             sessionStorage.setItem('last_course_subject', subjectMapping[subject]);
             sessionStorage.setItem('preferred_ai', selectedAI);
             
-            // Προσθήκη animation στο button
             const button = event.target;
             button.style.animation = 'pulse 0.6s ease-out';
             setTimeout(() => {
                 button.style.animation = '';
             }, 600);
             
-            // Ανακατεύθυνση
             setTimeout(() => {
                 window.location.href = aiPages[selectedAI];
             }, 400);
         }
 
-        // Enhanced Loading Animations
+        // CLEAR ALL CHAT HISTORIES
+        function clearAllChatHistories() {
+            const keysToRemove = [];
+            for (let i = 0; i < sessionStorage.length; i++) {
+                const key = sessionStorage.key(i);
+                if (key.includes('conversation') || key.includes('chat') || key.includes('history') || key.includes('educate4all')) {
+                    keysToRemove.push(key);
+                }
+            }
+            
+            keysToRemove.forEach(key => {
+                sessionStorage.removeItem(key);
+            });
+            
+            console.log('🧹 Όλο το ιστορικό συνομιλιών διαγράφηκε');
+        }
+
+        // SETUP CLEANUP SYSTEM
+        function setupCleanupListeners() {
+            // Clear on page load
+            clearAllChatHistories();
+            
+            // Clear when leaving page
+            window.addEventListener('beforeunload', clearAllChatHistories);
+            
+            // Clear when tab becomes inactive
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    setTimeout(clearAllChatHistories, 2 * 60 * 1000); // 2 minutes
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Animate stats counter
             const statNumbers = document.querySelectorAll('.stat-number');
@@ -1242,7 +1270,7 @@
                 observer.observe(element);
             });
 
-            // Επαναφορά προτιμήσεων χρήστη από sessionStorage
+            // Restore user preferences
             const savedAI = sessionStorage.getItem('preferred_ai');
             if (savedAI) {
                 selectedAI = savedAI;
@@ -1256,6 +1284,9 @@
                 });
             }
 
+            // Setup cleanup system
+            setupCleanupListeners();
+            
             // Enhanced hover effects
             document.querySelectorAll('.course-card').forEach(card => {
                 card.addEventListener('mouseenter', function() {
@@ -1266,61 +1297,6 @@
                     this.style.transform = 'translateY(0) scale(1)';
                 });
             });
-            
-            // Enhanced click effects
-            document.querySelectorAll('.ai-help-button, .nav-button').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    // Ripple effect
-                    const ripple = document.createElement('span');
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.6);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        width: ${size}px;
-                        height: ${size}px;
-                        left: ${x}px;
-                        top: ${y}px;
-                        pointer-events: none;
-                    `;
-                    
-                    this.style.position = 'relative';
-                    this.style.overflow = 'hidden';
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
-                });
-            });
-            
-            // Add CSS for ripple effect
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        });
-
-        // Clear session storage when page is about to be unloaded (browser close)
-        window.addEventListener('beforeunload', function() {
-            // Διατήρηση μόνο των βασικών προτιμήσεων
-            const preferredAI = sessionStorage.getItem('preferred_ai');
-            sessionStorage.clear();
-            if (preferredAI) {
-                sessionStorage.setItem('preferred_ai', preferredAI);
-            }
         });
     </script>
 </body>
