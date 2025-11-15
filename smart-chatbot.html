@@ -220,7 +220,7 @@
         }
         
         .api-input {
-            width: 350px;
+            width: 400px;
             max-width: 100%;
             padding: 14px 20px;
             border: 1px solid rgba(221, 221, 221, 0.5);
@@ -228,6 +228,13 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .api-input:focus {
+            outline: none;
+            border-color: #17a2b8;
+            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
         }
         
         .save-api-btn {
@@ -261,7 +268,7 @@
             margin-bottom: 25px;
             padding: 20px 25px;
             border-radius: 25px;
-            max-width: 80%;
+            max-width: 85%;
             line-height: 1.7;
             animation: fadeInUp 0.5s ease-out;
             backdrop-filter: blur(15px);
@@ -294,12 +301,12 @@
         /* Step-by-step indicators */
         .step-indicator {
             background: #e3f2fd;
-            padding: 8px 15px;
+            padding: 10px 15px;
             border-radius: 15px;
             font-size: 0.9rem;
             font-weight: 600;
             color: #1976d2;
-            margin: 10px 0;
+            margin: 12px 0;
             display: inline-block;
             border-left: 4px solid #1976d2;
         }
@@ -422,9 +429,9 @@
         
         .quick-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
@@ -645,9 +652,10 @@
     </div>
 
     <script>
-        // 🔧 GROQ API CONFIG
+        // 🔧 ENHANCED GROQ API CONFIG
         let apiKey = localStorage.getItem('educate4all_smart_api_key') || "";
         let currentDifficulty = 'medium'; // Default difficulty
+        let conversationHistory = [];
         
         // Enhanced filters for inappropriate content
         const inappropriateKeywords = [
@@ -737,8 +745,10 @@
                 setTimeout(() => {
                     apiKeyInput.style.animation = '';
                 }, 500);
+                
+                showTemporaryMessage('✅ API Key αποθηκεύτηκε επιτυχώς!', 'success');
             } else if (inputKey) {
-                alert('❌ Λάθος API Key. Πρέπει να ξεκινάει με "gsk_"');
+                showTemporaryMessage('❌ Λάθος API Key. Πρέπει να ξεκινάει με "gsk_"', 'error');
             }
         }
         
@@ -788,7 +798,7 @@
         function loadConversationHistory() {
             // Load only from sessionStorage - auto-cleared on browser close
             const conversations = JSON.parse(sessionStorage.getItem('educate4all_conversations') || '[]');
-            const recentConversations = conversations.filter(conv => conv.aiType === 'smart').slice(-6);
+            const recentConversations = conversations.filter(conv => conv.aiType === 'smart').slice(-8);
             
             const chat = document.getElementById('chat');
             recentConversations.forEach(conv => {
@@ -802,6 +812,12 @@
                 botMessage.innerHTML = formatAIResponse(conv.answer) + 
                     `<div class="message-time">${new Date(conv.timestamp).toLocaleTimeString('el-GR')}</div>`;
                 chat.appendChild(botMessage);
+                
+                // Add to conversation history for context
+                conversationHistory.push(
+                    { role: "user", content: conv.question },
+                    { role: "assistant", content: conv.answer }
+                );
             });
             
             if (recentConversations.length > 0) {
@@ -905,6 +921,17 @@
                 // Save conversation to sessionStorage only
                 saveConversation(message, botResponse);
                 
+                // Add to conversation history for context
+                conversationHistory.push(
+                    { role: "user", content: message },
+                    { role: "assistant", content: botResponse }
+                );
+                
+                // Keep conversation history manageable
+                if (conversationHistory.length > 20) {
+                    conversationHistory = conversationHistory.slice(-20);
+                }
+                
             } catch (error) {
                 chat.removeChild(typingIndicator);
                 showError('❌ Σφάλμα: ' + error.message);
@@ -916,23 +943,17 @@
         
         async function getAIResponse(userMessage) {
             const difficultyPrompts = {
-                'easy': `Απλούστευσε την εξήγηση. Χρησιμοποίησε πολύ απλή γλώσσα, βασικές έννοιες και πολλά παραδείγματα από την καθημερινή ζωή. Κάνε την εξήγηση πολύ προσιτή για αρχάριους.`,
-                'medium': `Παρέχε μια ισορροπημένη εξήγηση με σαφή βήματα. Χρησιμοποίησε τεχνικούς όρους με εξηγήσεις και πρακτικά παραδείγματα. Ιδανικό για μεσαίο επίπεδο κατανόησης.`,
-                'hard': `Παρέχε λεπτομερή και αναλυτική εξήγηση. Χρησιμοποίησε τεχνικούς όρους και μαθηματικές εκφράσεις όπου χρειάζεται. Ιδανικό για προχωρημένους μαθητές.`,
-                'expert': `Παρέχε εξαιρετικά λεπτομερή και τεχνική ανάλυση. Χρησιμοποίησε επιστημονικούς όρους, μαθηματικά μοντέλα και θεωρητικό πλαίσιο. Ιδανικό για πανεπιστημιακό επίπεδο.`
+                'easy': `Απλούστευσε την εξήγηση. Χρησιμοποίησε πολύ απλή γλώσσα, βασικές έννοιες και πολλά παραδείγματα από την καθημερινή ζωή. Κάνε την εξήγηση πολύ προσιτή για αρχάριους. Χώρισε σε μικρά βήματα.`,
+                'medium': `Παρέχε μια ισορροπημένη εξήγηση με σαφή βήματα. Χρησιμοποίησε τεχνικούς όρους με εξηγήσεις και πρακτικά παραδείγματα. Ιδανικό για μεσαίο επίπεδο κατανόησης. Χώρισε σε λογικά βήματα.`,
+                'hard': `Παρέχε λεπτομερή και αναλυτική εξήγηση. Χρησιμοποίησε τεχνικούς όρους και μαθηματικές εκφράσεις όπου χρειάζεται. Ιδανικό για προχωρημένους μαθητές. Χώρισε σε λεπτομερή βήματα.`,
+                'expert': `Παρέχε εξαιρετικά λεπτομερή και τεχνική ανάλυση. Χρησιμοποίησε επιστημονικούς όρους, μαθηματικά μοντέλα και θεωρητικό πλαίσιο. Ιδανικό για πανεπιστημιακό επίπεδο. Χώρισε σε τεχνικά βήματα.`
             };
             
-            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: "llama-3.1-8b-instant",
-                    messages: [{
-                        role: "system",
-                        content: `Είσαι ο ΕΞΥΠΝΟΣ AI βοηθός του educate4all - ειδικός σε εξηγήσεις βήμα-βήμα και βαθιά κατανόηση.
+            // Prepare messages with conversation history for context
+            const messages = [
+                {
+                    role: "system",
+                    content: `Είσαι ο ΕΞΥΠΝΟΣ AI βοηθός του educate4all - ειδικός σε εξηγήσεις βήμα-βήμα και βαθιά κατανόηση.
 
 ΕΙΔΙΚΟΤΗΤΑ: Εξηγήσεις βήμα-βήμα με προσαρμοσμένη δυσκολία
 
@@ -963,12 +984,26 @@ ${difficultyPrompts[currentDifficulty]}
 - Για προγραμματισμό: Εξήγησε τη λογική και τη σύνταξη ξεχωριστά
 
 Θυμήσου: Ο στόχος σου είναι η πλήρης κατανόηση μέσω δομημένης μάθησης! 🎓`
-                    }, {
-                        role: "user", 
-                        content: userMessage
-                    }],
-                    max_tokens: 1000,
-                    temperature: 0.7
+                },
+                ...conversationHistory.slice(-6), // Last 3 exchanges for context
+                {
+                    role: "user", 
+                    content: userMessage
+                }
+            ];
+
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: "llama-3.1-8b-instant",
+                    messages: messages,
+                    max_tokens: 1200,
+                    temperature: 0.7,
+                    top_p: 0.9
                 })
             });
             
@@ -990,7 +1025,9 @@ ${difficultyPrompts[currentDifficulty]}
                 .replace(/📝 Βήμα (\d+):/g, '<div class="step-indicator">📝 Βήμα $1:</div>')
                 .replace(/🔍 Βήμα (\d+):/g, '<div class="step-indicator">🔍 Βήμα $1:</div>')
                 .replace(/💡 Βήμα (\d+):/g, '<div class="step-indicator">💡 Βήμα $1:</div>')
-                .replace(/✅ Βήμα (\d+):/g, '<div class="step-indicator">✅ Βήμα $1:</div>');
+                .replace(/✅ Βήμα (\d+):/g, '<div class="step-indicator">✅ Βήμα $1:</div>')
+                .replace(/#### (.*?)(?=\n|$)/g, '<h4 style="margin: 15px 0 10px 0; color: #333;">$1</h4>')
+                .replace(/### (.*?)(?=\n|$)/g, '<h3 style="margin: 20px 0 15px 0; color: #333;">$1</h3>');
         }
         
         function showError(message) {
@@ -1000,6 +1037,19 @@ ${difficultyPrompts[currentDifficulty]}
             errorDiv.textContent = message;
             chat.appendChild(errorDiv);
             chat.scrollTop = chat.scrollHeight;
+        }
+        
+        function showTemporaryMessage(message, type) {
+            const chat = document.getElementById('chat');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+            messageDiv.textContent = message;
+            chat.appendChild(messageDiv);
+            chat.scrollTop = chat.scrollHeight;
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
         }
         
         function saveConversation(question, answer) {
@@ -1013,9 +1063,9 @@ ${difficultyPrompts[currentDifficulty]}
                 difficulty: currentDifficulty
             });
             
-            // Keep only last 20 conversations in session
-            if (conversations.length > 20) {
-                conversations = conversations.slice(-20);
+            // Keep only last 25 conversations in session
+            if (conversations.length > 25) {
+                conversations = conversations.slice(-25);
             }
             
             sessionStorage.setItem('educate4all_conversations', JSON.stringify(conversations));
@@ -1036,11 +1086,11 @@ ${difficultyPrompts[currentDifficulty]}
         function clearOldConversations() {
             const conversations = JSON.parse(sessionStorage.getItem('educate4all_conversations') || '[]');
             const now = new Date().getTime();
-            const oneHourAgo = now - (60 * 60 * 1000); // 1 hour
+            const twoHoursAgo = now - (2 * 60 * 60 * 1000); // 2 hours
             
             const filteredConversations = conversations.filter(conv => {
                 const convTime = new Date(conv.timestamp).getTime();
-                return convTime > oneHourAgo;
+                return convTime > twoHoursAgo;
             });
             
             sessionStorage.setItem('educate4all_conversations', JSON.stringify(filteredConversations));
